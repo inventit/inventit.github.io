@@ -2,15 +2,14 @@ safe: true
 lsi: false
 markdown: rdiscount
 pygments: true
-permalink: /posts/:title
 rdiscount:
   extensions: [smart]
 title : IIDN
 production_url : http://dev.yourinventit.com
 description: ""
-disqus_shortname: inventit
+disqus_shortname: iidn
 analytics: UA-32804324-3
-gauges: 50f2b533613f5d7c8000000c
 author :
   name : Inventit Inc.
   github : inventit
+  googleplus : 103577935124656848081
