@@ -1,0 +1,26 @@
+---
+layout: base
+title: "Inventit Iot developer Network | Blog"
+---
+
+<section class="content">
+ <div class="container">
+  <div class="row">
+  
+   <div class="col-lg-12">
+    <h1>POSTS</h1>
+     <ul class="listing">
+      {% for post in site.posts %}
+      <li>
+       <span>{{ post.date | date: "%B %e, %Y" }}</span> <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+     </ul>
+   </div>
+   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  
+  </div>
+ </div>
+</section>
+
+

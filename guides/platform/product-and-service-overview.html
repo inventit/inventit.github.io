@@ -1,0 +1,195 @@
+---
+layout: base
+title: "Inventit Iot developer Network | Platform | Product and Service Overview"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+        <div class="sideMenu">
+          <div class="accordion" id="accordion2">
+            <div class="accordion-group menu-name">
+              <p><strong>Guides</strong></p>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading avtive"><a href="../../guides.html">Guides</a> </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><strong>Platform</strong></a> <span>2</span> </div>
+              <div id="collapseOne" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul>
+                    <li><a href="../platform.html">Introduction to our Platform</a></li>
+                    <li><a href="#"><strong>Product and Service Overview</strong></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a href="../get-started.html">Get Started</a> </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">MOAT IoT</a><span>4</span> </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul>
+                    <li><a href="../moat-iot.html">MOAT IoT?</a></li>
+                    <li><a href="../MOAT-IoT/overview.html">Overview</a></li>
+                    <li><a href="../MOAT-IoT/deployment.html">Deployment</a></li>
+                    <li><a href="../MOAT-IoT/app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a href="../examples.html">Examples</a> </div>
+            </div>
+            
+            <!-- accordion End --> 
+          </div>
+          <!-- sideMenu End --> 
+        </div>
+        <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="../../index.html">Home&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="../../guides.html">Guides&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="../platform.html">Platform&nbsp;</a></li>
+          </li>
+          <i class="icon-angle-right"></i>
+          <li class="avtive">Product and Service Overview&nbsp;</li>
+        </ul>
+        
+        <h1>Product and Service Overview</h1>
+        <ul class="nav nav-tabs nav-justified"> 　
+          <li class="active"><a href="#ServiceSync-Product-Overview">ServiceSync<br />
+            Product Overview</a></li>
+          <li><a href="#ServiceSync-Gateway">ServiceSync <br />
+            Gateway</a></li>
+          <li><a href="#ServiceSync-Client">ServiceSync <br />
+            Client</a></li>
+          <li><a href="#ServiceSync-Server">ServiceSync <br />
+            Server</a></li>　　
+        </ul>
+        
+        <div id="ServiceSync-Product-Overview">
+          <h2>ServiceSync Product Overview</h2>
+        </div>
+        <h3>Platform overview</h3>
+        <p>Before you begin the walk-through of the platform, it is imperative that you understand its basic design and architecture, which gives you a big picture while you encounter various features of the platform during your development and trial.</p>
+        <p>The ServiceSync platform is composed of three primary components,<br />
+          -       ServiceSync server<br />
+          -       ServiceSync client<br />
+          -       ServiceSync gateway </p>
+        <p>The following figure shows the system architecture of ServiceSync. Devices are managed by ServiceSync platform, i.e. Client, Gateway, and Server. Devices may be installed at one location and used there for the term of their operations, or they may be mobile and need to be tracked from one to location to another. The platform is mainly for running M2M applications, which are respectively M2M application for Device, Gateway, and Server. The example of M2M applications is analyzing data collected from machine/sensor, manipulating the data, representing the data in a graphical manner, etc.</p>
+        <p><b>ServiceSync Server</b> : ServiceSync server manages the communications between remote devices, systems, and businesses. ServiceSync server operates as a central repository for device objects and their relationships, current state, and functionality. The Inventit SDK provides an application programming interface (API) to the server platform operations and device objects. M2M applications can access device data and functionality through Server API, which simplifies and optimizes M2M application development and deployment through hiding of network specifies.</p>
+        <p><b>ServiceSync Client</b> : A device that runs M2M applications using ServiceSync client. ServiceSync client provides M2M functions, through a set of API, that are to be shared by different M2M applications on a device. It simplifies and optimize M2M application development and deployment through hiding of network specifics. ServiceSync client acts as a remote management client for device where the client resides, to provide firmware update, remote monitoring, etc.</p>
+        <p><b>ServiceSync Gateway</b> : A device connects to the network via ServiceSync gateway. The devices connect to ServiceSync gateway using short range network, e.g. Bluetooth, Wi-Fi, Zigbee, etc., whose are collectively called M2M Area network in ETSI M2M standard. The messages or events from devices are forwarded to the server by the gateway through M2M applications on a gateway, and the commands from the server are forwarded to M2M applications on a gateway, which in turn passes them to the devices. The gateway operates as a proxy between devices and external network, which is connected to the server. Besides, ServiceSync gateway acts as a remote management proxy for device as well as a remote management client for gateway, and manages devices behind the gateway on behalf of the server. Two associated management sessions are established: one is between the server and the gateway, the other is between the gateway and devices. Another important feature of ServiceSync Gateway is open service platform, where M2M applications can be remotely installed, started, stopped, updated, and uninstalled without requiring a reboot. Application life cycle management is done via APIs that allow for remote downloading of management policies.</p>
+        <p>All these components are collectively called "platform" in this document.</p>
+        <p>The important aspect of ServiceSync is "Device object." The Device object is a model or representation of device. A model represents a type of device. All devices of a model are identical in operation and structure. The Device object is a set of interface and data items. Devices reports data item values and attributes to the ServiceSync platform within data messages, and the platform can write values back to data items in a device.  The data and parameters associated with the device are encapsulated within an object. The object interface is defined how the device object can be interacted with the platform.</p>
+        <p>ServiceSync Server and Client share the same Device object for a device where ServiceSync Client resides, whereas ServiceSync Server and Gateway share the same Device object(s)s for device(s) which are connected with the Gateway via M2M Area network.</p>
+        <p>ServiceSync server can store information for a device and each can be associated with a device. M2M applications facing the platform can access device data through APIs provided by the platform.</p>
+        
+        <div id="ServiceSync-Gateway">
+          <h2>ServiceSync Gateway</h2>
+        </div>
+        <h3>Overview</h3>
+        <p>ServiceSync gateway provides M2M applications for Gateway with execution environment. The gateway acts as a proxy between devices and server. It could be on the dedicated hardware or the hardware which has already been used in home/office, e.g., a smart phone/tablet, home router, etc. As an example, the Gateway* runs M2M applications on the gateway that collects and manipulates various machine/sensor data from devices. The devices are connected to ServiceSync gateway via M2M Area network, e.g. Wi-Fi, Bluetooth, Zigbee, PLC, M-BUS, etc. It is assumed that the management protocol between the Server and Gateway is either same or different from the one between the Gateway and Device. If it is different, the one between the Gateway and Device is called as native management protocol.<br />
+          * The word starting from the capital letter "G" means as a function, i.e. ServiceSync Gateway, whereas the one starts from the small character means as the hardware throughout this document.</p>
+        <p>The Gateway maintains the following functions:
+        <ol>
+          <li>The collection of device identifier and device address information relating to Devices attached to the gateway and making this available to the Server</li>
+          <li>The authentication and authorization of Devices before allowing them to access specific set of capabilities</li>
+          <li>The organization of Devices into Device groups, the controlling the reporting of alerts pertaining to the Devices that are attached to the gateway</li>
+          <li>The local storage of M2M applications for the Devices</li>
+          <li>The management of configuration of M2M applications running on the Gateway</li>
+        </ol>
+        </p>
+        <p>ServiceSync Gateway is composed of: ServiceSync client, ServiceSync bus and M2M applications. ServiceSync client communicates with ServiceSync Server using the management protocol defined by ServiceSync architecture and shares the same Device Object model with the server. Two types of M2M applications runs on the Gateway, one for the gateway device management, e.g. firmware update, monitoring, etc., and the other for managing the devices attached to the gateway, e.g. collecting and manipulating machine/sensor data. CEP(Complex Event Processing) engine can be used by M2M applications to decide how to manipulate the messages or responses from the Device(s).  Its policy and rule are provided by the Server.</p>
+        
+        <h3>Gateway Modes of Operation</h3>
+        <p>ServiceSync Gateway provides two modes of operation: Transparent and Adaptation.</p>
+        
+        <h3>Proxy Mode</h3>
+        <p>In this mode, the Gateway manages the Device behind the gateway on behalf of the Server over the management protocol. In this mode, the management protocol between the Server and Gateway is same as the one between the Gateway and Device, and the Gateway manages those two management sessions established.<br />
+          The management command sent from the Server to the Gateway is forwarded to the targeted Device(s), within a new message generated by the Gateway. After the Gateway receives the responses from the Device(s), the Gateway may notify the Server about the command completion status, it may send the aggregated response of the command or may filter the responses according to the policy defined in advance. In case of Device initiated, after the messages from the Device(s) are collected by the Gateway, the Gateway may notify the Server as an alert or may filter the messages according to the policy defined in advance.</p>
+        
+        <h3>Adaptation Mode</h3>
+        <p>There are two adaptation schemes: 1) protocol translation, 2) protocol encapsulation.</p>
+        
+        <h4>Protocol translation scheme</h4>
+        <p>In this mode, the Gateway translates between the management commands from the Server and the other management protocol. The messages data from the Devices are translated into the Device Object model by the Gateway.<br />
+          Once the Server deploys M2M application for the Device attached the gateway, the Server instantiates the corresponding Device Object for respective devices attached gateway.</p>
+        <p>The following steps constitute a typical flow for Adaptation mode:<br />
+          Server initiated:</p>
+        <ol>
+          <li>The Server sets the management command in this instance</li>
+          <li>The Client triggers the corresponding M2M application, which in turn adapts the command to the native management protocol of the Device and forwards the adapted command to the Device</li>
+          <li>Upon receiving the response from the Device, the M2M application stores and manipulates, if necessary, the response, and passes it to the Client</li>
+          <li>The Client sends the response to the Server </li>
+        </ol>
+        <p>Device initiated:</p>
+        <ol>
+          <li>The Device sends the message to the gateway, and the gateway passes it to the corresponding M2M application</li>
+          <li>The M2M application stores and manipulates the message, and then forward it to the Client</li>
+          <li>The Client stores the message into the Device Object and forward it to the Server</li>
+        </ol>
+        
+        <h4>Protocol encapsulation scheme</h4>
+        <p>The M2M application on the Server uses ServiceSync management protocol as the encapsulation of native management protocol supported by the targeted Device(s). In this scheme, the Server and Gateway share the Device Object instance which supports the native management command and response node.</p>
+        <p>The following steps constitute a typical flow for this scheme:<br />
+          Server initiated:</p>
+        <ol>
+          <li>The M2M application on the Server creates the native management command message and make it available to the Server via Server API</li>
+          <li>The Server forwards the native command on the native command node in the Device Object instance</li>
+          <li>The Gateway forwards the native command to the M2M application corresponding to the targeted Device</li>
+        </ol>
+        <p>Device initiated:</p>
+        <ol>
+          <li>The Device sends the message to the gateway, and the gateway passes it to the corresponding M2M application</li>
+          <li>The M2M application stores and manipulates the message, and then stores it on the native response node in the Device Object</li>
+          <li>The Client forwards the native response to the Server</li>
+          <li>The Server passes the native response to the corresponding M2M application on the Server through API</li>
+        </ol>
+        
+        <div id="ServiceSync-Client">
+          <h2>ServiceSync Client</h2>
+        </div>
+        <p>ServiceSync Client resides on a device which is directly connected to ServiceSync Server through M2M wide area network, using the management protocol, which is defined in ServiceSync architecture. M2M applications on a device runs on the Client through the Client API. M2M applications communicates with other M2M applications on the Server through the management communication function provided by the Client.</p>
+        <p>The Client provides the following functionality:</p>
+        <ol>
+          <li>Expose its functionality via APIs to M2M applications on device</li>
+          <li>Allow M2M applications on device to register to the Client</li>
+          <li>Manage the management protocol as well as the transport protocol between the Client and the Server, which are in turn a transportation method for M2M applications on a device to notify event, e.g. alert, and to receive the management requests from the Server</li>
+          <li>Perform remote device management of a device where the Client resides, e.g. firmware update, remote monitoring, etc., through interaction with the corresponding functions on the Server.  Actual device management is performed in conjunction with M2M applications on a device</li>
+        </ol>
+        
+        <div id="ServiceSync-Server">
+          <h2>ServiceSync Server</h2>
+        </div>
+        <p>ServiceSync Server includes:</p>
+        <p>M2M Application Services – Allows developers to extend and customize the core platform functionality via a rich set of Web Services for both SOAP and REST consumption.
+          M2M Integration Framework – Allows integration with the ServiceSync and enterprise systems, e.g. ERP, CRM, Enterprise SNS, etc. with standards-based Web Services. 
+          M2M Data Management – Processes and stores incoming M2M data; manages device and asset types, data items, locations, alarms, and files; and includes built-in security for managing users, roles, user groups, and device groups.  Data Object is a representation of device, asset, or any data in M2M space. Data Objects allow customers to define their own objects, and create specific properties for each object.<br />
+          M2M Complex Event Processing Engine - A flexible rules engine for processing incoming data, responding to events and alarms, and triggering actions on the Platform. You can define sophisticated rules with thresholds and expressions. You can run expression rules on the ServiceSync Platform or threshold rules remotely and natively on the edge device to reduce communication costs.<br />
+          Management Protocols<br />
+          Big Data Processing Engine</p>
+        <p>Inventit can provide the following M2M applications per customer's requests:<br />
+          M2M Application Lifecycle Management - installing, removing, and updating M2M applications in ServiceSync Gateway
+          M2M Device Management: configuration management of device and gateway</p>
+        <p>ServiceSync Server can meet with the needs of each business and therefore allows cloud, hosted, on-premise, and hybrid deployment scenarios.</p>
+        
+        <!-- col-lg-9 End --> 
+      </div>
+      
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>

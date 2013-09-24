@@ -1,0 +1,523 @@
+---
+layout: base
+title: "Inventit Iot developer Network | Guides | Get started"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+        <div class="sideMenu">
+          <div class="accordion" id="accordion2">
+            <div class="accordion-group menu-name">
+              <p><strong>Guides</strong></p>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading avtive"> <a href="../guides.html">Guides</a> </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a href="#collapseOne"><strong>Get Started</strong></a> </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">MOAT IoT</a> <span>4</span> </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul>
+                    <li><a href="moat-iot.html">MOAT IoT?</a></li>
+                    <li><a href="MOAT-IoT/overview.html">Overview</a></li>
+                    <li><a href="MOAT-IoT/deployment.html">Deployment</a></li>
+                    <li><a href="MOAT-IoT/app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a href="examples.html">Examples</a> </div>
+            </div>   
+           <!-- accordion End --> 
+          </div>
+        <!-- sideMenu End --> 
+        </div>
+      <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="../index.html">Home&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="../guides.html">Guides&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li class="avtive">Get started</li>
+        </ul>
+        
+        <h1>Let's Get It Started</h1>
+        <ul class="nav nav-tabs nav-justified">　
+          <li class="active"><a href="#Build-your-first-MOAT-IoT-Application">Build your first<br />
+            MOAT IoT Application</a></li>
+          <li><a href="#Checkout-Sample-Project-from-GitHub">Checkout Sample <br />
+            Project from GitHub</a></li>
+          <li><a href="#Kick-off-your-first-IoT-app">Kick off your <br />
+            first IoT app</a></li>
+          <li><a href="#Appendix"><br />
+            Appendix</a></li>　
+        </ul>
+        
+        <div id="build-your-first-moatiot-application">
+          <h2>Build your first MOAT IoT Application</h2>
+        </div>
+        <h3>Overview</h3>
+        <p>This tutorial introduces you how to build the example MOAT IoT application <a href="https://github.com/inventit/moat-iot-get-started">opened at GitHub</a> as well as how to sign up Inventit IoT Developer Network (IIDN) Sandbox Server which the application accesses.</p>
+        <p> The application demonstrates the following functions:<br />
+          - Uploading motion sensor data on a device when the device is shaken several times<br />
+          - Browsing the uploaded data history<br />
+          - Performing S-O-S morse code with vibration motor on the device when requested from a browser<br />
+        </p>
+        <div class="img">
+          <img src="../img/guides/get-started_01.png" alt="Responsive image" class="img-responsive" />
+        </div>
+        <p>Through the tutorial, there is <strong>no code modification</strong>. Therefore, you don't have to have knowledge of Java/Ruby/Javascript. </p>
+        
+        <h3>Need Building Environment?</h3>
+        <p>The tutorial includes the step to build MOAT IoT application development environment as a <a href="https://www.virtualbox.org/">VirtualBox</a> image via <a href="http://www.vagrantup.com/">Vagrant</a>, a strong virtual machine image management tool. You don't have to care about how it is prepared precisely.<br />
+          Once you type a couple of lines, <a href="http://www.vagrantup.com/">Vagrant</a> will work for you. </p>
+        
+        <h3>So what should I do?</h3>
+        <p> At first, install <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> (4.0.x, 4.1.x and 4.2.x).<br />
+          Then, install <a href="http://downloads.vagrantup.com/">Vagrant</a> (Choose the latest one! DON'T use vagrant gem!)<br />
+          Now let's get <a href="https://github.com/inventit/moat-iot-get-started-vagrant">Vagrant Settings for this example app</a>s from GitHub. </p>
+        <div class="bs-callout">
+          <h4>Git users</h4>
+          <p>You can change<code>path/to/settings</code>as you like. Anyway, you can start from there.</p>
+          <pre>
+mkdir -p path/to/settings
+cd path/to/settings
+git clone git://github.com/inventit/moat-iot-get-started-vagrant.git.</pre>
+          <h4>Non Git users</h4>
+          <p>Without git, you can install the tool by downloading a zip file from the <a href="https://github.com/inventit/moat-iot-get-started-vagrant">GitHub page</a> (find the ZIP labeled icon and click it) and unarchiving it.</p>
+        </div>
+        <p>Move to the checked out (or unarchived) project root directory, e.g. <code>path/to/settings</code>And run <code>vagrant</code>command.
+        <pre>cd path/to/settings
+vagrant up</pre>
+        </p>
+        <br />
+        <p>Then you will see the following logs:
+        <pre>default] Box precise32 was not found. Fetching box from specified URL...
+[vagrant] Downloading with Vagrant::Downloaders::HTTP...
+[vagrant] Downloading box: http://files.vagrantup.com/precise32.box
+     :
+   (snip)
+     :
+[default] Importing base box 'precise32'...
+[default] The guest additions on this VM do not match the install version of
+VirtualBox! This may cause things such as forwarded ports, shared
+folders, and more to not work properly. If any of those things fail on
+this machine, please update the guest additions and repackage the
+box.
+Guest Additions Version: 4.2.0
+VirtualBox Version: 4.2.6
+[default] Matching MAC address for NAT networking...
+[default] Clearing any previously set forwarded ports...
+[default] Forwarding ports...
+     :
+   (snip)
+     :
+</pre>
+        </p>
+        <br />
+        <p>The image download will take place when the box image file named <code>precise32</code> is missing. </p>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          This process will take over an hour for the first time, including download time.
+          So let's have lunch or a long coffee break!! </div>
+        
+        <h3>Enabling USB</h3>
+        <p>The created image doesn't allow USB connection. So you need to enable it manually from the VirtualBox UI.</p>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          You need to install Oracle VirtualBox Extension Pack to enable USB.
+          Download and install it from <a href="https://www.virtualbox.org/wiki/Downloads">here</a>. </div>
+        <p> 1. Disconnect a USB cable connecting your Android phone<br />
+          2. Terminate the virtual machine instance<br />
+        <pre>vagrant halt</pre>
+        </p>
+        <p> 3. Open the VirtualBox UI and choose your created image and click "Settings"<br />
+        <div class="img-photo">
+          <img src="../img/guides/get-started_p01.jpg" width="400" alt="Responsive image" class="img-responsive" />
+        </div>
+          4. Click "Ports" then select "USB" tab and enable checkboxes<br />
+        <div class="img-photo">
+          <img src="../img/guides/get-started_p02.jpg" width="400" alt="Responsive image" class="img-responsive" />
+        </div>
+          5. Launch the instance again<br /><br />
+        <pre>vagrant up</pre>
+        </p>
+        <p> 6. Connect the USB cable to your Android phone again
+          7. Enter the following command to start adb daemon
+        <pre>sudo adb devices</pre>
+        </p>
+        <p> 8. And you will see the following output:
+        <pre>List of devices attached 
+HT9ABC999999	device</pre>
+        </p>
+        <p><I>(HT9ABC999999 is an example)</I><br />
+          OK, now your're ready. </p>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          Unfortunately, hot-plugging doesn't work. So you need to add the connection manually from the above window by clicking "+" icon on the right side whenever you connect your Android Device via USB.<br />
+          You don't have to set it again once you enable USB. But please remember you perform <code>sudo adb devices</code> and connect USB after the command whenever you run <code>vagrant up</code>. </div>
+          
+        <h3>Using your cooked image</h3>
+        <p>Once <code>vagrant up</code> command is completed, all your commands MUST be performed on a terminal via <code>vagrant ssh</code>(Check <a href="get-started/for-windows.html">here</a> for Windows users). You can also run <code>vagrant halt</code> to terminate the running instance.<br />
+          This image already contains the following environment variables:
+        <ul>
+          <li><code>CLI</code>(described as <code>$CLI</code>) for IIDN command line tool installation directory</li>
+          <li><code>APP</code>(described as <code>$APP</code>) for a directory where MOAT IoT example applications are checked out</li>
+        </ul>
+        </p>
+        <p>So you can just copy and paste the commands described on this tutorial.</p>
+        
+        <h3>Sign up </h3>
+        <p>You can sign up with your <a href="https://github.com/">GitHub</a> account or your <a href="https://www.facebook.com/">Facebook</a> account. Unfortunately, we don't offer other OAuth2 provider services yet. We are planning to provide BitBucket and LinkedIn support when they employ OAuth2 (they don't support OAuth2 yet).<br />
+          So in order for you to sign up with GitHub account, just enter the following command on the vagrant box (use <code>vagrant ssh</code> to login).
+        <pre>sh $CLI/iidn signup github</pre>
+        <I>(<code>$CLI</code> for the iidn command line tool directory, you can use it as it is if you are on the Vagrant image since the variable is already declared in the image)</I><br />
+        Note that you can specify <code>fb</code> instead of <code>github</code> for using your Facebook account.
+        </p>
+        <p>Then you will see the following command logs. <br />
+          After reading the term of use, type yes and hit enter.</p>
+        <pre>[IIDN] Please read and accept the Terms of Service: 
+----------------------------- 
+Inventit IoT Developer Network Terms of Service 
+........... (snip)
+
+----------------------------- 
+[IIDN] Did you read and accept the terms? (yes/no): 
+=> yes </pre>
+        <pre>[IIDN] Opening Browser or you can enter the following URL manually:
+=> https://www.github.com/login/oauth?client_id=9999999999999999999&redirect_uri=http%3A%2F%2Fdev.yourinventit.com/tools/oauth2callback&scope=user
+[IIDN] Enter the authorization code: 
+=> </pre>
+        <div class="alert alert-warning"> <strong>IMPORTANT:</strong><br />
+          The command line tool  (iidn-cli) cannot open your browser when you run the command on a remote machine or using Vagrant image. In case of that, launch your browser manually and copy and paste the URL shown on the terminal to the browser. </div>
+        <p>Please click 'Allow' button and you will see the authorization code page on IIDN (this web site).<br />
+          Or you may see the following page (the application icon may be changed though). In that case, click 'Go to App'.</p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p03.jpg" width="600" alt="Responsive image" class="img-responsive" /></p><br />
+          <p><img src="../img/guides/get-started_p04.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p11.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div><p> The following page shows the authorization code provided by GitHub or Facebook.<br />
+          <I># You may see a plain white background HTML page if you use the latest Chrome which blocks all non SSL contents. But the page contains the valid code and you can use it.</I>
+        <p>Then type the authorization code to the prompt.
+        <pre>[IIDN] Enter the authorization code: 
+=> aaaaaaaaaaaaaaaaaaaaaaa</pre>
+        </p>
+        <p>Voila! Finally, you can get the credentials used for registering your own device and the application id for your development.
+        <pre>[IIDN] Congratulations! Welcome my@account.com to Inventit IoT Developer Network Sandbox!
+[IIDN] =====================
+[IIDN] Registration Info:
+[IIDN] app_id :xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+[IIDN] client_id :admin@999999999999999999
+[IIDN] client_secret :aaaaaaaaaaaaaaaaaaaaaaa
+[IIDN] <notice!> The information is used in order for your application to access IIDN Cloud Sandbox.
+[IIDN] =====================</pre>
+        </p>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          Don't worry if you forget your API credentials printed above.
+          You can use <code>reset</code> command to re-issue your password and print all credentials. The command is available as of <a href="https://github.com/inventit/iidn-cli">iidn-cli version 1.0.1.</a> </div>
+        <p>Let's go to the next step where you can create your first application by checking out from GitHub.</p>
+        <div id="Checkout-Sample-Project-from-GitHub">
+          <h2>Checkout Sample Project from GitHub </h2>
+        </div>
+        
+        <h3>Prerequisites </h3>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          If you are already using a <a href="https://www.virtualbox.org/">VirtualBox</a> image cooked by <a href="http://www.vagrantup.com/">Vagrant</a> with <a href="https://github.com/inventit/moat-iot-get-started-vagrant">moat-iot-get-started-vagrant</a>, you don't have to do nothing!<br />
+          Let's go to the next!! </div>
+        <p>We provide a sample project running on our platform. In order for you to try it, make sure you have the following: </p>
+        <ol>
+          <li>Internet Connectivity</li>
+          <li>Modern Browser</li>
+          <li>Android Device (2.3/Gingerbread or higher) with a valid Google account</li>
+          <li><a href="">Rails 3.2</a></li>
+          <li><a href="">Java SE JDK 6 (Open JDK will work as well, set PATH</code> to java command)
+            JDK7 is not available since Android SDK doesn't support it yet.</a></li>
+          <li><a href="">Android SDK</a> API Level 16 (set <code>PATH</code> to <code>adb</code> command)</li>
+          <li><a href="">Apache Maven</a> (3.0+, set <code>PATH</code> to <code>mvn</code> command) OR eclipse with ADT</li>
+          <li>Computer where Rails 3.2, JDK 6 and Android SDK work</li>
+          <li>Open SSL (Windows binaries can be found <a href="http://slproweb.com/products/Win32OpenSSL.html">here</a>)</li>
+          <li>The sandbox account you registered above</li>
+        </ol>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          We call <code>$APP</code> for the checkout root directory and <code>$CLI</code> for the iidn command line tool directory. And the tutorial starts from your home directory. </div>
+        
+        <h3>Upload MOAT js script package</h3>
+        <p>Let's start from uploading the example MOAT js scripts to the sandbox. Through this process, you can tell which application package you are using to the sandbox. Prior to uploading it, you need to create a zip file.</p>
+        <pre>cd $APP/simple-example-js
+jar cf simple-example.zip simple-example 
+sh $CLI/iidn jsdeploy ./simple-example.zip</pre>
+        <br />
+        <p> The file to be uploaded must contain the package metadata file called 'package.json' which describes script metadata. See <a href="../references/moat-rest-api-document.html#package">here</a> for detail.
+          Of course, you can take other way to create a zip file.</p>
+        <pre>[IIDN] Deploying a MOAT js package...
+[IIDN] A new MOAT js package has been created.
+[IIDN] Deployed package info:
+[IIDN] package-id(name): simple-example
+[IIDN] version: 1.0
+[IIDN] => OK. </pre>
+        <p> Good, we can go next.</p>
+        
+        <h3>Installing Gateway Application</h3>
+        <p>The sample Android application requires <b>Inventit ServiceSync Gateway</b> application so that it can use the sandbox. You can install it through Google Play.
+          Here is the direct link to the Google Play page where you can install it.</p>
+        <p><a href="https://play.google.com/store/search?q=pub:Inventit Inc.">
+<img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" /></a></p>
+        <p>Note that this gateway application uses a device id as a device identifier. This information is stored onto the sandbox and used for identifying the device on the sandbox. The gateway may use IMEI, ESN, MEID, Wi-Fi MAC address, or OS dependent device ID as the device id for now (the specification will change when the underlying OS or middleware is updated or modified). This information is treated under our <a href="../legal/privacy-policy.html">privacy policy</a> as well.</p>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          This gateway application works as a background service once your device enrolls the sandbox service. The service polls the sandbox environment at least 5 minutes interval so to check if it has enqueued tasks. The polling method is so-called <a href="http://en.wikipedia.org/wiki/Push_technology">long polling</a>. The interval increases up to 2 hours if your device network environment is good. Let us know if you experience troubles. </div>
+        
+        <h3>Android Application</h3>
+        <p>Let's take a look at the Android application example. The source code you checked out doesn't work though you can build it because the project has missing information to interact with the gateway application and the remote sandbox.</p>
+        <p>Here is a list of tasks you need to complete</p>
+        <ol>
+          <li>Download MOAT Android API jar</li>
+          <li>Download a secure token</li>
+          <li>Sign the token with your APK signing key</li>
+          <li>Copy the token to assets/moat folder</li>
+        </ol>
+        
+        <div id="Download_MOAT_Android_API">
+          <h3>Download MOAT Android API jar</h3>
+        </div>
+        <p>You can download the jar file from the cli tool as shown below.</p>
+        <pre>sh $CLI/iidn sysdownload \
+  inventit-dmc-android-lib-api-4.0.0-prod.jar</pre>
+        <p>The command also asks you you to enter the credentials.</p>
+        <pre>[IIDN] ** Using node... **
+[IIDN] Please read and accept the EULA:
+-----------------------------------------------------------
+Inventit Binary Code License Agreement for the Inventit ServiceSync
+-----------------------------------------------------------
+........... (snip)
+
+[IIDN] Did you read and accept the agreement? (yes/no):
+yes
+[IIDN] Enter your appId:
+(your-application-id)
+[IIDN] Enter your clientId:
+(your-client-id)
+[IIDN] Enter your password:
+(your-client-secret)
+[IIDN] Downloading the distribution package...
+[IIDN] The package:[inventit-dmc-android-lib-api-4.0.0-prod.jar] has been downloaded.</pre>
+        <p>Then install them to your local repository with <code>mvn</code> command. </p>
+        <pre>mvn install:install-file \
+-Dfile=inventit-dmc-android-lib-api-4.0.0-prod.jar \
+-DgroupId=com.yourinventit \
+-DartifactId=inventit-dmc-android-lib-api \
+-Dversion=4.0.0 -Dclassifier=prod -Dpackaging=jar</pre>
+        <p>You should see the success message. </p>
+        <pre> :
+(snip)
+  :
+[INFO] ---------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ---------------------------------------------------
+[INFO] Total time: 1.060s
+[INFO] Finished at: Wed Jan 09 18:22:17 JST 2013
+[INFO] Final Memory: 8M/81M
+[INFO] ----------------------------------------------------</pre>
+        
+        <h3>Download Secure Token</h3>
+        <p>You can download a secure token from the sandbox by running the following command.</p>
+        <pre>sh $CLI/iidn tokengen <code>simple-example</code></pre>
+        <p>The package id simple-example is the identifier assigned for the application package which is registered when you uploaded the MOAT js script archive at the preceding step.<br />
+          The command will print a lot of info to guide you. </p>
+        <br />
+        <p>When the command is successful, the last few lines should be like this:</p>
+        <pre>  :
+(snip)
+  :
+[IIDN] $ openssl pkcs12 -in your-new.p12 -clcerts -nokeys -out your.cert.pem
+[IIDN] ----------------------------------------------------
+[IIDN] $ openssl pkcs12 -in your-new.p12 -nocerts -out your.key
+[IIDN] ----------------------------------------------------
+[IIDN] Done</pre>
+        <p>The downloaded file will be saved on the current working directory with the suffix <code>.bin</code>. The file will be referred later as <code>download-file.bin</code>.</p>
+        <h4>Sign The Token</h4>
+        <p>After downloading the secure token, you need to sign it with your own key. Here in this example, we will show you the way to use Android's debug key for convenience. But NEVER use this way for your production artifacts.</p>
+        <br />
+        <p>At first, you need to change the format of the debug keystore to PKCS#12. Enter the following command. </p>
+        <pre>keytool -importkeystore -srckeystore $HOME/.android/debug.keystore -destkeystore $HOME/.android/debug.p12 -deststoretype PKCS12</pre>
+        <p><I>If <code>$HOME.android</code>(or <code>%HOMEPATH%\.android</code> for windows users) is missing, try the following command:</I></p>
+        <div class="bs-callout">
+          <pre>keytool -genkey -keypass android -keystore \
+$HOME/.android/debug.keystore -alias \
+androiddebugkey -storepass android -validity 10000 \
+-dname "CN=Android Debug,O=Android,C=US"</pre>
+        </div>
+        <br />
+        <p>Next, you need to extract a certificate file and a private key from the converted file. For the debug certificate:</p>
+        <pre>openssl pkcs12 -in $HOME/.android/debug.p12 -clcerts -nokeys -out $HOME/.android/debug.pem</pre>
+        <br />
+        <p>Enter the same password used for keytool command above when prompted.   And for the private key:</p>
+        <pre>openssl pkcs12 -in $HOME/.android/debug.p12 -nocerts -out $HOME/.android/debug.key</pre>
+        <p>Enter the same password and passphrase here as well.<br />
+          Note that the passwords of the Android's debug keystore are available <a href="http://developer.android.com/tools/publishing/app-signing.html#debugmode">here</a>.</p>
+        <br />
+        <p>Finally, you can run the following command for signing the secure token.</p>
+        <pre>openssl smime -sign -in download-file.bin -out signed.bin -signer $HOME/.android/debug.pem -inkey $HOME/.android/debug.key -nodetach -outform der -binary</pre>
+        <p>The signed content will be stored at <code>./signed.bin</code>. </p>
+        <h4>Place The Token</h4>
+        <p>Move the signed content to the assets directory.</p>
+        <pre>mv ./signed.bin $APP/simple-example-android/assets/moat</pre>
+        
+        <h3>Build and Install the sample APK</h3>
+        <p> Make sure your Android device is connected via USB.<br />
+          You can create and install your APK on your eclipse IDE as well (<a href="http://stackoverflow.com/questions/4756451/how-to-install-an-apk-file-on-an-android-phone">this thread</a> may help you).</p>
+        <pre>cd $APP/simple-example-android
+mvn clean deploy</pre>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          If you have compilation errors, please download and install <code>inventit-dmc-android-lib-api-4.0.0-prod.jar</code> again. See <a href="#Download_MOAT_Android_API">here</a> to download. </div>
+        <p>Then install the built APK.</p>
+        <pre>adb install target/moat-android-simple.apk</pre>
+        　
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          <p>A vagrant image user must enter <code>sudo adb devices</code> prior to entering the command above. If you experience <code>- waiting for device -</code> freezing, run the following commands:</p>
+          <pre>adb kill-server
+sudo adb devices
+adb logcat -v</pre>
+          <p>And make sure that other instances (including your host machine) than the vagrant instance don't use (activate) the Android phone USB connection.</p>
+        </div>
+        <p>You will see the following log when the installation is successful (though the transfer rate and binary size may be different from yours).</p>
+        <pre>431 KB/s (518685 bytes in 1.174s)
+	pkg: /data/local/tmp/moat-android-simple.apk
+Success</pre>
+        <p>You can also tail android device log by entering the following command:</p>
+        <pre>adb logcat -v time</pre>
+        <p>This will show the following output.</p>
+        <pre>01-09 18:45:42.413 D/dalvikvm(24064): GC_CONCURRENT freed 1960K, 56% free 4495K/10055K, external 2797K/3480K, paused 7ms+5ms
+01-09 18:45:42.413 D/dalvikvm(24064): GC_CONCURRENT freed 1456K, 56% free 4463K/10055K, external 2797K/3480K, paused 6ms+3ms
+01-09 18:45:42.413 D/dalvikvm(24064): GC_EXPLICIT freed 376K, 56% free 4455K/10055K, external 2797K/3480K, paused 77ms
+  :
+(snip)
+  :
+</pre>
+        <p>Now let's move to rails app. The application is placed under <code>simple-example-rails</code> directory.</p>
+        
+        <h3>Set Credentials & Prepare Rails</h3>
+        <p> The rails application requires your credentials to connect IIDN sandbox server. First, open the <code>config/initializers/constants.rb</code> and you will find the following part:</p>
+        <pre># Modify here with your credentials
+APPLICATION_ID = "{:your_application_id}"
+API_CLIENT_ID = "{:your_client_id}"
+API_CLIENT_SECRET = "{:your_client_secret}"</pre>
+        <p>Second, replace <code>{:your_application_id}</code>, <code>{:your_client_id}</code> and <code>{:your_client_secret}</code> with <code>app_id</code>, <code>client_id</code> and <code>client_secret</code> respectively. </p>
+        <br />
+        <p>From the command line, enter the following commands.</p>
+        <pre>cd $APP/simple-example-rails
+bundle install
+bundle exec rake db:migrate</pre>
+        <p>Once you run bundle install and bundle exec rake db:migrate, you don't have to do them next time.</p>
+        
+        <div id="Kick-off-your-first-IoT-app">
+          <h2>Kick off your first IoT app</h2>
+        </div>
+        <h3>Run Web app on localhost </h3>
+        <p>From the command line, enter the following commands.</p>
+        <pre>cd $APP/simple-example-rails
+rails server</pre>
+        <p>After a few seconds, you will see the following message:</p>
+        <pre>[2013-01-09 19:09:19] INFO WEBrick 1.3.1
+[2013-01-09 19:09:19] INFO ruby 1.9.3 (2012-04-20) [x86_64-darwin12.1.0]
+[2013-01-09 19:09:19] INFO WEBrick::HTTPServer#start: pid=79599 port=3000</pre>
+        <br />
+        <p> OK. The rails started.<br />
+          Now open <code>http://localhost:3000</code> with your browser and you can see the following page: </p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p05.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div>
+        
+        <h3>Tail your server side app log</h3>
+        <div class="alert alert-warning"> <strong>IMPORTANT:</strong><br />
+          Unfortunately, this feature is currently not available as the load balancer disconnects long time TCP session connections. We will prepare another way later. </div>
+        <p>You can remotely tail the MOAT js script server log emitted via MessageSesion.log API in MOAT js.
+          While connecting the server, the command is kept flowing server logs to the command line.</p>
+        <pre>$ sh ./iidn log</pre>
+        <p>You will be requested to enter the credentials:</p>
+        <pre>[IIDN] ** Using node... **
+[IIDN] Enter your appId:
+(your-application-id)
+[IIDN] Enter your clientId:
+(your-client-id)
+[IIDN] Enter your password:
+(your-client-secret)
+[IIDN] Tailing the MOAT js server script log:</pre>
+        <p>The command line will be paused when the authentication is successful. The logs will follow the line above.</p>
+        
+        <h3>Tap and shake your Android app</h3>
+        <p>Back to your Android device, and find the MOAT icon and tap it.<br />
+          You will see the following view on your device. </p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p06.jpg" width="300" alt="Responsive image" class="img-responsive" /></p>
+        </div>
+        <p>After around half a minute, the initialization process is terminated (called activation). You may be asked to accept the application license agreement. Read and accept it, and you can proceed the next step.
+        <p>
+        <p>When the activation is completed, the device info will appear on the rails web page like this: </p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p07.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div>
+        <p>You can click the "Morse Code" button, which requests your Android device to perform the S-O-S morse code with vibration motor.   When you click it, the page will change as follows: </p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p08.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div>
+        <p>As you can see, "Active Requests" now has an entry. This is <a href="../references/moat-rest-api-document.html#dmjob">dmjob</a> record. The object has its own lifecycle and will be terminated when the job is completed or expired.
+          After the <a href="../references/moat-rest-api-document.html#dmjob">dmjob</a> is completed, then the "Active Requests" list is cleared and "Request History" then has an entry with a new attribute "Ended At".<br />
+          Note that the history records are saved only on the rails app rather than the cloud server.<br />
+          This example web app doesn't store request histories for "Morse Code" requests as the web app cannot receive finish notifications from the sandbox server. So you don't have to care when your "Morse Code" request disappear. We will provide you another example running with Heroku, which can receive them and manage histories properly.</p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p09.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div>　
+        <p>This demo offers other feature than the S-O-S Morse Code Vibration, which is to record motion events info.<br />
+          Now you can shake your Android device quickly a couple of times within a few seconds while the demo application screen is displayed <strong>(nothing happens when the screen is locked!)</strong>. Nothing happens? Try to shake repeatedly several times.</p>
+        <br />
+        <p>Then the motion sensor data will be uploaded onto the sandbox server and the result will appear on the rails web page by reloading the page. Take a look at it. </p>
+        <div class="img-photo">
+          <p><img src="../img/guides/get-started_p10.jpg" width="600" alt="Responsive image" class="img-responsive" /></p>
+        </div>
+        <p>The "Delete" button next to "Morse Code" is used for releasing your device from the sandbox server control. Once you delete your device, you need to perform "<a href="https://www.google.co.jp/search?q=android+clear+data&tbm=vid">Clear Data</a>" of the gateway application on your device.<br />
+          By the way, what happened to the server app logs?<br />
+          The logs were output as shown below: </p>
+        <pre>[IIDN] 2013-01-09 21:58:56,885 JST <94> [vibrate] Start VibrateDevice!
+[IIDN] 2013-01-09 21:58:56,885 JST <94> [vibrate] args => {"options":[0,0,0,200,200,200,200,200,500,500,200,500,200,500,500,200,200,200,200,200,1000,200,200,200,200,200,500,500,200,500,200,500,500,200,200,200,200,200],"http.set":"true"}
+[IIDN] 2013-01-09 21:58:57,568 JST <95> [vibrate:vibrate] Successful!!
+[IIDN] 2013-01-09 21:58:57,568 JST <95> [vibrate] End VibrateDevice!
+[IIDN] 2013-01-09 22:35:04,204 JST <86> [shake] Start ShakeEvent!
+[IIDN] 2013-01-09 22:35:05,000 JST <86> [shake:save] The object@uid:39ab2ec3-1240-487c-bd9d-2cb2fba15fa9 has been saved to the database.
+[IIDN] 2013-01-09 22:35:05,285 JST <86> [shake:save] The object@uid:6aac601d-347c-443a-8c4c-49ec21d036d4 has been saved to the database.
+[IIDN] 2013-01-09 22:35:05,564 JST <86> [shake:save] The object@uid:c506fc23-d05e-4c3e-93c8-60469c37fbe9 has been saved to the database.
+[IIDN] 2013-01-09 22:35:05,847 JST <86> [shake:save] The object@uid:e387e2b5-6fdc-4e66-9b30-fa0f2ef1b80c has been saved to the database.
+[IIDN] 2013-01-09 22:35:05,866 JST <86> [shake] => 1 objects are stored.</pre>
+        <p style="color:red"><strong>Again, this feature is currently not available as the load balancer disconnects long time TCP session connections. We will prepare another way later.</strong></p>
+        <p>That's all. The resource Example is not yet ready for now. So skip it. </p>
+        
+        <div id="Appendix">
+          <h3>Appendix</h3>
+        </div>
+        
+        <h3>Learn more about the example app</h3>
+        <p>The purpose of this tutorial is for you to get started with the sandbox. We illustrate you here what happens to the example app.</p>
+        
+        <h3>Undeploy your app</h3>
+        <p>You can delete the existing MOAT js script package when your app is no longer used.</p>
+        <pre>$ sh ./iidn jsundeploy simple-example</pre>
+        
+        <h3>After entering the command, the result will be shown as below.</h3>
+        <pre>[IIDN] Undeploying the MOAT js package...
+[IIDN] Done.</pre>
+        
+        <!-- col-lg-9 End --> 
+      </div>
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>

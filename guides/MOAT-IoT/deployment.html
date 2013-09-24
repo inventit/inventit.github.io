@@ -1,0 +1,92 @@
+---
+layout: base
+title: "Inventit Iot developer Network | Guides | MOAT-IoT | Deployment"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+        <div class="sideMenu">
+          <div class="accordion" id="accordion2">
+            <div class="accordion-group menu-name">
+              <p><strong>Guides</strong></p>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading avtive"><a href="../../guides.html">Guides</a></div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a href="../get-started.html">Get Started</a></div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo"><strong>MOAT IoT</strong></a><span>4</span> </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul>
+                    <li><a href="../moat-iot.html">MOAT IoT?</a></li>
+                    <li><a href="overview.html">Overview</a></li>
+                    <li><a href="#"><strong>Deployment</strong></a></li>
+                    <li><a href="app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a href="../examples.html">Examples</a></div>
+            </div>
+            
+            <!-- accordion End --> 
+          </div>
+          <!-- sideMenu End --> 
+        </div>
+        <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="../../index.html">Home&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="../../guides.html">Guides&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="../moat-iot.html">MOAT IoT&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li class="avtive">Deployment</li>
+        </ul>
+        
+        <h1>Deployment</h1>
+        <p>Let's start from the big picture.<br />
+          Your service application will be deployed as follows.</p>
+        <div class="img">
+          <img src="../../img/guides/deployment01.png" alt="Responsive image" class="img-rounded img-responsive" />
+          <p><i>ig. The big picture of MOAT IoT application deployment</i></p>
+        </div>
+        
+        <h3>Web Apps</h3>
+        <p>Your concrete service application goes here. SQL/NoSQL databases, application servers, or any other middleware related to your apps are there as well.<br />
+          You can create and deploy such the web application on your own hosts or any cloud services such as <a href="http://www.heroku.com/">Heroku</a>, <a href="http://www.force.com/">Force.com</a>, <a href="https://developers.google.com/appengine/">Google App Engine</a>, <a href="http://aws.amazon.com/jp/elasticbeanstalk/">Amazon Elastic Beanstalk</a> or whatever you want.
+          You already have one? No problem. You can modify it. <br />
+          What you need is to write a code to interact with Remote Server. <a href="deployment/moat-rest.html">MOAT REST</a> offers that. </p>
+        
+        <h3>Remote Server</h3>
+        <p>Your web application should be focused on your service and its functionalities.<br />
+          How about the following functions? - Defining protocols between device and server? - Interacting devices securely? - Managing sessions between device and server?
+          No, no, no, you don't, but our server does.<br />
+          Instead, you just write a code, what you want devices to do. <a href="deployment/moat-js.html">MOAT js</a> offeres that. </p>
+        
+        <h3>Android Devices</h3>
+        <p>Your service shall have an Android client with fancy UI/UX and backend logics in the device or to communicate with the web app.
+          You may also have to consider the communication traffic, transient phone network connectivity, or more convenient push functionality than <a href="http://developer.android.com/google/gcm/index.html">GCM</a>/<a href="https://developers.google.com/android/c2dm/">C2DM</a>.
+          Here, you no longer have to care about the underlying system, either. - How to connect to server - Connection handling - Push functionality or whatever the client interacts with the Remote Server, they are provided. <a href="../../references/moat-java-api-document.html">MOAT Android</a> offeres that. </p>
+        <h3>OSGi Devices / Gateways</h3>
+        <p>This is a client running on OSGi containers.<br />
+          Do you already have your own bundles? - Great.<br />
+          You can deploy and enhance them. <a href="../../references/moat-java-api-document.html">MOAT OSGi Gateway</a> provides DmtAdmin(r4v4.2) and additional embedded libraries to allows you to integrate them with MOAT IoT. </p>
+        
+        <!-- col-lg-9 End --> 
+      </div>
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>
