@@ -3845,7 +3845,7 @@ footer
 ------------------------------ */
 
 #footer {
-	background: url(../img/index/noisy_grid.png) repeat;
+	background: url(/img/index/noisy_grid.png) repeat;
 }
 
 #footer .mast {

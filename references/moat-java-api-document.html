@@ -14,22 +14,22 @@ title: "Inventit Iot developer Network | References | MOAT Java/Android"
               <p><strong>References</strong></p>
             </div>
             <div class="accordion-group">
-              <div class="accordion-heading"><a href="../references.html">API References and Design Patterns</a></div>
+              <div class="accordion-heading"><a href="/references.html">API References and Design Patterns</a></div>
             </div>
             <div class="accordion-group">
-              <div class="accordion-heading"><a href="moat-iot-model-descriptor.html">MOAT IoT Model Descriptor</a></div>
+              <div class="accordion-heading"><a href="/references/moat-iot-model-descriptor.html">MOAT IoT Model Descriptor</a></div>
             </div>
             <div class="accordion-group">
-              <div class="accordion-heading"><a href="moat-rest-api-document.html">MOAT REST</a></div>
+              <div class="accordion-heading"><a href="/references/moat-rest-api-document.html">MOAT REST</a></div>
             </div>
             <div class="accordion-group">
-              <div class="accordion-heading"><a href="moat-js-api-document.html">MOAT jst</a></div>
+              <div class="accordion-heading"><a href="/references/moat-js-api-document.html">MOAT js</a></div>
             </div>
             <div class="accordion-group">
               <div class="accordion-heading"><a href="#"><strong>MOAT Java/Android</strong></a></div>
             </div>
             <div class="accordion-group">
-              <div class="accordion-heading"><a href="moat-c-api-document.html">MOAT C</a></div>
+              <div class="accordion-heading"><a href="/references/moat-c-api-document.html">MOAT C</a></div>
             </div>
             
            <!-- accordion End --> 
@@ -41,8 +41,8 @@ title: "Inventit Iot developer Network | References | MOAT Java/Android"
       
       <div class="col-lg-9">
         <ul class="breadcrumb">
-          <li><a href="../index.html">Home&nbsp;</a></li><i class="icon-angle-right"></i>
-          <li><a href="../references.html">References&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/index.html">Home&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/references.html">References&nbsp;</a></li><i class="icon-angle-right"></i>
           <li>MOAT Java/Android</li>
         </ul>
         
@@ -231,7 +231,7 @@ final Moat moat = MoatAndroidFactory.getInstance()
         <div id="Command">
           <h3>Command Annotation</h3>
         </div>
-        <p>This interface annotates a method so that it can be invoked from a MOAT js script via a <a href="moat-js-api-document.html#ClassesModelStub">ModelStub</a> object.<br />
+        <p>This interface annotates a method so that it can be invoked from a MOAT js script via a <a href="/references/moat-js-api-document.html#ClassesModelStub">ModelStub</a> object.<br />
           Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single <code>Map</code> argument containing the context information which is created by a appropriate <code>ContextFactory</code>, specified via <code>Moat#registerModel(String, Class, ModelMapper, ContextFactory)</code>. <br />
           The method should tell the MOAT IoT Client/Gateway if the method execution is performed synchronously or asynchronously (See the Examples below). The method is able to return arbitrary error code when you'd like to pass it to the server. The negative integer value can be sent back to the server automatically. </p>
         <h4>Examples</h4>
@@ -299,7 +299,7 @@ public int associate(Map&lt;String, Object&gt; context) {
           <h3>ResourceType Annotation</h3>
         </div>
         <p>The <code>resource</code> type field contains URLs to fetch a binary object or to store it. You can retrieve the URL from the passed Map value. Its keys are corresponding to HTTP methods available.</p>
-        <p>Note that the URLs to be passed in the field value are determined by a server side script with MOAT js API. See <a href="moat-js-api-document.html#ClassesModelStub">ModelStub</a> for detail.</p>
+        <p>Note that the URLs to be passed in the field value are determined by a server side script with MOAT js API. See <a href="/references/moat-js-api-document.html#ClassesModelStub">ModelStub</a> for detail.</p>
         <pre>final Map&lt;String,String&gt; r = model.getMyResouceType();
 final URL getUrl = new URL(r.get("get"));
 final HttpURLConnection conn = getUrl.openConnection();
@@ -408,7 +408,7 @@ public void setMyResourceTypeResource(Map value) {
                 &nbsp;&nbsp;moat:<a href="#Moat">Moat</a>,<br />
                 &nbsp;&nbsp;p:String) </td>
               <td> N/A </td>
-              <td> Invoked when <code>initMoat</code> is completed with a <a href="#Moat">Moat</a> instance. The <code>p</code> is the prefix of MOAT URN having <a href="../guides/moat-iot/app-design-in-moat-iot.html#JobServiceIdentifier">applicationId and packageId</a> used in your application. The prefix always ends with <code>:</code>. </td>
+              <td> Invoked when <code>initMoat</code> is completed with a <a href="#Moat">Moat</a> instance. The <code>p</code> is the prefix of MOAT URN having <a href="/guides/moat-iot/app-design-in-moat-iot.html#JobServiceIdentifier">applicationId and packageId</a> used in your application. The prefix always ends with <code>:</code>. </td>
             </tr>
             <tr>
               <td> onThrowable(<br />
@@ -427,7 +427,7 @@ public void setMyResourceTypeResource(Map value) {
           <li>Putting a <a href="http://developer.android.com/guide/topics/manifest/uses-permission-element.html">uses-permission</a> named <code>com.yourinventit.servicesync.android.permission.MOAT_ANDROID</code></li>
           <li>Defining a <a href="http://developer.android.com/guide/components/services.html">Service</a> named <code>com.yourinventit.dmc.api.moat.android.MoatClientEndpoint</code></li>
         </ol>
-        <p>The first one is required for interacting with Inventit ServiceSync Gateway application since it grants access to/from applications having this permission. Other securities regarding Interprocess Communication (IPC) between the gateway application and your APK than the Android permission, you can refer to <a href="/tools.html#PlatformSecurity">this page</a>.</p>
+        <p>The first one is required for interacting with Inventit ServiceSync Gateway application since it grants access to/from applications having this permission. Other securities regarding Interprocess Communication (IPC) between the gateway application and your APK than the Android permission.</p>
         <p>Note that the name of the permission may be different from this depending on the distribution of the gateway application. The name is currently available for Inventit ServiceSync Android Gateway connecting Inventit IoT Developer Network Development Sandbox Server.</p>
         <p>The second is used by the gateway application so that it can invoke objects defined in your APK. The detailed info is described later. </p>
         

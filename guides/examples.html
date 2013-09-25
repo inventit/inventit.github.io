@@ -13,7 +13,7 @@ title: "Inventit Iot developer Network | Platform | Example"
             <div class="accordion-group menu-name">
               <p><strong>Guides</strong></p>
             </div>            <div class="accordion-group">
-              <div class="accordion-heading avtive"> <a href="../guides.html">Guides</a> </div>
+              <div class="accordion-heading avtive"> <a href="/guides/guides.html">Guides</a> </div>
             </div>
             <div class="accordion-group">
               <div class="accordion-heading"> <a href="get-started.html">Get Started</a> </div>
@@ -23,10 +23,10 @@ title: "Inventit Iot developer Network | Platform | Example"
               <div id="collapseTwo" class="accordion-body collapse">
                 <div class="accordion-inner">
                   <ul>
-                    <li><a href="moat-iot.html">MOAT IoT?</a></li>
-                    <li><a href="MOAT-IoT/overview.html">Overview</a></li>
-                    <li><a href="MOAT-IoT/deployment.html">Deployment</a></li>
-                    <li><a href="MOAT-IoT/app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
+                    <li><a href="/guides/moat-iot.html">MOAT IoT?</a></li>
+                    <li><a href="/guides/MOAT-IoT/overview.html">Overview</a></li>
+                    <li><a href="/guides/MOAT-IoT/deployment.html">Deployment</a></li>
+                    <li><a href="/guides/MOAT-IoT/app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
                   </ul>
                 </div>
               </div>
@@ -44,8 +44,8 @@ title: "Inventit Iot developer Network | Platform | Example"
       
       <div class="col-lg-9">
         <ul class="breadcrumb">
-          <li><a href="../index.html">Home&nbsp;</a></li><i class="icon-angle-right"></i>
-          <li><a href="../guides.html">Guides&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/index.html">Home&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/guides/guides.html">Guides&nbsp;</a></li><i class="icon-angle-right"></i>
           <li>Example</li>
         </ul>
         
@@ -67,20 +67,20 @@ title: "Inventit Iot developer Network | Platform | Example"
         <h4>Function</h4>
         <p><i>Temp2Twitter</i> is an application that monitors temperature and upload filtered data to <i>Temp2Twitter</i> server app through MOAT IoT platform, <i>Temp2Twitter</i> server app will send these data to twitter, as well as showing them on its web pages. </p>
         <div class="img-photo">
-          <img src="../img/guides/temp2twitter_p01.jpg" width="600" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/temp2twitter_p01.jpg" width="600" alt="Responsive image" class="img-responsive" />
         </div>
         <p>Temperature is took by an <a href="http://arduino.cc/">arduino</a> board equiped with a temperature sensor. The board is connected to a notebook through USB port, where Temp2Twitter client app runs on.</p>
         <div class="img-photo">
-          <img src="../img/guides/temp2twitter_p02.jpg" width="600" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/temp2twitter_p02.jpg" width="600" alt="Responsive image" class="img-responsive" />
         </div>
         <p><i>Temp2Twitter</i> client app takes temperature every specified seconds, each temperature data will be handled by CEP rules, if passed through, they'll be seen on twitter and web page, or the data will be throw away.</p>
         <div class="img-photo">
-          <img src="../img/guides/temp2twitter_p03.jpg" width="600" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/temp2twitter_p03.jpg" width="600" alt="Responsive image" class="img-responsive" />
         </div>
         
         <h4>Workflow</h4>
         <div class="img">
-          <img src="../img/guides/temp2twitter_p04.png" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/temp2twitter_p04.png" alt="Responsive image" class="img-responsive" />
         </div>
         <p>Temp2Twitter send request to arduino server for current temperature</p>
         <ol>
@@ -354,7 +354,7 @@ var moat = require('moat');
     session.log('The object@uid:' + result.uid + ' has been saved to the database.');
  } 
 {% endhighlight %}
-        <p>If your web app want to receive the real-time temp data, you can send the data by method <a href="../references/moat-js-api-document.html">fetchUrlSync</a>, like this</p>
+        <p>If your web app want to receive the real-time temp data, you can send the data by method <a href="/references/moat-js-api-document.html">fetchUrlSync</a>, like this</p>
 		{% highlight java %}
 try { 
      var targetUrl = 'http://localhost:8080/IoTDemo/TwitterServlet';   
@@ -412,15 +412,15 @@ twitter-demo/TemperatureModel?l=500&token=aaaaaaaaaaaaaa'
         <h4>Function</h4>
         <p><i>PushFromTwitter</i> is an application that fetchs <a href="https://twitter.com/IVIatEXPO">twitter</a> messages  and shows it on a LCD when a button clicked. The button to be pushed and LCD used to show tweet message are connected to an <a href="http://arduino.cc/">arduino</a> board. The pushing action and tweets fetched back will shows on web pages of <i>PushFromTwitter</i> server app. </p>
         <div class="img-photo">
-          <img src="../img/guides/pushfromtwitter_p01.jpg" width="600" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/pushfromtwitter_p01.jpg" width="600" alt="Responsive image" class="img-responsive" />
         </div>
         <div class="img-photo">
-          <img src="../img/guides/pushfromtwitter_p02.jpg" width="600" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/pushfromtwitter_p02.jpg" width="600" alt="Responsive image" class="img-responsive" />
         </div>
         <p>The <a href="http://arduino.cc/">arduino</a> board with LCD and buttons is connected to a notebook through USB port, where PushFromTwitter client app runs on.</p>
         <h4>Workflow</h4>
         <div class="img">
-          <img src="../img/guides/pushfromtwitter_p03.png" alt="Responsive image" class="img-responsive" />
+          <img src="/img/guides/pushfromtwitter_p03.png" alt="Responsive image" class="img-responsive" />
         </div>
         <ol>
           <li>Button been pushed</li>
