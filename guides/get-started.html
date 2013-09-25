@@ -1,4 +1,6 @@
 ---
+name: get-started.html
+collapse: collapse
 layout: base
 title: "Inventit Iot developer Network | Guides | Get started"
 ---
@@ -8,37 +10,7 @@ title: "Inventit Iot developer Network | Guides | Get started"
     
       <div class="col-lg-3"> 
         <!-- sideMenu -->
-        <div class="sideMenu">
-          <div class="accordion" id="accordion2">
-            <div class="accordion-group menu-name">
-              <p><strong>Guides</strong></p>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading avtive"> <a href="/guides/guides.html">Guides</a> </div>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading"> <a href="#collapseOne"><strong>Get Started</strong></a> </div>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">MOAT IoT</a> <span>4</span> </div>
-              <div id="collapseTwo" class="accordion-body collapse">
-                <div class="accordion-inner">
-                  <ul>
-                    <li><a href="/guides/moat-iot.html">MOAT IoT?</a></li>
-                    <li><a href="/guides/MOAT-IoT/overview.html">Overview</a></li>
-                    <li><a href="/guides/MOAT-IoT/deployment.html">Deployment</a></li>
-                    <li><a href="/guides/MOAT-IoT/app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading"> <a href="/examples.html">Examples</a> </div>
-            </div>   
-           <!-- accordion End --> 
-          </div>
-        <!-- sideMenu End --> 
-        </div>
+	  {% include guides_side_menu.html %}
       <!-- col-lg-3 End --> 
       </div>
       
@@ -46,7 +18,7 @@ title: "Inventit Iot developer Network | Guides | Get started"
         <ul class="breadcrumb">
           <li><a href="/index.html">Home&nbsp;</a></li>
           <i class="icon-angle-right"></i>
-          <li><a href="/guides/guides.html">Guides&nbsp;</a></li>
+          <li><a href="/guides.html">Guides&nbsp;</a></li>
           <i class="icon-angle-right"></i>
           <li class="avtive">Get started</li>
         </ul>

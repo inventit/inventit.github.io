@@ -1,4 +1,5 @@
 ---
+name: MOAT-IoT/app-design-in-moat-iot.html
 layout: base
 title: "Inventit Iot developer Network | Platform | App Design in MOAT IoT"
 ---
@@ -8,46 +9,18 @@ title: "Inventit Iot developer Network | Platform | App Design in MOAT IoT"
     
       <div class="col-lg-3"> 
         <!-- sideMenu -->
-        <div class="sideMenu">
-          <div class="accordion" id="accordion2">
-            <div class="accordion-group menu-name">
-              <p><strong>Guides</strong></p>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading avtive"><a href="/guides/guides.html">Guides</a></div>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading"> <a href="/guides/get-started.html">Get Started</a> </div>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo"><strong>MOAT IoT</strong></a> <span>4</span> </div>
-              <div id="collapseTwo" class="accordion-body collapse">
-                <div class="accordion-inner">
-                  <ul>
-                    <li><a href="/guides/moat-iot.html">MOAT IoT?</a></li>
-                    <li><a href="overview.html">Overview</a></li>
-                    <li><a href="#">Deployment</a></li>
-                    <li><a href="#"><strong>App Design in MOAT IoT</strong></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-group">
-              <div class="accordion-heading"> <a href="/guides/examples.html">Examples</a> </div>
-            </div>
-            
-           <!-- accordion End --> 
-          </div>
-        <!-- sideMenu End --> 
-        </div>
+	  {% include guides_side_menu.html %}
       <!-- col-lg-3 End --> 
       </div>
       
       <div class="col-lg-9">
         <ul class="breadcrumb">
-          <li><a href="/index.html">Home&nbsp;</a></li><i class="icon-angle-right"></i>
-          <li><a href="/guides/guides.html">Guides&nbsp;</a></li><i class="icon-angle-right"></i>
-          <li><a href="/guides/moat-iot.html">MOAT IoT&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/index.html">Home&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="/guides.html">Guides&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="/guides/moat-iot.html">MOAT IoT&nbsp;</a>
+		  </li><i class="icon-angle-right"></i>
           <li class="avtive">App Design in MOAT IoT</li>
         </ul>
         
