@@ -1,0 +1,102 @@
+<div class="sideMenu">
+	<div class="accordion" id="accordion2">
+		<div class="accordion-group menu-name">
+			<p><strong>References</strong></p>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "references.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="/references.html">
+				{% endif %}
+				API References and Design Patterns
+				{% if page.name == "references.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "moat-iot-model-descriptor.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="/references/moat-iot-model-descriptor.html">
+				{% endif %}
+				MOAT IoT Model Descriptor
+				{% if page.name == "moat-iot-model-descriptor.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "moat-rest-api-document.html" %}
+				<a href="#"><strong>
+				{% elsif page.name == "moat-rest-api-document/changes.html" %}
+				<strong><a href="/references/moat-rest-api-document.html">
+				{% else %}
+				<a href="/references/moat-rest-api-document.html">
+				{% endif %}
+				MOAT REST
+				{% if page.name == "moat-rest-api-document.html" or page.name == "moat-rest-api-document/changes.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "moat-js-api-document.html" %}
+				<a href="#"><strong>
+				{% elsif page.name == "moat-js-api-document/changes.html" %}
+				<strong><a href="/references/moat-js-api-document.html">
+				{% else %}
+				<a href="/references/moat-js-api-document.html">
+				{% endif %}
+				MOAT js
+				{% if page.name == "moat-js-api-document.html" or page.name == "moat-js-api-document/changes.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "moat-java-api-document.html" %}
+				<a href="#"><strong>
+				{% elsif page.name == "moat-java-api-document/changes.html" %}
+				<strong><a href="/references/moat-java-api-document.html">
+				{% else %}
+				<a href="/references/moat-java-api-document.html">
+				{% endif %}
+				MOAT Java/Android
+				{% if page.name == "moat-java-api-document.html" or page.name == "moat-java-api-document/changes.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "moat-c-api-document.html" %}
+				<a href="#"><strong>
+				{% elsif page.name == "moat-c-api-document/changes.html" %}
+				<strong><a href="/references/moat-c-api-document.html">
+				{% else %}
+				<a href="/references/moat-c-api-document.html">
+				{% endif %}
+				MOAT C
+				{% if page.name == "moat-c-api-document.html" or page.name == "moat-c-api-document/changes.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+
+	<!-- accordion End --> 
+	</div>
+<!-- sideMenu End --> 
+</div>
