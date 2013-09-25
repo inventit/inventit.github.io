@@ -5,7 +5,7 @@ pygments: true
 rdiscount:
   extensions: [smart]
 title : IIDN
-production_url : http://dev.yourinventit.com
+production_url : http://dev.inventit.io
 description: ""
 disqus_shortname: iidn
 analytics: UA-32804324-3
