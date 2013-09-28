@@ -1,8 +1,10 @@
 ---
-layout: layout
+layout: base
 ---
 
 <section class="content">
+ <div class="container">
+  <div class="row">
   <h1>
     <a href="{{ page.url }}">{{ page.title }}</a>
   </h1>
@@ -17,4 +19,6 @@ layout: layout
   {% include googleplus.html %}
   <hr>
   {% include disqus.html %}
+ </div>
+</div>
 </section>
