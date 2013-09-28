@@ -1,14 +1,16 @@
 safe: true
 lsi: false
-markdown: rdiscount
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 pygments: true
-rdiscount:
-  extensions: [smart]
 title : IIDN
+timezone: UTC
 production_url : http://dev.inventit.io
 description: ""
 disqus_shortname: iidn
 analytics: UA-32804324-3
+encoding: UTF-8
 author :
   name : Inventit Inc.
   github : inventit
