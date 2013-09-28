@@ -1,0 +1,40 @@
+---
+layout: base
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3"> 
+      
+        <!-- sideMenu -->
+	  {% include references_side_menu.html %}
+
+      <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="/index.html">Home&nbsp;</a></li>
+
+{% for breadcrumb in page.breadcrumbs %}
+<i class="icon-angle-right"></i>
+<li>{% if forloop.last %}
+		{{ breadcrumb.name }}
+	{% else %}
+		<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+	{% endif %}
+</li>
+{% endfor %}
+
+        </ul>
+        
+	  {{ content }}
+        
+        <!-- col-lg-9 End --> 
+      </div>
+      
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>
