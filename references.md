@@ -1,11 +1,15 @@
 ---
-name: references
+sitemap:
+ priority: 0.8
+ changefreq: weekly
+ lastmod: 2013-09-28T00:00:00
+name: references.html
+title: "Inventit Iot developer Network | References"
 layout: references
 breadcrumbs:
 -
  name: References
  url: /references.html
-title: "Inventit Iot developer Network | References"
 ---
 
 # API References
@@ -24,7 +28,7 @@ title: "Inventit Iot developer Network | References"
 
  * Version 1.1.0, Server side javascript running on the sandbox server
 
-[MOAT Java/Android]()/references/moat-java-api-document.html)
+[MOAT Java/Android](/references/moat-java-api-document.html)
 
  * Version 1.0.0, Android, OSGi and generic Java SE version of API set
 
