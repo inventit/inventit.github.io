@@ -884,7 +884,9 @@ POST request to unregistered models will fail with HTTP 400. All models to be ac
 </tbody>
 </table>
 <p>For example, you can issue a GET request to the following URL;</p>
-<pre>https://host:port/moat/v1/my-package/mymodel/12345?f=myResourceField&amp;r=get,post,put,delete,head&amp;q=%7B%22response-content-disposition%22%2C%22attachment%3B%20filename%3D%5C%22mydata%3Dis%3Dhere.txt%5C%22%22%7D</pre>
+```bash
+curl -X GET 'https://host:port/moat/v1/my-package/mymodel/12345?f=myResourceField&amp;r=get,post,put,delete,head&amp;q=%7B%22response-content-disposition%22%2C%22attachment%3B%20filename%3D%5C%22mydata%3Dis%3Dhere.txt%5C%22%22%7D'
+```
 <br />
 <p>Then the result would be like this;</p>
 
