@@ -1,0 +1,74 @@
+---
+name: iidn-developer-console.html
+title: "Inventit Iot developer Network | Tools | DeveloperConsole"
+layout: tools
+---
+
+<h1>IIDN Developer Console</h1>
+
+<h2>API Information</h2>
+
+<h3>Destination</h3>
+<table>
+<tbody>
+<tr>
+	<td>
+		<input type="radio" id="dest" name="dest" value="https://sandbox.service-sync.com" checked> IIDN Sandbox (<a href="http://www.sslshopper.com/ssl-checker.html#hostname=sandbox.service-sync.com">SSLed</a>)
+	</td>
+</tr>
+</tbody>
+</table>	
+
+<h3>Credentials</h3>
+<table>
+<tbody>
+<tr>
+	<td>Application ID</td>
+	<td>
+		<input type="text" id="auth-applicationId" name="applicationId" style="width: 30em;" />
+	</td>
+</tr>
+<tr>
+	<td>User ID</td>
+	<td>
+		<input type="text" id="auth-authUserId" name="authUserId" style="width: 30em;" />
+	</td>
+</tr>
+<tr>
+	<td>User Password</td>
+	<td>
+		<input type="password" id="auth-authPassword" name="authPassword" style="width: 30em;" />
+	</td>
+</tr>
+</tbody>
+</table>	
+
+<div style="padding: .35em .625em .75em;">
+<input class="btn btn-navbar" type="button" id="login" value="login">
+<input class="btn btn-navbar" type="button" id="logout" value="logout" disabled="disabled">
+</div>
+<div id="auth-progress"></div>
+
+<div id="commands">
+
+<h2>Commands</h2>
+
+<h3>Generate Token</h3>
+<table>
+<tbody>
+<tr>
+	<td>Package ID</td>
+	<td>
+		<input type="text" id="packageId" name="packageId" style="width: 30em;" />
+	</td>
+	<td>
+		<div style="padding: .35em .625em .75em;">
+		 <a href="#packageId" id="tokengen" class="btn btn-top">Generate Package Token <i class="icon-download"></i></a>
+		</div>
+	</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<script src="/js/iidn-developer-console.js" />
