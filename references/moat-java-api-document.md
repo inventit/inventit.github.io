@@ -35,12 +35,12 @@ breadcrumbs:
 </ol>
 
 ## MOAT Java
-<div id="Moat">
-### MOAT Interface</h3>
-</div>
+<div id="Moat"></div>
+### MOAT Interface
 
-<p>This is an entry point of MOAT Android/OSGi API. You don't have to implement this interface since the instance of the interface should be provided by the underlying runtime application or library.</p>
-<h4>OSGi Example</h4>
+This is an entry point of MOAT Java/Android/OSGi API. You don't have to implement this interface since the instance of the interface should be provided by the underlying runtime application or library.
+
+#### OSGi Example
 
 ```java
 final ContextFactory contextFactory = ...;
@@ -54,10 +54,11 @@ final Moat moat = bundleContext.getService(moatRef);
     Block.class, blockDaoOrmlite, contextFactory);
 ```
 
-<p><i><code>bundleContext</code> is an org.osgi.framework.BudleContext instance.</i><br />
-  <i><code>Moat</code> instance is associated with its FQDN in the bundleContext.</i></p>
+`bundleContext` is an org.osgi.framework.BudleContext instance. <br/>
+`Moat` instance is associated with its FQDN in the bundleContext.
 
-<h4>Android Example</h4>
+#### Android Example
+
 ```java
 final byte[] token = toByteArray(
     context.getAssets().open(
@@ -78,9 +79,10 @@ final Moat moat = MoatAndroidFactory.getInstance()
       }
 });
 ```
-<p><i><code>context</code> is an android.content.Context instance.</i><br />
-  <i><code>toByteArray</code> is a pseudo code, you can get the code by search engine with <code>inputstream to byte array</code>.</i><br />
-  <i><code>moat/signed-token-file</code> is a token file signed by both MOAT server runtime environment and developers themselves.</i></p>
+`context` is an android.content.Context instance.<br />
+`toByteArray` is a pseudo code, you can get the code by search engine with `inputstream to byte array`.<br />
+`moat/signed-token-file` is a token file signed by both MOAT server runtime environment and developers themselves.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -141,15 +143,18 @@ final Moat moat = MoatAndroidFactory.getInstance()
   </tbody>
 </table>
 
-<div id="ModelMapper">
-  <h3>ModelMapper Interface</h3>
-</div>
-<p>This interface represents Create/Read/Update/Delete operations for a single POJO data model, one model for one ModelMapper.<br />
-  The implementation is totally depending on developers, which means there is no constraint on the implementation of the interface. For instance, you can use the database or the file system for the object persistence if you want. </p>
-<h4>Singleton and Array</h4>
-<p> There are 2 kinds of model objects in MOAT IoT. One is Singleton, which is always a single record object and the other is Array, which aggregates zero, one or more model objects with unique identifiers. </p>
-<h4>UID, the unique identifier</h4>
-<p>Each model object must have an identifier field named 'uid' like the primary key in RDB.</p>
+<div id="ModelMapper"></div>
+### ModelMapper Interface
+
+This interface represents Create/Read/Update/Delete operations for a single POJO data model, one model for one ModelMapper.<br />
+The implementation is totally depending on developers, which means there is no constraint on the implementation of the interface. For instance, you can use the database or the file system for the object persistence if you want.
+
+#### Singleton and Array
+There are 2 kinds of model objects in MOAT IoT. One is Singleton, which is always a single record object and the other is Array, which aggregates zero, one or more model objects with unique identifiers.
+
+#### UID, the unique identifier
+Each model object must have an identifier field named 'uid' like the primary key in RDB.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -201,59 +206,62 @@ final Moat moat = MoatAndroidFactory.getInstance()
   </tbody>
 </table>
         
-<div id="Command">
-  <h3>Command Annotation</h3>
-</div>
-<p>This interface annotates a method so that it can be invoked from a MOAT js script via a <a href="/references/moat-js-api-document.html#ClassesModelStub">ModelStub</a> object.<br />
-  Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single <code>Map</code> argument containing the context information which is created by a appropriate <code>ContextFactory</code>, specified via <code>Moat#registerModel(String, Class, ModelMapper, ContextFactory)</code>. <br />
+<div id="Command"></div>
+### Command Annotation
+This interface annotates a method so that it can be invoked from a MOAT js script via a [ModelStub](/references/moat-js-api-document.html#ClassesModelStub) object.<br />
+Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single <code>Map</code> argument containing the context information which is created by a appropriate <code>ContextFactory</code>, specified via <code>Moat#registerModel(String, Class, ModelMapper, ContextFactory)</code>. <br />
   The method should tell the MOAT IoT Client/Gateway if the method execution is performed synchronously or asynchronously (See the Examples below). The method is able to return arbitrary error code when you'd like to pass it to the server. The negative integer value can be sent back to the server automatically. </p>
-<h4>Examples</h4>
-<p>1. This declaration means the method <code>associate</code> is performed synchronously and is expected for the object itself to be updated after the execution.</p>
-```java
-@Command
-public int associate(Map&lt;String, Object&gt; context) {
-  ...
-}
-```
-<p>2. This declaration means the method is performed asynchronously and is expected for the object itself to be updated after the execution.</p>
+
+#### Examples
+1) This declaration means the method <code>associate</code> is performed synchronously and is expected for the object itself to be updated after the execution.
 
 ```java
 @Command
-public void associate(Map&lt;String, Object&gt; context) {
+public int associate(Map<String, Object> context) {
+  ...
+}
+```
+
+2) This declaration means the method is performed asynchronously and is expected for the object itself to be updated after the execution.
+
+```java
+@Command
+public void associate(Map<String, Object> context) {
   ...
   throw new CommandException(Constants.ASYNC);
 }
 ```
 
-<p>3. This declaration means the method is performed synchronously and is expected for the object itself NOT to be updated after the execution.</p>
+3) This declaration means the method is performed synchronously and is expected for the object itself NOT to be updated after the execution.
 
 ```java
 @Command
-public int associate(Map&lt;String, Object&gt; context) {
+public int associate(Map<String, Object> context) {
   ...
   return Constants.SYNC;
 }
 ```
 
-<p>4. This declaration means the method is performed asynchronously and is expected for the object itself NOT to be updated after the execution.</p>
+4) This declaration means the method is performed asynchronously and is expected for the object itself NOT to be updated after the execution.
 
 ```java
 @Command
-public int associate(Map&lt;String, Object&gt; context) {
+public int associate(Map<String, Object> context) {
   ...
   return Constants.ASYNC;
 }
 ```
         
-<div id="Command.jdk14">
-  <h4>For JDK1.4</h4>
-</div>
-<p>With regard to bundles compiled with JDK1.4, the following method declaration convention is provided instead of the annotation mechanism.</p>
+<div id="Command.jdk14"></div>
+#### For JDK1.4
 
-<h4>Examples (JDK 1.4)</h4>
-<p>The following examples show the JDK 1.4 version of the above Examples.</p>
-<br />
-<p>1. This declaration means the method is performed synchronously and is expected for the object itself to be updated after the execution.</p>
+With regard to bundles compiled with JDK1.4, the following method declaration convention is provided instead of the annotation mechanism.
+
+#### Examples (JDK 1.4)
+
+The following examples show the JDK 1.4 version of the above Examples.<br />
+
+1) This declaration means the method is performed synchronously and is expected for the object itself to be updated after the execution.
 
 ```java
 public void associate(Map context) {
@@ -261,7 +269,7 @@ public void associate(Map context) {
 }
 ```
 
-<p>2. This declaration means the method is performed asynchronously and is expected for the object itself to be updated after the execution.</p>
+2) This declaration means the method is performed asynchronously and is expected for the object itself to be updated after the execution.
 
 ```java
 public void associate(Map context) {
@@ -270,7 +278,7 @@ public void associate(Map context) {
 }
 ```
 
-<p>3. This declaration means the method is performed synchronously and is expected for the object itself NOT to be updated after the execution.</p>
+3) This declaration means the method is performed synchronously and is expected for the object itself NOT to be updated after the execution.
 
 ```java
 public int associate(Map context) {
@@ -279,7 +287,7 @@ public int associate(Map context) {
 }
 ```
 
-<p>4. This declaration means the method is performed asynchronously and is expected for the object itself NOT to be updated after the execution.</p>
+4) This declaration means the method is performed asynchronously and is expected for the object itself NOT to be updated after the execution.
 
 ```java
 public int associate(Map context) {
@@ -287,33 +295,33 @@ public int associate(Map context) {
   return Constants.ASYNC;
 }
 ```
-        
-<div id="ResourceType">
-  <h3>ResourceType Annotation</h3>
-</div>
-<p>The <code>resource</code> type field contains URLs to fetch a binary object or to store it. You can retrieve the URL from the passed Map value. Its keys are corresponding to HTTP methods available.</p>
-<p>Note that the URLs to be passed in the field value are determined by a server side script with MOAT js API. See <a href="/references/moat-js-api-document.html#ClassesModelStub">ModelStub</a> for detail.</p>
+
+<div id="ResourceType"></div>
+### ResourceType Annotation
+The `resource` type field contains URLs to fetch a binary object or to store it. You can retrieve the URL from the passed Map value. Its keys are corresponding to HTTP methods available.
+
+Note that the URLs to be passed in the field value are determined by a server side script with MOAT js API. See [ModelStub](/references/moat-js-api-document.html#ClassesModelStub) for detail.
 
 ```java
-final Map&lt;String,String&gt; r = model.getMyResouceType();
+final Map<String,String> r = model.getMyResouceType();
 final URL getUrl = new URL(r.get("get"));
 final HttpURLConnection conn = getUrl.openConnection();
   :
   :
 ```
-        
-<h4>For JDK1.5 including Android</h4>
-<p>Annotate your resource field declaration with <code>@ResourceType</code>.</p>
+
+#### For JDK1.5 including Android
+Annotate your resource field declaration with `@ResourceType`.
 
 ```java
 public class ... {
 @ResourceType
-private Map&lt;String,String&gt; myResourceType;
-public Map&lt;String,String&gt; getMyResourceType() {
+private Map<String,String> myResourceType;
+public Map<String,String> getMyResourceType() {
   ...
 }
 public void setMyResourceType(
-Map&lt;String,String&gt; value) {
+Map<String,String> value) {
   ...
 }
    :
@@ -322,10 +330,11 @@ Map&lt;String,String&gt; value) {
 }
 ```
 
-<p>You need to declare the accessor methods as well.</p>
+You need to declare the accessor methods as well.
 
-<h4><a name="ResourceTypejdk14"></a>For JDK1.4</h4>
-<p>Use <code>Resource</code> suffix to your resource field name.</p>
+<div id="ResourceTypejdk14"></div>
+#### For JDK1.4
+Use `Resource` suffix to your resource field name.
 
 ```java
 public class ... {
@@ -341,19 +350,24 @@ public void setMyResourceTypeResource(Map value) {
    :
 }
 ```
-<p>You need to declare the accessor methods as well.</p>
 
-<h2>MOAT Android</h2>
-<p>MOAT Android is the Android Specific API set. These classes enable you to access the MOAT IoT runtime environment via a gateway application, which can be installed from <a href="https://play.google.com/store/search?q=pub:Inventit%20Inc.">Google Play</a>.</p>
-<p>These classes are included in <code>inventit-dmc-android-lib-api-4.0.0-prod.jar</code> which you can download via <a href="https://github.com/inventit/iidn-cli"><code>iidn</code></a> command. You need to embed the jar file into your APK.</p>
-<p>The minimum API level required in the jar file is 10 (<a href="http://developer.android.com/about/versions/android-2.3.3.html">Gingerbread MR1</a>). You can also use higher level of API set in your APK.</p>
+You need to declare the accessor methods as well.
 
-<div id="MoatAndroidFactory">
-  <h3>MoatAndroidFactory Class</h3>
-</div>
-<p>This is a factory class for creating Android Platform dependent <code><a href="#Moat">Moat</a></code> object.</p>
-<p>You need to invoke <code>initMoat</code> in order to obtain the instance. You also need to invoke <code>destroyMoat</code> so that the gateway application is able to discard unused state and information, which causes inconsistency between the gateway application and your application.</p>
-<p>Once the inconsistency happens, your application doesn't work properly until the installed device is rebooted.</p>
+## MOAT Android
+MOAT Android is the Android Specific API set. These classes enable you to access the MOAT IoT runtime environment via a gateway application, which can be installed from [Google Play](https://play.google.com/store/search?q=pub:Inventit%20Inc.).
+
+These classes are included in `inventit-dmc-android-lib-api-4.0.0-prod.jar` which you can download via [iidn](https://github.com/inventit/iidn-cli) command. You need to embed the jar file into your APK.
+
+The minimum API level required in the jar file is 10 ([Gingerbread MR1](http://developer.android.com/about/versions/android-2.3.3.html)). You can also use higher level of API set in your APK.
+
+<div id="MoatAndroidFactory"></div>
+### MoatAndroidFactory Class
+This is a factory class for creating Android Platform dependent <code><a href="#Moat">Moat</a></code> object.
+
+You need to invoke `initMoat` in order to obtain the instance. You also need to invoke `destroyMoat` so that the gateway application is able to discard unused state and information, which causes inconsistency between the gateway application and your application.
+
+Once the inconsistency happens, your application doesn't work properly until the installed device is rebooted.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -390,10 +404,10 @@ public void setMyResourceTypeResource(Map value) {
   </tbody>
 </table>
 
-<div id="MoatAndroidFactoryCallback">
-  <h3>Callbck Interface</h3>
-</div>
-<p>This interface is used for receiving <code<a href="#Moat">>Moat</code></a> object from <code<a href="MoatAndroidFactory">>MoatAndroidFactory</a></code>. Or you may also receive an exception raised during the initialization process.</p>
+<div id="MoatAndroidFactoryCallback"></div>
+### Callbck Interface
+This interface is used for receiving <code<a href="#Moat">>Moat</code></a> object from <code<a href="MoatAndroidFactory">>MoatAndroidFactory</a></code>. Or you may also receive an exception raised during the initialization process.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -419,20 +433,25 @@ public void setMyResourceTypeResource(Map value) {
   </tbody>
 </table>
 
-<div id="AndroidManifestxml">
-  <h3>AndroidManifest.xml for your APK</h3>
-</div>
-<p>There are several chores prior to finishing your APK regarding AndroidManifest.xml.</p>
+<div id="AndroidManifestxml"></div>
+### AndroidManifest.xml for your APK
+
+There are several chores prior to finishing your APK regarding AndroidManifest.xml.
+
 <ol>
   <li>Putting a <a href="http://developer.android.com/guide/topics/manifest/uses-permission-element.html">uses-permission</a> named <code>com.yourinventit.servicesync.android.permission.MOAT_ANDROID</code></li>
   <li>Defining a <a href="http://developer.android.com/guide/components/services.html">Service</a> named <code>com.yourinventit.dmc.api.moat.android.MoatClientEndpoint</code></li>
 </ol>
-<p>The first one is required for interacting with Inventit ServiceSync Gateway application since it grants access to/from applications having this permission. Other securities regarding Interprocess Communication (IPC) between the gateway application and your APK than the Android permission.</p>
-<p>Note that the name of the permission may be different from this depending on the distribution of the gateway application. The name is currently available for Inventit ServiceSync Android Gateway connecting Inventit IoT Developer Network Development Sandbox Server.</p>
-<p>The second is used by the gateway application so that it can invoke objects defined in your APK. The detailed info is described later. </p>
 
-<h4>uses-permission</h4>
-<p>You can define the <a href="http://developer.android.com/guide/topics/manifest/uses-permission-element.html">uses-permission</a> as follows:</p>
+The first one is required for interacting with Inventit ServiceSync Gateway application since it grants access to/from applications having this permission. Other securities regarding Interprocess Communication (IPC) between the gateway application and your APK than the Android permission.
+
+Note that the name of the permission may be different from this depending on the distribution of the gateway application. The name is currently available for Inventit ServiceSync Android Gateway connecting Inventit IoT Developer Network Development Sandbox Server.
+
+The second is used by the gateway application so that it can invoke objects defined in your APK. The detailed info is described later.
+
+#### uses-permission
+
+You can define the [uses-permission](http://developer.android.com/guide/topics/manifest/uses-permission-element.html) as follows:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -446,10 +465,12 @@ package="com.yourinventit.moat.android.example">
    :
 ```
 
-        
-<h4>Android Service</h4>
-<p>The Android <a href="http://developer.android.com/guide/components/services.html">Service</a> you need to specify in your APK's AndroidManifest.xml is <code>MoatClientEndpoint</code>, which is embedded in the library jar.</p>
-<p>The service receives operations directed by the gateway application and propagates them to the local objects in your APK. You don't have to do something special for the service other than placing the service setting in your AndroidManifest.xml.</p>
+#### Android Service
+
+The Android [Service](http://developer.android.com/guide/components/services.html) you need to specify in your APK's AndroidManifest.xml is `MoatClientEndpoint`, which is embedded in the library jar.
+
+The service receives operations directed by the gateway application and propagates them to the local objects in your APK. You don't have to do something special for the service other than placing the service setting in your AndroidManifest.xml.
+
 ```xml
 <application
 android:allowClearUserData="false"
@@ -472,3 +493,4 @@ android:permission="com.yourinventit.servicesync.android.permission.MOAT_ANDROID
    :
 </application>
 ```
+You can find the working example [here](https://github.com/inventit/moat-iot-get-started/blob/master/simple-example-android/AndroidManifest.xml) at GitHub.

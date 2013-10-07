@@ -32,24 +32,29 @@ breadcrumbs:
   <li><a href="#UnidirectionalLinkedList">Unidirectional Linked List</a> interface</li>
 </ol>
 
-<h2>MOAT C</h2>
+## MOAT C
 <div class="alert alert-info"> <b>NOTICE:</b><br />
   The MOAT IoT API is designed in Object Oriented Paradigm. We apply the design philosophy to MOAT C API as well.<br />
   Give <a href="https://plus.google.com/u/0/103577935124656848081/posts">us</a> feedback if you have suggestions on it.<br />
 </div>
-  
-<h4>Modeling and MOAT API</h4>
-<p>The above diagram illustrates the relationships between modelling and MOAT API sets. At first, developers design models representing data sets on the device side. Then, they write server side code with MOAT js and client side code with MOAT C.<br />
-This document focuses on MOAT C API used for developing the device side application.</p>
 
-<h4>MOAT C app specific function</h4>
-<p>Your MOAT C apps must implement the following function so that the underlying MOAT runtime environment is able to start/stop your apps.</p>
-<div id="MoatApp">
-<h3>MoatApp interfaces</h3>
-</div>
+### Overview
 
-<h4>MOAT C application specific function</h4>
-<p>Your MOAT C apps must implement the following function so that the underlying MOAT runtime environment is able to start/stop your apps.</p>
+#### Modeling and MOAT API
+
+The above diagram illustrates the relationships between modelling and MOAT API sets. At first, developers design models representing data sets on the device side. Then, they write server side code with MOAT js and client side code with MOAT C.<br />
+This document focuses on MOAT C API used for developing the device side application.
+
+#### MOAT C app specific function
+Your MOAT C apps must implement the following function so that the underlying MOAT runtime environment is able to start/stop your apps.
+
+<div id="MoatApp"></div>
+### MoatApp interfaces
+
+#### MOAT C application specific function
+
+Your MOAT C apps must implement the following function so that the underlying MOAT runtime environment is able to start/stop your apps.
+
 <table class="table table-hover table-bordered">
 <thead>
 <tr>
@@ -77,8 +82,10 @@ This document focuses on MOAT C API used for developing the device side applicat
 </tbody>
 </table>
 
-<h4>MOAT C app lifecycle management functions</h4>
-<p>The following functions offer your MOAT C app main entry point to manage the application lifecycle.</p>
+#### MOAT C app lifecycle management functions
+
+The following functions offer your MOAT C app main entry point to manage the application lifecycle.
+
 <table class="table table-hover table-bordered">
 <thead>
 <tr>
@@ -127,15 +134,16 @@ This document focuses on MOAT C API used for developing the device side applicat
 </tbody>
 </table>
 
-<div id="Moat">
-<h3>Moat Interfaces</h3>
-</div>
-<p>The Moat interfaces allow MOAT C applications to manage and/or manipulate model data.</p>
+<div id="Moat"></div>
+### Moat Interfaces
 
-<h4>Moat type</h4>
-<p>The <code>Moat</code> data type is context information associated with the underlying MOAT runtime environment.
+The Moat interfaces allow MOAT C applications to manage and/or manipulate model data.
+
+#### Moat type
+The `Moat` data type is context information associated with the underlying MOAT runtime environment.
 You need to pass the valid object to all Moat functions described later.<br />
-The data is always passed by the MOAT runtime so you don't have to instantiate it.</p>
+The data is always passed by the MOAT runtime so you don't have to instantiate it.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -151,8 +159,10 @@ The data is always passed by the MOAT runtime so you don't have to instantiate i
 </tbody>
 </table>
 
-<h4>Moat functions</h4>
-<p>The following functions are methods associated with the <code>Moat</code> data type, class methods and/or instance methods in OO languages.</p>
+#### Moat functions
+
+The following functions are methods associated with the <code>Moat</code> data type, class methods and/or instance methods in OO languages.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -255,9 +265,12 @@ The data is always passed by the MOAT runtime so you don't have to instantiate i
 </tbody>
 </table>
 
-<h4>Moat Opaque Types</h4>
-<h5>MoatNotifyResultProc</h5>
-<p>This is an opaque type representing a callback function to be invoked when <code>moat_send_notification</code> is finished. Your MOAT C apps must implement the following function so that the runtime is able to call your MOAT C app function.</p>
+#### Moat Opaque Types
+
+##### MoatNotifyResultProc
+
+This is an opaque type representing a callback function to be invoked when `moat_send_notification` is finished. Your MOAT C apps must implement the following function so that the runtime is able to call your MOAT C app function.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -292,20 +305,24 @@ The data is always passed by the MOAT runtime so you don't have to instantiate i
 </tbody>
 </table>
 
-<div id="ModelMapper">
-<h3>ModelMapper Interfaces</h3>
-</div>
-<p>These interfaces represent Create/Read/Update/Delete operations for a single data model, one model for one ModelMapper.<br />
-The implementation is totally depending on developers, which means there is no constraint on the implementation of the interfaces. For instance, you can use the database or the file system for the object persistence if you want.</p>
+<div id="ModelMapper"></div>
+### ModelMapper Interfaces
 
-<h4>Singleton and Array</h4>
-<p>There are 2 kinds of model objects in MOAT IoT. One is Singleton, which is always a single record object and the other is Array, which aggregates zero, one or more model objects with unique identifiers.</p>
+These interfaces represent Create/Read/Update/Delete operations for a single data model, one model for one ModelMapper.<br />
+The implementation is totally depending on developers, which means there is no constraint on the implementation of the interfaces. For instance, you can use the database or the file system for the object persistence if you want.
 
-<h4>UID, the unique identifier</h4>
-<p>Each model object must have an identifier field named 'uid' like the primary key in RDB.</p>
+#### Singleton and Array
 
-<h4>ModelMapper type</h4>
-<p>The <code>ModelMapper</code> type is a collection of callback functions, which are invoked by the underlying MOAT runtime environment when a MOAT js code on the MOAT server runtime demands. See <a href="/references/moat-js-api-document.html#ClassesModelMapperStub">ModelMapperStub</a> for detail, the stub class functions are corresponding to the callback functions declared here.</p>
+There are 2 kinds of model objects in MOAT IoT. One is Singleton, which is always a single record object and the other is Array, which aggregates zero, one or more model objects with unique identifiers.
+
+#### UID, the unique identifier
+
+Each model object must have an identifier field named 'uid' like the primary key in RDB.
+
+#### ModelMapper type
+
+The `ModelMapper` type is a collection of callback functions, which are invoked by the underlying MOAT runtime environment when a MOAT js code on the MOAT server runtime demands. See [(ModelMapperStub]/references/moat-js-api-document.html#ClassesModelMapperStub) for detail, the stub class functions are corresponding to the callback functions declared here.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -321,13 +338,15 @@ The implementation is totally depending on developers, which means there is no c
 </tbody>
 </table>
 
-<h5>Model Object Accessor Members</h5>
-<p> The following table illustrates functions so-called accessors in OO languages.<br />
+##### Model Object Accessor Members
+
+The following table illustrates functions so-called accessors in OO languages.<br />
 They are called by the underlying MOAT runtime environment but you never call them directly.<br />
 The responsibility of the functions is to offer the MOAT runtime to CRUD (create/read/update/delete) model objects managed by your MOAT C app.<br />
-The functions are corresponding to ones defined in <a href="/references/moat-js-api-document.html#ClassesModelMapperStub">ModelMapperStub</a>. The stub methods invocation is propagated by the MOAT runtime (including both Server and Client) and the callback functions are invoked in the end.<br />
+The functions are corresponding to ones defined in [ModelMapperStub](/references/moat-js-api-document.html#ClassesModelMapperStub). The stub methods invocation is propagated by the MOAT runtime (including both Server and Client) and the callback functions are invoked in the end.<br />
 <br />
-See <a href="#ModelMapperOpaqueTypes">ModelMapper Opaque Types</a> for the following type detail. </p>
+See [ModelMapper Opaque Types](#ModelMapperOpaqueTypes) for the following type detail.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -366,15 +385,17 @@ See <a href="#ModelMapperOpaqueTypes">ModelMapper Opaque Types</a> for the follo
   </tr>
 </tbody>
 </table>
-<div id="ModelMapperOpaqueTypes">
-<h4>ModelMapper Opaque Types</h4>
-</div>
-<div id="MoatAddProc">
-<h5>MoatAddProc</h5>
-</div>
-<p>This is an opaque type representing a callback function to be invoked when <code>ModelMapperStub.add</code> is performed on the MOAT server runtime.<br />
-MOAT C app must implement this function to store the passed <code>MoatObject</code> and associate it with the given 'uid' value so that <code>MoatFindAllUidsProc</code> and <code>MoatFindAllUidsProc</code> type functions are able to retrieve the object.<br />
-Note that MOAT C API specification doesn't care of the way to persist the object data, which is completely dependent on MOAT C apps.</p>
+
+<div id="ModelMapperOpaqueTypes"></div>
+#### ModelMapper Opaque Types
+
+<div id="MoatAddProc"></div>
+##### MoatAddProc
+
+This is an opaque type representing a callback function to be invoked when `ModelMapperStub.add` is performed on the MOAT server runtime.<br />
+MOAT C app must implement this function to store the passed `MoatObject` and associate it with the given 'uid' value so that `MoatFindAllUidsProc` and `MoatFindAllUidsProc` type functions are able to retrieve the object.<br />
+Note that MOAT C API specification doesn't care of the way to persist the object data, which is completely dependent on MOAT C apps.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -400,11 +421,12 @@ Note that MOAT C API specification doesn't care of the way to persist the object
 </tbody>
 </table>
 
-<div id="MoatRemoveProc">
-<h5>MoatRemoveProc</h5>
-</div>
-<p>This is an opaque type representing a callback function to be invoked when <code>ModelMapperStub.remove</code> is performed on the MOAT server runtime.<br />
-MOAT C app must implement this function to remove the object specified by the given 'uid' value.</p>
+<div id="MoatRemoveProc"></div>
+MoatRemoveProc
+
+This is an opaque type representing a callback function to be invoked when `ModelMapperStub.remove` is performed on the MOAT server runtime.<br />
+MOAT C app must implement this function to remove the object specified by the given 'uid' value.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -428,11 +450,12 @@ MOAT C app must implement this function to remove the object specified by the gi
 </tbody>
 </table>
 
-<div id="MoatUpdateProc">
-<h5>MoatUpdateProc</h5>
-</div>
-<p>This is an opaque type representing a callback function to be invoked when <code>ModelMapperStub.update</code> is performed on the MOAT server runtime.<br />
-MOAT C app must implement this function to update all fields in the object specified by the given 'uid' value.</p>
+<div id="MoatUpdateProc"></div>
+##### MoatUpdateProc
+
+This is an opaque type representing a callback function to be invoked when `ModelMapperStub.update` is performed on the MOAT server runtime.<br />
+MOAT C app must implement this function to update all fields in the object specified by the given 'uid' value.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -458,11 +481,12 @@ MOAT C app must implement this function to update all fields in the object speci
 </tbody>
 </table>
 
-<div id="MoatUpdateFieldsProc">
-<h5>MoatUpdateFieldsProc</h5>
-</div>
-<p>This is an opaque type representing a callback function to be invoked when <code>ModelMapperStub.updateFields</code> is performed on the MOAT server runtime.<br />
-MOAT C app must implement this function to update all fields in the object specified by the given 'uid' value. </p>
+<div id="MoatUpdateFieldsProc"></div>
+##### MoatUpdateFieldsProc
+
+This is an opaque type representing a callback function to be invoked when `ModelMapperStub.updateFields` is performed on the MOAT server runtime.<br />
+MOAT C app must implement this function to update all fields in the object specified by the given 'uid' value.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -488,11 +512,12 @@ MOAT C app must implement this function to update all fields in the object speci
 </tbody>
 </table>
 
-<div id="MoatFindAllUidsProc">
-<h5>MoatFindAllUidsProc</h5>
-</div>
-<p>This is an opaque type representing a callback function to be invoked when <code>ModelMapperStub.findAllUids</code> is performed on the MOAT server runtime.<br />
-MOAT C app must implement this function to return all objects associated with the model type. </p>
+<div id="MoatFindAllUidsProc"></div>
+##### MoatFindAllUidsProc
+
+This is an opaque type representing a callback function to be invoked when `ModelMapperStub.findAllUids` is performed on the MOAT server runtime.<br />
+MOAT C app must implement this function to return all objects associated with the model type.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -546,11 +571,12 @@ MOAT C app must implement this function to return a model object specifed by the
 </tbody>
 </table>
 
-<div id="MoatCountProc">
-<h5>MoatCountProc</h5>
-</div>
-<p>This is an opaque type representing a callback function to be invoked when <code>ModelMapperStub.count</code> is performed on the MOAT server runtime.<br />
-MOAT C app must implement this function to return the number of stored objects.</p>
+<div id="MoatCountProc"></div>
+##### MoatCountProc
+
+This is an opaque type representing a callback function to be invoked when `ModelMapperStub.count` is performed on the MOAT server runtime.<br />
+MOAT C app must implement this function to return the number of stored objects.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -574,11 +600,12 @@ MOAT C app must implement this function to return the number of stored objects.<
 </tbody>
 </table>
 
-<h4>Command Interface Type</h4>
-<p>The command interface opaque type is a function so-called 'instance method' associated a model object in OO languages.<br />
+#### Command Interface Type
+
+The command interface opaque type is a function so-called 'instance method' associated a model object in OO languages.<br />
 They are called by the underlying MOAT runtime environment but you never call it directly.<br />
 The responsibility of the function is to offer the MOAT runtime to invoke an instance method of a model object managed by your MOAT C app.<br />
-</p>
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -608,13 +635,15 @@ The responsibility of the function is to offer the MOAT runtime to invoke an ins
 </tbody>
 </table>
 
-<div id="DataStore">
-<h3>DataStore Interfaces</h3>
-</div>
-<p>The DataStore interfaces allow MOAT C applications to manage and/or manipulate model data on a built-in store.</p>
+<div id="DataStore"></div>
+### DataStore Interfaces
 
-<h4>DataStore functions</h4>
-<p>The following functions offer your MOAT C apps to store/load/remove <code>MoatObject</code> data.</p>
+The DataStore interfaces allow MOAT C applications to manage and/or manipulate model data on a built-in store.
+
+#### DataStore functions
+
+The following functions offer your MOAT C apps to store/load/remove `MoatObject` data.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -697,12 +726,13 @@ The responsibility of the function is to offer the MOAT runtime to invoke an ins
 </tbody>
 </table>
 
-<div id="MoatValue">
-<h3>MoatValue type</h3>
-</div>
+<div id="MoatValue"></div>
+### MoatValue type
 
-<h4>MoatValue struct type</h4>
-<p>The MoatValue type represents an abstract field type in a model object.</p>
+#### MoatValue struct type
+
+The MoatValue type represents an abstract field type in a model object.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -718,7 +748,8 @@ The responsibility of the function is to offer the MOAT runtime to invoke an ins
 </tbody>
 </table>
 
-<h4>MoatValue type enums</h4>
+#### MoatValue type enums
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -733,8 +764,10 @@ The responsibility of the function is to offer the MOAT runtime to invoke an ins
   </tr>
 </tbody>
 </table>
-<p>The following table is a list of enums available as MoatValue types (the declaration of <code>moat_value_type_</code>).<br />
-Most of types described in the 'Description' is corresponding to one used in a <a href="/references/moat-iot-model-descriptor.html">Model Descriptor</a>. </p>
+
+The following table is a list of enums available as MoatValue types (the declaration of `moat_value_type_`).<br />
+Most of types described in the 'Description' is corresponding to one used in a [Model Descriptor](/references/moat-iot-model-descriptor.html).
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -793,8 +826,10 @@ Most of types described in the 'Description' is corresponding to one used in a <
 </tbody>
 </table>
 
-<h4>MoatValue generic functions</h4>
-<p>The following functions offer your MOAT C apps to manipulate <code>MoatValue</code> data.</p>
+#### MoatValue generic functions
+
+The following functions offer your MOAT C apps to manipulate `MoatValue` data.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
@@ -832,8 +867,10 @@ Most of types described in the 'Description' is corresponding to one used in a <
 </tbody>
 </table>
 
-<h4>MoatValue accessor functions</h4>
-<p>The following functions offer your MOAT C apps to get/set <code>MoatValue</code> data.</p>
+#### MoatValue accessor functions
+
+The following functions offer your MOAT C apps to get/set `MoatValue` data.
+
 <table class="table table-hover table-bordered">
 <thead>
   <tr>
