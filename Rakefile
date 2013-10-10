@@ -3,7 +3,6 @@ require 'rake'
 require 'yaml'
 require 'time'
 require 'open-uri'
-require 'RMagick'
 require "digest/md5"
 
 SOURCE = "."
@@ -79,7 +78,8 @@ task :icons do
   end
 
   puts "Creating favicon.ico..."
-  Magick::Image::read(origin).first.resize(16, 16).write("favicon.ico")
+  require 'RMagick'
+  Magick::Image::read(origin).first.resize(32, 32).write("favicon.ico")
 
   [144, 114, 72, 57].each do |size|
     puts "Creating #{name_pre} icon..." % [size, size]
@@ -90,4 +90,8 @@ task :icons do
   File.delete origin
 end
 
-
+task :ico do
+  puts "Creating favicon.ico..."
+  require 'RMagick'
+  Magick::Image::read("source.png").first.resize(32, 32).write("dest.ico")
+end
