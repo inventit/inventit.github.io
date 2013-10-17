@@ -1,9 +1,5 @@
 // iidn-developer-console.js
-var accessToken = "";
-var debug = null;
-
 var MSG_PLEASE_LOGIN = "Please Login."
-var MOAT_PREFIX = "/moat/v1";
 
 // init
 $(document).ready(function() {
@@ -25,31 +21,51 @@ $(document).ready(function() {
 		$("#login").prop('disabled', true);
 		var url = getUrl('/sys/auth?a='
 			+ $("#auth-applicationId").val() + "&u="
-			+ $("#auth-authUserId").val() + "&c="
-			+ $("#auth-authPassword").val(), true);
+			+ $("#auth-authUserId").val(), true);
 		authMessage("accessing...");
 		$.ajax({
 			dataType: "json",
 			type: 'GET',
 			url: url,
 			success: function(result) {
-				accessToken = result.accessToken;
-				authMessage("Login Successful.");
-				$("#commands").fadeIn();
-				$("#logout").prop('disabled', false);
-				$('#packageId').focus();
-				$('html, body').animate({
-				    scrollTop: 180
-				 }, 800);
-			},
-			error: function(resp) {
-				$("#login").prop('disabled', false);
-				if (!resp.responseText) {
-					authMessage("Login Failed.", "WARNING");
+				if (result.status == 401) {
+					// Challenge
+					authMessage("Authentication in progress...");
+					var clientNonce = generateClientNonce();
+					url += "&c=" + escape(digest($("#auth-authPassword").val(), result.serverNonce, clientNonce))
+						+ "&n=" + escape(clientNonce)
+						+ "&e=" + result.expireAt
+					$.ajax({
+						dataType: "json",
+						type: 'GET',
+						url: url,
+						success: function(result) {
+							if (result.status == 200) {
+								authMessage("Login Successful.");
+								$("#commands").fadeIn();
+								$("#logout").prop('disabled', false);
+								$('#packageId').focus();
+								$('html, body').animate({
+								    scrollTop: 180
+								 }, 800);
+							} else {
+								$("#login").prop('disabled', false);
+								authMessage("Login Failed. " + result.message, "WARNING");
+							}
+						},
+						error: function(result) {
+							$("#login").prop('disabled', false);
+							authMessage("Login Failed.", "WARNING");
+						}
+					});
 				} else {
-					var result = $.parseJSON(resp.responseText);
-					authMessage("status:" + result.status + ", message:" + result.message, "WARNING");
+					$("#login").prop('disabled', false);
+					authMessage("Login Failed.", "WARNING");
 				}
+			},
+			error: function(result) {
+				$("#login").prop('disabled', false);
+				authMessage("Login Failed.", "WARNING");
 			}
 		});
 	});
@@ -161,4 +177,21 @@ function downloadURL(url) {
         document.body.appendChild(iframe);
     }
     iframe.src = url;
+}
+
+// For Authentication Challenge
+// http://stackoverflow.com/a/1349426
+function generateClientNonce() {
+	var text = "";
+	var alphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	for (var i=0; i < 10; i++) {
+	    text += alphaNumeric.charAt(Math.floor(Math.random() * alphaNumeric.length));
+	}
+    return text;
+}
+
+// B64(HmacSHA1({:password}, {:client_nonce}:{:password}:{:server_nonce}))
+function digest(password, serverNonce, clientNonce) {
+	var hash = CryptoJS.HmacSHA1("Message", "Secret Passphrase");
+	return hash.toString(CryptoJS.enc.Base64);
 }

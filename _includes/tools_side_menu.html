@@ -1,0 +1,37 @@
+<div class="sideMenu">
+	<div class="accordion" id="accordion2">
+		<div class="accordion-group menu-name">
+			<p><strong>Tools</strong></p>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading avtive">
+				{% if page.name == "signup.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="/tools/signup.html">
+				{% endif %}
+				IIDN Sandbox Signup
+				{% if page.name == "signup.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "iidn-developer-console.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="/tools/iidn-developer-console.html">
+				{% endif %}
+				IIDN Developer Console
+				{% if page.name == "iidn-developer-console.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<!-- accordion End --> 
+	</div>
+<!-- sideMenu End --> 
+</div>

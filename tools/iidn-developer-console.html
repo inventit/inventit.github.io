@@ -13,7 +13,7 @@ layout: tools
 <tbody>
 <tr>
 	<td>
-		<input type="radio" id="dest" name="dest" value="https://sandbox.service-sync.com" checked> IIDN Sandbox (<a href="http://www.sslshopper.com/ssl-checker.html#hostname=sandbox.service-sync.com">SSLed</a>)
+		<input type="radio" id="dest" name="dest" value="https://sandbox.service-sync.com" checked> IIDN Sandbox (<a href="http://www.sslshopper.com/ssl-checker.html#hostname=sandbox.service-sync.com">SSL Certificate Status</a>)
 	</td>
 </tr>
 </tbody>
@@ -46,7 +46,7 @@ layout: tools
 <div style="padding: .35em .625em .75em;">
 <button class="btn btn-navbar" type="button" id="login">login <i class="icon-signin"></i></button> 
 <button class="btn btn-navbar" type="button" id="logout" disabled="disabled">logout <i class="icon-signout"></i></button>
-<button class="btn btn-navbar" type="button" id="signup" disabled="disabled">signup <i class="icon-heart"></i></button> 
+<a href="/tools/signup.html" id="signup" class="btn btn-top">Signup <i class="icon-heart"></i></a>
 </div>
 <div id="auth-progress"></div>
 
@@ -72,4 +72,7 @@ layout: tools
 </table>
 
 </div>
+<script src="/js/mqttws31.js"></script>
 <script src="/js/iidn-developer-console.js"></script>
+<script src="/js/hmac-sha1.js"></script>
+<script src="/js/enc-base64-min.js"></script>
