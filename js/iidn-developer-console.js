@@ -192,6 +192,6 @@ function generateClientNonce() {
 
 // B64(HmacSHA1({:password}, {:client_nonce}:{:password}:{:server_nonce}))
 function digest(password, serverNonce, clientNonce) {
-	var hash = CryptoJS.HmacSHA1("Message", "Secret Passphrase");
+	var hash = CryptoJS.HmacSHA1(password, clientNonce + ":" + password + ":" + serverNonce);
 	return hash.toString(CryptoJS.enc.Base64);
 }
