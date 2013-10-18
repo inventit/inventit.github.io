@@ -32,15 +32,19 @@ $(document).ready(function() {
 					// Challenge
 					authMessage("Authentication in progress...");
 					var clientNonce = generateClientNonce();
-					url += "&c=" + escape(digest($("#auth-authPassword").val(), result.serverNonce, clientNonce))
-						+ "&n=" + escape(clientNonce)
+					url += "&c=" + encodeURIComponent(digest($("#auth-authPassword").val(), result.serverNonce, clientNonce))
+						+ "&n=" + encodeURIComponent(clientNonce)
 						+ "&e=" + result.expireAt
 					$.ajax({
 						dataType: "json",
 						type: 'GET',
 						url: url,
 						success: function(result) {
-							if (result.status == 200) {
+							if (result.status) {
+								$("#login").prop('disabled', false);
+								authMessage("Login Failed. " + result.message, "WARNING");
+							} else {
+								accessToken = result.accessToken;
 								authMessage("Login Successful.");
 								$("#commands").fadeIn();
 								$("#logout").prop('disabled', false);
@@ -48,9 +52,6 @@ $(document).ready(function() {
 								$('html, body').animate({
 								    scrollTop: 180
 								 }, 800);
-							} else {
-								$("#login").prop('disabled', false);
-								authMessage("Login Failed. " + result.message, "WARNING");
 							}
 						},
 						error: function(result) {
@@ -190,8 +191,9 @@ function generateClientNonce() {
     return text;
 }
 
-// B64(HmacSHA1({:password}, {:client_nonce}:{:password}:{:server_nonce}))
+// B64(HmacSHA1(B64(SHA1({:password})), {:client_nonce}:B64(SHA1({:password})):{:server_nonce}))
 function digest(password, serverNonce, clientNonce) {
-	var hash = CryptoJS.HmacSHA1(password, clientNonce + ":" + password + ":" + serverNonce);
+	var passwordSha1B64 = CryptoJS.SHA1(password).toString(CryptoJS.enc.Base64);
+	var hash = CryptoJS.HmacSHA1(passwordSha1B64, clientNonce + ":" + passwordSha1B64 + ":" + serverNonce);
 	return hash.toString(CryptoJS.enc.Base64);
 }
