@@ -5,7 +5,15 @@ var MSG_PLEASE_LOGIN = "Please Login."
 $(document).ready(function() {
 	$("#auth-applicationId").focus();
 	$("#commands").hide();
-	authMessage(MSG_PLEASE_LOGIN);
+	// instruction
+	var message = MSG_PLEASE_LOGIN;
+	var show = getURLParameter('show');
+	if (show != "") {
+		message = "Please refer to the downloaded JSON file and populate the credentials above! " +
+		  "See `appId` for Application ID, `clientId` for User ID and `clientSecret1 for User Password.";
+	}
+	// buttons
+	authMessage(message);
 	$("#login").click(function() {
 		if (!authMandatoryValid($("#auth-applicationId"))
 				|| !authMandatoryValid($("#auth-authUserId"))
@@ -196,4 +204,14 @@ function digest(password, serverNonce, clientNonce) {
 	var passwordSha1B64 = CryptoJS.SHA1(password).toString(CryptoJS.enc.Base64);
 	var hash = CryptoJS.HmacSHA1(passwordSha1B64, clientNonce + ":" + passwordSha1B64 + ":" + serverNonce);
 	return hash.toString(CryptoJS.enc.Base64);
+}
+
+function getURLParameter(name) {
+	// http://stackoverflow.com/a/1404100
+	var value = (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1];
+	if (value != null) {
+		return decodeURI(value);
+	} else {
+		return "";
+	}
 }

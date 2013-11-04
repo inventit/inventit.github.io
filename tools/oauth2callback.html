@@ -4,9 +4,71 @@ title: "OAuth2 Information"
 sitejs: disabled
 ---
 
+<script>
+// init
+$(document).ready(function() {
+    $("#complete").prop('disabled', false);
+	$("#complete").focus();
+	$("#complete").click(function() {
+		$("#container").empty();
+		var provider = getProvider();
+		var code = encodeURI('OAUTH2_CODE');
+		console.log("provider => " + provider + ", code(encoded) => " + code);
+		$.ajax({
+			type: 'GET',
+			url: '/moat/v1/sys/oauth2auth?p=' + provider + '&t=verification&c=' + code,
+			success: function(result) {
+				// download credentials on this page.
+				var content = "data:application/json;charset=utf-8," + JSON.stringify(result, null, '\t');
+				var encodedUri = encodeURI(content);
+				var link = document.createElement("a");
+				link.setAttribute("href", encodedUri);
+				link.setAttribute("download", "credentials.json");
+				link.click();
+				window.location.replace("http://localhost:4000/tools/iidn-developer-console.html?show=instruction");
+			},
+			error: function(resp) {
+				alert("Mmm. Something wrong to proceed the Oauth2 process. Back to the home page.");
+				window.location.replace("http://dev.inventit.io/tools/signup.html");
+			}
+		});
+	});
+})
+
+// functions
+function getProvider() {
+	var state = unescape(getURLParameter('state'));
+	var colon = state.indexOf(':');
+	if (colon < 0) {
+		return null;
+	}
+	return decodeHex(state.substring(colon + 1));
+}
+
+function decodeHex(hex) {
+	var len = hex.length / 2;
+	var result = "";
+	for (var i = 0; i < len; i++) {
+		var code = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+		result += String.fromCharCode(code);
+	}
+	return result;
+}
+
+function getURLParameter(name) {
+	// http://stackoverflow.com/a/1404100
+	var value = (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1];
+	if (value != null) {
+		return decodeURI(value);
+	} else {
+		return "";
+	}
+}
+</script>
+
 <section class="content">
-  <h1>OAuth2 Information</h1>
-  <section class="container">
+  <h1 id="title">OAuth2 Information</h1>
+  <section class="container" id="container">
 	<p>
 		Thank you for signing up.
 	</p>
@@ -19,3 +81,5 @@ sitejs: disabled
     </p>
   </section>
 </section>
+
+<button class="btn btn-navbar" style="margin-bottom:4em" type="button" id="complete">complete <i class="icon-star"></i></button> 
