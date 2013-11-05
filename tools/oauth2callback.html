@@ -13,10 +13,14 @@ $(document).ready(function() {
 		$("#container").empty();
 		var provider = getProvider();
 		var code = encodeURI(getURLParameter('code'));
-		console.log("provider => " + provider + ", code(encoded) => " + code);
+		var dest = '/moat/v1/sys/oauth2auth?p=' + provider + '&t=verification&c=' + code;
+		var g = getOperation();
+		if (g != null) {
+			dest += "&g=" + g;
+		}
 		$.ajax({
 			type: 'GET',
-			url: '/moat/v1/sys/oauth2auth?p=' + provider + '&t=verification&c=' + code,
+			url: dest,
 			success: function(result) {
 				// download credentials on this page.
 				var content = "data:application/json;charset=utf-8," + JSON.stringify(result, null, '\t');
@@ -48,7 +52,22 @@ function getProvider() {
 	if (colon < 0) {
 		return null;
 	}
-	return decodeHex(state.substring(colon + 1));
+	var hyphen = state.lastIndexOf('-');
+	if (hyphen < 0) {
+		return decodeHex(state.substring(colon + 1));
+	} else {
+		return decodeHex(state.substring(colon + 1, hyphen));
+	}
+}
+
+function getOperation() {
+	var state = unescape(getURLParameter('state'));
+	var hyphen = state.lastIndexOf('-');
+	if (hyphen < 0) {
+		return null;
+	} else {
+		return state.substring(hyphen + 1);
+	}
 }
 
 function decodeHex(hex) {

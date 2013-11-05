@@ -17,7 +17,7 @@ $(document).ready(function() {
 					},
 					resizable: false,
 					height:$(window).height() * 0.5,
-					width:$(window).width() * 0.5,
+					width:$(window).width() * 0.3,
 					modal: true,
 					buttons: {
 						Yes : function() {
