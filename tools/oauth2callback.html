@@ -11,6 +11,7 @@ $(document).ready(function() {
 	$("#complete").focus();
 	$("#complete").click(function() {
 		$("#container").empty();
+		$("#container").html('<p>Downloading the credentials...</p>');
 		var provider = getProvider();
 		var code = encodeURI(getURLParameter('code'));
 		var dest = '/moat/v1/sys/oauth2auth?p=' + provider + '&t=verification&c=' + code;
@@ -22,6 +23,7 @@ $(document).ready(function() {
 			type: 'GET',
 			url: dest,
 			success: function(result) {
+				$("#container").html('<p>Downloaded.</p>');
 				// download credentials on this page.
 				var content = "data:application/json;charset=utf-8," + JSON.stringify(result, null, '\t');
 				var encodedUri = encodeURI(content);
@@ -32,6 +34,7 @@ $(document).ready(function() {
 				window.location.replace("{{ site.production_url }}/tools/iidn-developer-console.html?show=instruction");
 			},
 			error: function(resp) {
+				$("#container").html('<p>Error.</p>');
 				if (resp.status == "400") {
 					// you already have an account.
 					alert("Oh, you're already enrolled. Let's go back to the login page.");
