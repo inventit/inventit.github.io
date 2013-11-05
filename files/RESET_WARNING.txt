@@ -1,0 +1,4 @@
+Heads Up!!
+THIS ACTION INVALIDATES YOUR API SECRET (client_secret).
+(Your client_secret is no longer valid after the action completed.)
+Are you sure to reset your client_secret?
