@@ -16,8 +16,8 @@ $(document).ready(function() {
 		                init();
 					},
 					resizable: false,
-					height:$(window).height() * 0.5,
-					width:$(window).width() * 0.3,
+					height:$(window).height() * 0.3,
+					width:$(window).width() * 0.5,
 					modal: true,
 					buttons: {
 						Yes : function() {
