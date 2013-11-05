@@ -8,23 +8,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">{{ site.title }}</a>
+      <a class="navbar-brand" href="{{ site.production_url }}/">{{ site.title }}</a>
       <div class="nav-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav pull-right hidden-print">
           <li>
-            <a class="hidden-sm" title="About us" href="/about.html">
+            <a class="hidden-sm" title="About us" href="{{ site.production_url }}/about.html">
               <i class="icon-user icon-large"></i>
             </a>
-            <a class="visible-sm" title="About us" href="/about.html">
+            <a class="visible-sm" title="About us" href="{{ site.production_url }}/about.html">
               <i class="icon-user icon-large"></i>
               About us
             </a>
           </li>
           <li>
-            <a class="hidden-sm" href="/atom.xml" title="Atom Feed">
+            <a class="hidden-sm" href="{{ site.production_url }}/atom.xml" title="Atom Feed">
               <i class="icon-rss icon-large"></i>
             </a>
-            <a class="visible-sm" href="/atom.xml" title="Atom Feed">
+            <a class="visible-sm" href="{{ site.production_url }}/atom.xml" title="Atom Feed">
               <i class="icon-rss icon-large"></i>
               Atom Feed
             </a>
