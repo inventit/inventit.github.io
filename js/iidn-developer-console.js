@@ -10,7 +10,7 @@ $(document).ready(function() {
 	var show = getURLParameter('show');
 	if (show != "") {
 		message = "Please refer to the downloaded JSON file and populate the credentials above! " +
-		  "See `appId` for Application ID, `clientId` for User ID and `clientSecret1 for User Password.";
+		  "See `appId` for Application ID, `clientId` for Client ID and `clientSecret` for Client Secret.";
 	}
 	// buttons
 	authMessage(message);
