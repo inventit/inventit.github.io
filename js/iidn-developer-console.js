@@ -1,5 +1,5 @@
 // iidn-developer-console.js
-var MSG_PLEASE_LOGIN = "Please Login."
+var MSG_PLEASE_LOGIN = "Please Login. You can copy and paste the credenials JSON string to populate the above credentials text boxes."
 
 // init
 $(document).ready(function() {
@@ -111,9 +111,12 @@ $(document).ready(function() {
 		}
 	});
 	// Commands
+	// tokengen command
 	$("#tokengen").click(function() {
 		downloadURL(getUrl("/sys/package/" + $("#packageId").val() + "?secureToken=true"))
 	});
+	// Clipboard API
+	window.addEventListener("paste", pastEventListener);
 });
 
 // validation
@@ -134,8 +137,6 @@ function validateApplicationId() {
 	authMessage("Invalid Application ID.", "WARNING");
 	return false;
 }
-
-// validation
 function validateAuthUserId() {
 	var appId = $("#auth-authUserId").val();
 	if (appId && appId.indexOf('@') < appId.length - 1) {
@@ -143,6 +144,22 @@ function validateAuthUserId() {
 	}
 	authMessage("Invalid User ID.", "WARNING");
 	return false;
+}
+function validatePackageId(packageId) {
+	if (!pacakgeId) {
+		return false;
+	}
+	// must be 4+ characters
+	if (packageId.length < 4) {
+		return false;
+	}
+	// must be within 40 characters
+	if (packageId.length > 40) {
+		return false;
+	}
+	// /[a-zA-Z][a-zA-Z0-9\\-_]*/
+	var regexpMatched = (/[a-zA-Z][a-zA-Z0-9\-_]*$/.test(packageId));
+	return regexpMatched;
 }
 
 // show the status message
@@ -213,5 +230,26 @@ function getURLParameter(name) {
 		return decodeURI(value);
 	} else {
 		return "";
+	}
+}
+
+// Clipboard Event Handler
+function pastEventListener(e) {
+	for (var i = 0 ; i < e.clipboardData.items.length ; i++) {
+		var clipboardItem = e.clipboardData.items[i];
+		var type = clipboardItem.type;
+		if (type == "text/plain" || type == "application/json") {
+			clipboardItem.getAsString(function(text) {
+				try {
+					var creds = JSON.parse(text);
+					$("#auth-applicationId").val(creds.appId);
+					$("#auth-authUserId").val(creds.clientId);
+					$("#auth-authPassword").val(creds.clientSecret);
+				} catch (e) {
+					// ignore
+				}
+				
+			});
+		}
 	}
 }
