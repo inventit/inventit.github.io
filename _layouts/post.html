@@ -11,6 +11,9 @@ layout: base
 
   <section class="byline">
     {{ page.date | date: "%B %e, %Y" }}
+	{% if page.posted_by != nil %}
+	by <a href="https://github.com/{{ page.posted_by }}">{{ page.posted_by }}</a>
+	{% endif %}
   </section>
 
   {{ content }}
