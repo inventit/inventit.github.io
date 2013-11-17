@@ -6,7 +6,13 @@ redcarpet:
 pygments: true
 title : IIDN
 timezone: UTC
+
 production_url : http://dev.inventit.io
+i18n : false
+
+#production_url : http://localhost:4000
+#i18n : true
+
 description: ""
 disqus_shortname: iidn
 analytics: UA-32804324-3

@@ -1,0 +1,43 @@
+<div class="sub-navbar navbar-fixed-top">
+	<div class="container">
+		<ul class="subnav subnavbar-nav pull-right hidden-print">
+			{% if page.lang != nil %}
+			<li>
+				<a class="hidden-sm" title="EN" href="{{ site.production_url }}/index.html">
+					EN
+				</a>
+				<a class="visible-sm" title="EN" href="{{ site.production_url }}/index.html">
+					EN
+				</a>
+			</li>
+			{% endif %}
+			<li>
+				<a class="hidden-sm" title="About us" href="{{ site.production_url }}/ja/about.html">
+					<i class="icon-user icon-large"></i>
+				</a>
+				<a class="visible-sm" title="About us" href="http://www.yourinventit.com">
+					<i class="icon-user icon-large"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="navbar navbar-fixed-top nav-top">
+	<div class="container">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+    	<a class="navbar-brand" href="">IIDN</a>
+		<div class="nav-collapse collapse navbar-responsive-collapse">
+			<ul class="nav navbar-nav pull-right hidden-print">
+				<li> <a class="hidden-sm" title="Home" href="#"> </a> <a class="visible-sm" title="Home" href="{{ site.production_url }}/ja/index.html"> ホーム </a> </li>
+				<li> <a class="hidden-sm" title="Guides" href="#"> </a> <a class="visible-sm" title="Guides" href="{{ site.production_url }}/ja/guides.html"> ガイド </a> </li>
+				<li> <a class="hidden-sm" title="Tools" href="#"> </a> <a class="visible-sm" title="Tools" href="{{ site.production_url }}/tools/iidn-developer-console.html"> ツール（英語） </a> </li>
+				<li> <a class="hidden-sm" title="References" href="#"> </a> <a class="visible-sm" title="References" href="{{ site.production_url }}/ja/references.html"> リファレンス </a> </li>
+				<li> <a class="hidden-sm" title="Blog" href="#"> </a> <a class="visible-sm" title="Blog" href="{{ site.production_url }}/ja/blog.html"> ブログ </a> </li>
+			</ul>
+		</div>
+	</div>
+</div>

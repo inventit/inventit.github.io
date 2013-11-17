@@ -7,7 +7,11 @@ layout: base
       <div class="col-lg-3"> 
       
         <!-- sideMenu -->
-	  {% include references_side_menu.html %}
+		{% if page.lang == nil %}
+		  {% include references_side_menu.html %}
+		{% elsif page.lang == "ja" %}
+		  {% include ja/references_side_menu.html %}
+		{% endif %}
 
       <!-- col-lg-3 End --> 
       </div>

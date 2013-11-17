@@ -1,6 +1,18 @@
 <div class="sub-navbar navbar-fixed-top">
 	<div class="container">
 		<ul class="subnav subnavbar-nav pull-right hidden-print">
+			{% if site.i18n %}
+				{% if page.lang == nil %}
+				<li>
+					<a class="hidden-sm" title="日本語" href="{{ site.production_url }}/ja/index.html">
+						日本語
+					</a>
+					<a class="visible-sm" title="日本語" href="{{ site.production_url }}/ja/index.html">
+						日本語
+					</a>
+				</li>
+				{% endif %}
+			{% endif %}
 			<li>
 				<a class="hidden-sm" title="About us" href="{{ site.production_url }}/about.html">
 					<i class="icon-user icon-large"></i>

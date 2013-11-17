@@ -29,7 +29,6 @@ GEM
       yajl-ruby (~> 1.1.0)
     rake (10.0.4)
     redcarpet (3.0.0)
-    rmagick (2.13.2)
     safe_yaml (0.7.1)
     syntax (1.0.0)
     yajl-ruby (1.1.0)
@@ -41,4 +40,3 @@ DEPENDENCIES
   jekyll
   rake
   redcarpet
-  rmagick
