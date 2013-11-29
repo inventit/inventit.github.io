@@ -1,5 +1,5 @@
 // iidn-developer-console.js
-var MSG_PLEASE_LOGIN = "Please Login. You can copy and paste the credenials JSON string to populate the above credentials text boxes."
+var MSG_PLEASE_LOGIN = "Please Login. You can copy and paste the credenials JSON string to populate the above credentials text boxes (IE won't work, though)."
 
 // init
 $(document).ready(function() {
@@ -235,21 +235,33 @@ function getURLParameter(name) {
 
 // Clipboard Event Handler
 function pastEventListener(e) {
-	for (var i = 0 ; i < e.clipboardData.items.length ; i++) {
-		var clipboardItem = e.clipboardData.items[i];
-		var type = clipboardItem.type;
-		if (type == "text/plain" || type == "application/json") {
-			clipboardItem.getAsString(function(text) {
-				try {
-					var creds = JSON.parse(text);
-					$("#auth-applicationId").val(creds.appId);
-					$("#auth-authUserId").val(creds.clientId);
-					$("#auth-authPassword").val(creds.clientSecret);
-				} catch (e) {
-					// ignore
+	var clipboardData = e.clipboardData;
+	if (clipboardData) {
+		var items = clipboardData.items;
+		if (items) {
+			for (var i = 0 ; i < items.length ; i++) {
+				var clipboardItem = e.clipboardData.items[i];
+				var type = clipboardItem.type;
+				if (type == "text/plain" || type == "application/json") {
+					clipboardItem.getAsString(function(text) {
+						populateCreds(text);
+					});
 				}
-				
-			});
+			}
 		}
+	} else {
+		// IE11 doesn't work properly...
+		// var text = window.clipboardData.getData("Text");
+		// populateCreds(text);
+	}
+}
+function populateCreds(text) {
+	try {
+		var creds = JSON.parse(text);
+		$("#auth-applicationId").val(creds.appId);
+		$("#auth-authUserId").val(creds.clientId);
+		$("#auth-authPassword").val(creds.clientSecret);
+	} catch (e) {
+		// ignore
 	}
 }
