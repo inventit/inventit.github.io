@@ -320,6 +320,16 @@ yes
         <br />
         <p>At first, you need to change the format of the debug keystore to PKCS#12. Enter the following command. </p>
         <pre>keytool -importkeystore -srckeystore $HOME/.android/debug.keystore -destkeystore $HOME/.android/debug.p12 -deststoretype PKCS12</pre>
+
+        <div class="alert alert-warning"> <strong>IMPORTANT:</strong><br />
+			You MUST enter the same password for all 3 prompts by the keytool command above. Or you'll get an OpenSSL error when exporting a private key.
+			<pre>
+Error outputting keys and certificates
+140044161410720:error:06065064:digital envelope routines:EVP_DecryptFinal_ex:bad decrypt:evp_enc.c:539:
+140044161410720:error:23077074:PKCS12 routines:PKCS12_pbe_crypt:pkcs12 cipherfinal error:p12_decr.c:104:
+140044161410720:error:2306A075:PKCS12 routines:PKCS12_item_decrypt_d2i:pkcs12 pbe crypt error:p12_decr.c:130:</pre>
+			
+		</div>
         <p><I>If <code>$HOME.android</code>(or <code>%HOMEPATH%\.android</code> for windows users) is missing, try the following command:</I></p>
         <div class="bs-callout">
           <pre>keytool -genkey -keypass android -keystore \
