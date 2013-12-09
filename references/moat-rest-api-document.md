@@ -539,28 +539,34 @@ It includes the following attributes.</p>
   <tr>
     <td> createdAt </td>
     <td><b>Not Updatable</b><br />
-      The timestamp when the dmjob is created.<br /></td>
+      The timestamp when the dmjob is created.<br />
+	  <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> activatedAt </td>
-    <td><b>Updatable only for POST</b><br />
-      The timestamp when the dmjob is activated. When a dmjob is activated, a device is able to receive a notification from the underlying server to initiate a new conversation.<br /></td>
+    <td><b>Mandatory for POST</b><br />
+		<b>Updatable only for POST</b><br />
+      The timestamp when the dmjob is activated. When a dmjob is activated, a device is able to receive a notification from the underlying server to initiate a new conversation.<br />
+  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> startedAt </td>
     <td><b>Not Updatable</b><br />
-      The timestamp when the dmjob is started by a device contacting to the underlying server.<br /></td>
+      The timestamp when the dmjob is started by a device contacting to the underlying server.<br />
+  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> endedAt </td>
     <td><b>Not Updatable</b><br />
-      The timestamp when the dmjob is ended by an event, e.g. the conversation is terminated normally, timed out, or server/client error.<br /></td>
+      The timestamp when the dmjob is ended by an event, e.g. the conversation is terminated normally, timed out, or server/client error.<br />
+  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> expiredAt </td>
     <td><b>Mandatory for POST</b><br />
       <b>Updatable only for POST</b><br />
-      The timestamp when the dmjob is expired.<br /></td>
+      The timestamp when the dmjob is expired.<br />
+  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> notificationType </td>
