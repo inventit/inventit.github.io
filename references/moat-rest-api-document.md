@@ -518,7 +518,7 @@ It includes the following attributes.</p>
     <td> jobServiceId </td>
     <td><b>Mandatory for POST</b><br />
       <b>Updatable only for POST</b><br />
-      The unique identifier for specifying a job service type. See <a href="/guides/moat-iot/app-design-in-moat-iot.html#JobServiceIdentifier">here</a> for detail.<br /></td>
+      The unique identifier for specifying a job service type. See <a href="/guides/MOAT-IoT/app-design-in-moat-iot.html#JobServiceIdentifier">here</a> for detail.<br /></td>
   </tr>
   <tr>
     <td> sessionId </td>
