@@ -527,7 +527,8 @@ It includes the following attributes.</p>
   </tr>
   <tr>
     <td> arguments </td>
-    <td><b>Not Updatable</b><br />
+    <td>
+        <b>Updatable only for POST</b><br />
       A key-value entry set for providing additional information for the job.<br /></td>
   </tr>
   <tr>
