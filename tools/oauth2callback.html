@@ -30,6 +30,7 @@ $(document).ready(function() {
 				var encodedUri = encodeURI(content);
 				var link = document.createElement("a");
 				link.setAttribute("href", encodedUri);
+				link.setAttribute("target", "_blank");
 				link.setAttribute("download", "credentials.json");
 				link.click();
 				window.location.replace("{{ site.production_url }}/tools/iidn-developer-console.html?show=instruction");
