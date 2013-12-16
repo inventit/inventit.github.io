@@ -1816,7 +1816,7 @@ a.list-group-item.active .list-group-item-text {
 
 
 .nav>li.disabled>a {
- color: #999
+ color: #999;
 }
 
 .nav>li.disabled>a:hover, .nav>li.disabled>a:focus {
@@ -1875,8 +1875,8 @@ a.list-group-item.active .list-group-item-text {
  color: #555;
  cursor:default;
  background-color:#fff;
- border:1px solid #ddd;b
- order-bottom-color:transparent
+ border:1px solid #ddd;
+ border-bottom-color:transparent;
 }
 
 .nav-tabs.nav-justified {
@@ -3738,9 +3738,6 @@ body {
  padding-top: 36px;
 }
 
-h2 {
-	color: 
-}
 h1, h2, h3, h4, h5, h6 {
  margin-top: 20px;
 }

@@ -16,6 +16,7 @@ i18n : false
 description: ""
 disqus_shortname: iidn
 analytics: UA-32804324-3
+analytics_domain: inventit.io
 encoding: UTF-8
 author :
   name : Inventit Inc.
