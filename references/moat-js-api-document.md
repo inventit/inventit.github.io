@@ -467,7 +467,7 @@ breadcrumbs:
         &nbsp; &nbsp; entity:object)</td>
       <td>void</td>
       <td>Submits a notification message <b>asynchronously</b>.<br />
-        The destination is set when a DM job object is created. See <a href="ClassesDmJobnotificationUri">りんくさきがわからないthis field</a> for detail.<br />
+        The destination is set when a DM job object is created. See <a href="ClassesDmJobnotificationUri"><code>DmJob.notificationUri</code></a> for detail.<br />
         <br />
         The latest method invocation is affected when the function is performed two or more times.<br />
         <br />
