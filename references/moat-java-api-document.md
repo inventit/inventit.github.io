@@ -137,7 +137,7 @@ final Moat moat = MoatAndroidFactory.getInstance()
       <td> N/A<br /></td>
       <td> Sends a notification to MOAT IoT cloud servers.<br />
         <code>urn</code> must be a job service id determining the type of client/server application flow.<br />
-        <code>t</code> can be set if any, which is the continuation key when this method is used for notifying asynchronous operation result. You can get this value from a context object associated with the key 'token' in the corresponding method when the method is defined as asynchronous.<br />
+        <code>t</code> can be set if any, which is the continuation key when this method is used for notifying asynchronous operation result. You can get this value from a context object associated with the key `token` in the corresponding method when the method is defined as asynchronous.<br />
         <code>models</code> are the model objects to be sent if any. Can be null. Each model must be registered prior to the method invocation.</td>
     </tr>
   </tbody>
@@ -213,7 +213,7 @@ Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument 
   The method should tell the MOAT IoT Client/Gateway if the method execution is performed synchronously or asynchronously (See the Examples below). The method is able to return arbitrary error code when you'd like to pass it to the server. The negative integer value can be sent back to the server automatically. </p>
 
 #### Examples
-1) This declaration means the method <code>associate</code> is performed synchronously and is expected for the object itself to be updated after the execution.
+1) This declaration means the method <code>associate</code> is performed synchronously.
 
 ```java
 @Command
@@ -222,7 +222,7 @@ public int associate(Map<String, Object> context) {
 }
 ```
 
-2) This declaration means the method is performed asynchronously and is expected for the object itself to be updated after the execution.
+2) This declaration means the method is performed asynchronously.
 
 ```java
 @Command
@@ -232,7 +232,7 @@ public void associate(Map<String, Object> context) {
 }
 ```
 
-3) This declaration means the method is performed synchronously and is expected for the object itself NOT to be updated after the execution.
+3) This declaration means the method is performed synchronously.
 
 ```java
 @Command
@@ -242,7 +242,7 @@ public int associate(Map<String, Object> context) {
 }
 ```
 
-4) This declaration means the method is performed asynchronously and is expected for the object itself NOT to be updated after the execution.
+4) This declaration means the method is performed asynchronously.
 
 ```java
 @Command
@@ -261,7 +261,7 @@ With regard to bundles compiled with JDK1.4, the following method declaration co
 
 The following examples show the JDK 1.4 version of the above Examples.<br />
 
-1) This declaration means the method is performed synchronously and is expected for the object itself to be updated after the execution.
+1) This declaration means the method is performed synchronously.
 
 ```java
 public void associate(Map context) {
@@ -269,7 +269,7 @@ public void associate(Map context) {
 }
 ```
 
-2) This declaration means the method is performed asynchronously and is expected for the object itself to be updated after the execution.
+2) This declaration means the method is performed asynchronously.
 
 ```java
 public void associate(Map context) {
@@ -278,7 +278,7 @@ public void associate(Map context) {
 }
 ```
 
-3) This declaration means the method is performed synchronously and is expected for the object itself NOT to be updated after the execution.
+3) This declaration means the method is performed synchronously.
 
 ```java
 public int associate(Map context) {
@@ -287,7 +287,7 @@ public int associate(Map context) {
 }
 ```
 
-4) This declaration means the method is performed asynchronously and is expected for the object itself NOT to be updated after the execution.
+4) This declaration means the method is performed asynchronously.
 
 ```java
 public int associate(Map context) {
