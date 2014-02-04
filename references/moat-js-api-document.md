@@ -505,13 +505,13 @@ breadcrumbs:
 <h5>Usage of Model Operations</h5>
 <p>There are several functions in the class allowing you to access/manipulate model objects on a remote device.</p>
 <ul>
-  <li><a href="#ClassesModelMapperadd">add</a> for adding new model objects</li>
-  <li><a href="#ClassesModelMapperupdate">update</a> for updating existing model objects</li>
-  <li><a href="#ClassesModelMapperupdateFields">updateFields</a> for updating one or more fields in a model object</li>
-  <li><a href="#ClassesModelMapperremove">remove</a> for removing the existing model object</li>
-  <li><a href="#ClassesModelMapperfindByUid">findByUid</a> for finding a model object by a given UID</li>
-  <li><a href="#ClassesModelMapperfindAllUids">findAllUids</a> for listing all UIDs associated with a model type</li>
-  <li><a href="#ClassesModelMappercount">count</a> for counting the number of model objects</li>
+  <li><a href="#ClassesModelMapper.add">add</a> for adding new model objects</li>
+  <li><a href="#ClassesModelMapper.update">update</a> for updating existing model objects</li>
+  <li><a href="#ClassesModelMapper.updateFields">updateFields</a> for updating one or more fields in a model object</li>
+  <li><a href="#ClassesModelMapper.remove">remove</a> for removing the existing model object</li>
+  <li><a href="#ClassesModelMapper.findByUid">findByUid</a> for finding a model object by a given UID</li>
+  <li><a href="#ClassesModelMapper.findAllUids">findAllUids</a> for listing all UIDs associated with a model type</li>
+  <li><a href="#ClassesModelMapper.count">count</a> for counting the number of model objects</li>
 </ul>
 <p>These functions are performed asynchronously. <code>MessageSession.commit()</code> or command functions in a model stub object triggers the operations on a remote device. In order for you to look into the operation results, you can append a callback function object (see below) to above functions.</p>
 
@@ -559,7 +559,7 @@ breadcrumbs:
   </thead>
   <tbody>
     <tr>
-      <td><a name="ClassesModelMapperadd"></a>add(<br />
+      <td><a name="ClassesModelMapper.add"></a>add(<br />
         entity:object,<br />
         block:object)</td>
       <td>String</td>
@@ -591,7 +591,7 @@ breadcrumbs:
   </thead>
   <tbody>
     <tr>
-      <td><a name="ClassesModelMapperupdate"></a> update(<br />
+      <td><a name="ClassesModelMapper.update"></a> update(<br />
         entity:object,<br />
         block:object)</td>
       <td>String</td>
@@ -604,7 +604,7 @@ breadcrumbs:
         A token string corresponding to the insert request.</td>
     </tr>
     <tr>
-      <td><a name="ClassesModelMapperupdateFields"></a> updateFields(<br />
+      <td><a name="ClassesModelMapper.updateFields"></a> updateFields(<br />
         entity:object,<br />
         fields:Array,<br />
         block:object)</td>
@@ -676,8 +676,6 @@ breadcrumbs:
       <td>Reserves a query for an instance of the given array type specified by the given uid.<br />
         The uid is a unique identifier to identify the instance of the array.<br />
         <br />
-        You cannot use this method for a singleton type.<br />
-        <br />
         Parameters:<br />
         uid ... the unique identifier for the destination instance.<br />
         block ... <u>(optional)</u> a <a href="#CallbackFunctionObject">Callback Function Object</a><br />
@@ -689,7 +687,7 @@ breadcrumbs:
         block:object)</td>
       <td>String</td>
       <td>Reserves a query for the list of existing uids for the given array type.<br />
-        You cannot use this method to query a Singleton type instance.<br />
+        You cannot use this method to query a Singleton type instance since the empty data is always returned.<br />
         <br />
         Parameter:<br />
         block ... <u>(optional)</u> a <a href="#CallbackFunctionObject">Callback Function Object</a><br />
