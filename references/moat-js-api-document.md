@@ -546,7 +546,7 @@ breadcrumbs:
     </tr>
   </tbody>
 </table>
-
+<a name="ClassesModelMapper.add"></a>
 <h5>Add Operation</h5>
 <p>You can add an object, the class of which is defined as a MOAT data model.</p>
 <table class="table table-hover table-bordered">
@@ -559,7 +559,7 @@ breadcrumbs:
   </thead>
   <tbody>
     <tr>
-      <td><a name="ClassesModelMapper.add"></a>add(<br />
+      <td>add(<br />
         entity:object,<br />
         block:object)</td>
       <td>String</td>
@@ -577,10 +577,10 @@ breadcrumbs:
 <h5>Example</h5>
 <h5>add</h5>
 <script src="https://gist.github.com/3142705.js" type="text/javascript"></script>
-<div id="ClassesModelMapperupdate">
-  <h4>Update Operations</h4>
-</div>
-<p>You can update the object retrieved from a device and persist the modification to the device.></p>
+<a name="ClassesModelMapper.update"></a>
+<a name="ClassesModelMapper.updateFields"></a>
+<h5>Update Operations</h5>
+  <p>You can update the object retrieved from a device and persist the modification to the device.></p>
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -591,7 +591,7 @@ breadcrumbs:
   </thead>
   <tbody>
     <tr>
-      <td><a name="ClassesModelMapper.update"></a> update(<br />
+      <td>update(<br />
         entity:object,<br />
         block:object)</td>
       <td>String</td>
@@ -604,7 +604,7 @@ breadcrumbs:
         A token string corresponding to the insert request.</td>
     </tr>
     <tr>
-      <td><a name="ClassesModelMapper.updateFields"></a> updateFields(<br />
+      <td>updateFields(<br />
         entity:object,<br />
         fields:Array,<br />
         block:object)</td>
@@ -626,6 +626,7 @@ breadcrumbs:
 <script src="https://gist.github.com/3143020.js" type="text/javascript"></script>
 <h5>updateFields</h5>
 <script src="https://gist.github.com/3143092.js" type="text/javascript"></script>
+<a name="ClassesModelMapper.remove"></a> 
 <h5>Remove Operation</h5>
 <p>You can remove an object in a device.</p>
 <table class="table table-hover table-bordered">
@@ -655,6 +656,9 @@ breadcrumbs:
 <h5>Example</h5>
 <h5>remove</h5>
 <script src="https://gist.github.com/3142802.js" type="text/javascript"></script>
+<a name="ClassesModelMapper.findByUid"></a>
+<a name="ClassesModelMapper.findAllUids"></a>
+<a name="ClassesModelMapper.count"></a>
 <h5>Query Operations</h5>
 <p>You can retrieve data stored in a device via find* and count functions as similar as you do so from a database via DAO class.<br />
   Unlike a generic database, the query operations require 'commit' operation in order for you to complete them.<br />
@@ -669,7 +673,7 @@ breadcrumbs:
   </thead>
   <tbody>
     <tr>
-      <td><a name="ClassesModelMapper.findByUid"></a> findByUid(<br />
+      <td>findByUid(<br />
         uid:String,<br />
         block:object)</td>
       <td>String</td>
@@ -683,7 +687,7 @@ breadcrumbs:
         A token string corresponding to the query request. </td>
     </tr>
     <tr>
-      <td><a name="ClassesModelMapper.findAllUids"></a> findAllUids(<br />
+      <td>findAllUids(<br />
         block:object)</td>
       <td>String</td>
       <td>Reserves a query for the list of existing uids for the given array type.<br />
@@ -695,7 +699,7 @@ breadcrumbs:
         A token string corresponding to the query request.</td>
     </tr>
     <tr>
-      <td><a name="ClassesModelMapper.count"></a> count(<br />
+      <td>count(<br />
         block:object)</td>
       <td>String</td>
       <td>Reserves a query for the count of the given array type entries in a device.<br />
