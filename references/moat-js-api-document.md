@@ -478,7 +478,7 @@ breadcrumbs:
 
 <h5>Example</h5>
 <p>This is an example for <code>fetchUrlSync()</code>.</p>
-<script src="https://gist.github.com/2943421.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/2943421.js" type="text/javascript"></script>
 <div id="ClassesModelMapperStub">
   <h4>ModelMapperStub</h4>
 </div>
@@ -576,7 +576,7 @@ breadcrumbs:
 
 <h5>Example</h5>
 <h5>add</h5>
-<script src="https://gist.github.com/3142705.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3142705.js" type="text/javascript"></script>
 <a name="ClassesModelMapper.update"></a>
 <a name="ClassesModelMapper.updateFields"></a>
 <h5>Update Operations</h5>
@@ -623,9 +623,9 @@ breadcrumbs:
 
 <h5>Examples</h5>
 <h5>update</h5>
-<script src="https://gist.github.com/3143020.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3143020.js" type="text/javascript"></script>
 <h5>updateFields</h5>
-<script src="https://gist.github.com/3143092.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3143092.js" type="text/javascript"></script>
 <a name="ClassesModelMapper.remove"></a> 
 <h5>Remove Operation</h5>
 <p>You can remove an object in a device.</p>
@@ -655,7 +655,7 @@ breadcrumbs:
 
 <h5>Example</h5>
 <h5>remove</h5>
-<script src="https://gist.github.com/3142802.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3142802.js" type="text/javascript"></script>
 <a name="ClassesModelMapper.findByUid"></a>
 <a name="ClassesModelMapper.findAllUids"></a>
 <a name="ClassesModelMapper.count"></a>
@@ -715,11 +715,11 @@ breadcrumbs:
 
 <h5>Examples</h5>
 <h5>findByUid</h5>
-<script src="https://gist.github.com/3122106.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3122106.js" type="text/javascript"></script>
 <h5>findAllUids</h5>
-<script src="https://gist.github.com/3123410.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3123410.js" type="text/javascript"></script>
 <h5>count</h5>
-<script src="https://gist.github.com/3123774.js" type="text/javascript"></script>
+<script src="https://gist.github.com/dbaba/3123774.js" type="text/javascript"></script>
 <div id="ClassesModelStub">
   <h4>ModelStub</h4>
 </div>
@@ -731,8 +731,8 @@ breadcrumbs:
 var stub = mapper.newModelStub();
 stub.myResourceField = ["put", "get"];
 </pre>
-        <br />
-        <p>In this example above, the string array is assigned to a field named 'myResourceField', which is, for example, a resource type field. With this array, the runtime automatically converts the field value (String Array) into a resource type object, like this:</p>
+<br />
+<p>In this example above, the string array is assigned to a field named 'myResourceField', which is, for example, a resource type field. With this array, the runtime automatically converts the field value (String Array) into a resource type object, like this:</p>
         <pre>{
   "put" : "http://....",
   "get" : "http://....",
@@ -754,7 +754,7 @@ stub.myResourceField = ["put", "get"];
           <p>The runtime environment will call <code>MessageSession.commit()</code> automatically when a command is invoked.</p>
         </div>
         <h5>Command in a model object</h5>
-        <script src="https://gist.github.com/3142814.js" type="text/javascript"></script><br />
+        <script src="https://gist.github.com/dbaba/3142814.js" type="text/javascript"></script><br />
         <div id="ClassesOperationResult">
           <h3>OperationResult</h3>
         </div>
