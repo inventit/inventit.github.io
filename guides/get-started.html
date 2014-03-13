@@ -55,8 +55,8 @@ title: "Inventit Iot developer Network | Guides | Get started"
           Once you type a couple of lines, <a href="http://www.vagrantup.com/">Vagrant</a> will work for you. </p>
         
         <h3>So what should I do?</h3>
-        <p> At first, install <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> (4.0.x, 4.1.x and 4.2.x).<br />
-          Then, install <a href="http://downloads.vagrantup.com/">Vagrant</a> (Choose the latest one! DON'T use vagrant gem!)<br />
+        <p> At first, install <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> (4.3.x).<br />
+          Then, install <a href="http://downloads.vagrantup.com/">Vagrant</a> (1.5.0+. Choose the latest one! DON'T use vagrant gem!)<br />
           Now let's get <a href="https://github.com/inventit/moat-iot-get-started-vagrant">Vagrant Settings for this example app</a>s from GitHub. </p>
         <div class="bs-callout">
           <h4>Git users</h4>
@@ -73,39 +73,27 @@ git clone git://github.com/inventit/moat-iot-get-started-vagrant.git.</pre>
 vagrant up</pre>
         </p>
         <br />
-        <p>Then you will see the following logs:
-        <pre>default] Box precise32 was not found. Fetching box from specified URL...
-[vagrant] Downloading with Vagrant::Downloaders::HTTP...
-[vagrant] Downloading box: http://files.vagrantup.com/precise32.box
+        <p>This will take approx. 10 minutes (or more depending on the bandwidth) if you run the command first time. When run the command, you will see the following logs:
+        <pre>==> default: Box 'opscode_ubuntu-12.04-i386_chef-11.4.4' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Adding box 'opscode_ubuntu-12.04-i386_chef-11.4.4' (v0) for provider: virtualbox
+    default: Downloading: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_chef-11.4.4.box
+==> default: Successfully added box 'opscode_ubuntu-12.04-i386_chef-11.4.4' (v0) for 'virtualbox'!
+==> default: Importing base box 'opscode_ubuntu-12.04-i386_chef-11.4.4'...
+==> default: Matching MAC address for NAT networking...
      :
    (snip)
      :
-[default] Importing base box 'precise32'...
-[default] The guest additions on this VM do not match the install version of
-VirtualBox! This may cause things such as forwarded ports, shared
-folders, and more to not work properly. If any of those things fail on
-this machine, please update the guest additions and repackage the
-box.
-Guest Additions Version: 4.2.0
-VirtualBox Version: 4.2.6
-[default] Matching MAC address for NAT networking...
-[default] Clearing any previously set forwarded ports...
-[default] Forwarding ports...
-     :
-   (snip)
-     :
-</pre>
+[2014-03-13T00:29:35+00:00] INFO: execute[add APP env] ran successfully
+[2014-03-13T00:29:35+00:00] INFO: Chef Run complete in 396.508700733 seconds
+[2014-03-13T00:29:35+00:00] INFO: Running report handlers
+[2014-03-13T00:29:35+00:00] INFO: Report handlers complete</pre>
         </p>
-        <br />
-        <p>The image download will take place when the box image file named <code>precise32</code> is missing. </p>
-        <div class="alert alert-info"> <strong>NOTE:</strong><br />
-          This process will take over an hour for the first time, including download time.
-          So let's have lunch or a long coffee break!! </div>
-        
         <h3>Enabling USB</h3>
         <p>The created image doesn't allow USB connection. So you need to enable it manually from the VirtualBox UI.</p>
         <div class="alert alert-info"> <strong>NOTE:</strong><br />
-          You need to install Oracle VirtualBox Extension Pack to enable USB.
+          You need to install Oracle VM VirtualBox Extension Pack to enable USB.
           Download and install it from <a href="https://www.virtualbox.org/wiki/Downloads">here</a>. </div>
         <p> 1. Disconnect a USB cable connecting your Android phone<br />
           2. Terminate the virtual machine instance<br />
@@ -121,10 +109,14 @@ VirtualBox Version: 4.2.6
         </div>
           5. Launch the instance again<br /><br />
         <pre>vagrant up</pre>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          You will get an error on running the command unless you install Oracle VM VirtualBox Extension Pack.
+          Download and install it from <a href="https://www.virtualbox.org/wiki/Downloads">here</a> and run the command above again when you get an error. </div>
         </p>
-        <p> 6. Connect the USB cable to your Android phone again
-          7. Enter the following command to start adb daemon
-        <pre>sudo adb devices</pre>
+        <p> 6. Connect the USB cable to your Android phone</p>
+        <p> 7. Enter the following command to start adb daemon</p>
+        <pre>sudo adb kill-server
+sudo adb devices</pre>
         </p>
         <p> 8. And you will see the following output:
         <pre>List of devices attached 
@@ -133,7 +125,9 @@ HT9ABC999999	device</pre>
         <p><I>(HT9ABC999999 is an example)</I><br />
           OK, now your're ready. </p>
         <div class="alert alert-info"> <strong>NOTE:</strong><br />
-          Unfortunately, hot-plugging doesn't work. So you need to add the connection manually from the above window by clicking "+" icon on the right side whenever you connect your Android Device via USB.<br />
+          <p>Unfortunately, hot-plugging doesn't work. So you need to add the connection manually from the above window by clicking "+" icon on the right side whenever you connect your Android Device via USB.</p>
+		  <br />
+          <p><img src="/img/guides/get-started_p02-2.png" width="400" alt="Responsive image" class="img-responsive" /></p><br />
           You don't have to set it again once you enable USB. But please remember you perform <code>sudo adb devices</code> and connect USB after the command whenever you run <code>vagrant up</code>. </div>
           
         <h3>Using your cooked image</h3>
@@ -406,11 +400,15 @@ bundle exec rake db:migrate</pre>
         <h3>Run Web app on localhost </h3>
         <p>From the command line, enter the following commands.</p>
         <pre>cd $APP/simple-example-rails
-rails server</pre>
+bundle exec rails server</pre>
         <p>After a few seconds, you will see the following message:</p>
-        <pre>[2013-01-09 19:09:19] INFO WEBrick 1.3.1
-[2013-01-09 19:09:19] INFO ruby 1.9.3 (2012-04-20) [x86_64-darwin12.1.0]
-[2013-01-09 19:09:19] INFO WEBrick::HTTPServer#start: pid=79599 port=3000</pre>
+        <pre>=> Booting WEBrick
+=> Rails 3.2.11 application starting in development on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+[2014-03-13 10:37:11] INFO  WEBrick 1.3.1
+[2014-03-13 10:37:11] INFO  ruby 2.1.0 (2013-12-25) [i386-linux-gnu]
+[2014-03-13 10:37:11] INFO  WEBrick::HTTPServer#start: pid=15065 port=3000</pre>
         <br />
         <p> OK. The rails started.<br />
           Now open <code>http://localhost:3000</code> with your browser and you can see the following page: </p>
