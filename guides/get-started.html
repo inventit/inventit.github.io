@@ -192,6 +192,16 @@ Inventit IoT Developer Network Terms of Service
 [IIDN] <notice!> The information is used in order for your application to access IIDN Cloud Sandbox.
 [IIDN] =====================</pre>
         </p>
+        <div class="alert alert-info"> <strong>Tips!</strong><br />
+<p>You can create a text file containing the above 3 credential items as shown below separated by line separator so that you can easily enter the credentials information on running <code>iidn-cli</code> command.</p>
+<pre>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+admin@999999999999999999
+aaaaaaaaaaaaaaaaaaaaaaa
+</pre>
+<p>
+You can copy and paste them when <code>iidn-cli</code> prompts you to enter the credentials, and you can skip to enter them respectively.
+</p>
+</div>
         <div class="alert alert-info"> <strong>NOTE:</strong><br />
           Don't worry if you forget your API credentials printed above.
           You can use <code>reset</code> command to re-issue your password and print all credentials. The command is available as of <a href="https://github.com/inventit/iidn-cli">iidn-cli version 1.0.1.</a> </div>
@@ -209,11 +219,11 @@ Inventit IoT Developer Network Terms of Service
           <li>Internet Connectivity</li>
           <li>Modern Browser</li>
           <li>Android Device (2.3/Gingerbread or higher) with a valid Google account</li>
-          <li><a href="">Rails 3.2</a></li>
-          <li><a href="">Java SE JDK 6 (Open JDK will work as well, set PATH</code> to java command)
-            JDK7 is not available since Android SDK doesn't support it yet.</a></li>
-          <li><a href="">Android SDK</a> API Level 16 (set <code>PATH</code> to <code>adb</code> command)</li>
-          <li><a href="">Apache Maven</a> (3.0+, set <code>PATH</code> to <code>mvn</code> command) OR eclipse with ADT</li>
+          <li>Rails 3.2</li>
+          <li>Java SE JDK 6 (Open JDK will work as well, set <code>PATH</code> to java command)
+            JDK7 is not available since Android SDK doesn't support it yet.</li>
+          <li>Android SDK API Level 16 (set <code>PATH</code> to <code>adb</code> command)</li>
+          <li>Apache Maven(3.0.x, set <code>PATH</code> to <code>mvn</code> command) OR eclipse with ADT</li>
           <li>Computer where Rails 3.2, JDK 6 and Android SDK work</li>
           <li>Open SSL (Windows binaries can be found <a href="http://slproweb.com/products/Win32OpenSSL.html">here</a>)</li>
           <li>The sandbox account you registered above</li>
@@ -313,7 +323,14 @@ yes
 [IIDN] $ openssl pkcs12 -in your-new.p12 -nocerts -out your.key
 [IIDN] ----------------------------------------------------
 [IIDN] Done</pre>
-        <p>The downloaded file will be saved on the current working directory with the suffix <code>.bin</code>. The file will be referred later as <code>download-file.bin</code>.</p>
+        <p>The downloaded file will be saved on the current working directory with the suffix <code>.bin</code>.
+		<pre>vagrant@vagrant:~/moat-iot-get-started/simple-example-js$ ls -al
+total 588
+drwxr-xr-x 3 vagrant root      4096 Mar 14 03:43 .
+drwxr-xr-x 9 vagrant root      4096 Mar 13 10:27 ..
+-rw-rw-r-- 1 vagrant vagrant   1750 Mar 14 03:43 1394768569891-token.bin</pre>
+		Here as shown above, the file is named as <code>1394768569891-token.bin</code> in this example. The file will be referred later as <code>download-file.bin</code> in this document.
+		</p>
         <h4>Sign The Token</h4>
         <p>After downloading the secure token, you need to sign it with your own key. Here in this example, we will show you the way to use Android's debug key for convenience. But NEVER use this way for your production artifacts.</p>
         <br />
@@ -329,6 +346,12 @@ Error outputting keys and certificates
 140044161410720:error:2306A075:PKCS12 routines:PKCS12_item_decrypt_d2i:pkcs12 pbe crypt error:p12_decr.c:130:</pre>
 			
 		</div>
+
+        <p><I>If you get the following error;<pre>keytool error: java.io.FileNotFoundException: /home/vagrant/.android/debug.keystore (No such file or directory)</pre> create the directory.</I></p>
+        <div class="bs-callout">
+          <pre>mkdir $HOME/.android</pre>
+		</div>
+
         <p><I>If <code>$HOME.android</code>(or <code>%HOMEPATH%\.android</code> for windows users) is missing, try the following command:</I></p>
         <div class="bs-callout">
           <pre>keytool -genkey -keypass android -keystore \
@@ -345,7 +368,7 @@ androiddebugkey -storepass android -validity 10000 \
         <p>Enter the same password and passphrase here as well.<br />
           Note that the passwords of the Android's debug keystore are available <a href="http://developer.android.com/tools/publishing/app-signing.html#debugmode">here</a>.</p>
         <br />
-        <p>Finally, you can run the following command for signing the secure token.</p>
+        <p>Finally, you can run the following command for signing the secure token. Make sure that you may rename <code>download-file.bin</code> with your downloaded bin file name.</p>
         <pre>openssl smime -sign -in download-file.bin -out signed.bin -signer $HOME/.android/debug.pem -inkey $HOME/.android/debug.key -nodetach -outform der -binary</pre>
         <p>The signed content will be stored at <code>./signed.bin</code>. </p>
         <h4>Place The Token</h4>
