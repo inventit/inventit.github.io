@@ -114,6 +114,10 @@ vagrant up</pre>
           Download and install it from <a href="https://www.virtualbox.org/wiki/Downloads">here</a> and run the command above again when you get an error. </div>
         </p>
         <p> 6. Connect the USB cable to your Android phone</p>
+        <div class="alert alert-info"> <strong>NOTE:</strong><br />
+          <p>You may be asked if you allow USB debugging as shown below.</p>
+          <p><img src="/img/guides/get-started_p02-1.png" width="200" alt="Responsive image" class="img-responsive" /></p>
+          <p>Answer OK to the dialog.</p> </div>
         <p> 7. Enter the following command to start adb daemon</p>
         <pre>sudo adb kill-server
 sudo adb devices</pre>
@@ -127,7 +131,8 @@ HT9ABC999999	device</pre>
         <div class="alert alert-info"> <strong>NOTE:</strong><br />
           <p>Unfortunately, hot-plugging doesn't work. So you need to add the connection manually from the above window by clicking "+" icon on the right side whenever you connect your Android Device via USB.</p>
 		  <br />
-          <p><img src="/img/guides/get-started_p02-2.png" width="400" alt="Responsive image" class="img-responsive" /></p><br />
+          <p>On Mac:<br /><img src="/img/guides/get-started_p02-2.png" width="400" alt="Responsive image" class="img-responsive" /></p><br />
+          <p>On Windows:<br /><img src="/img/guides/get-started_p02-3.png" width="400" alt="Responsive image" class="img-responsive" /></p><br />
           You don't have to set it again once you enable USB. But please remember you perform <code>sudo adb devices</code> and connect USB after the command whenever you run <code>vagrant up</code>. </div>
           
         <h3>Using your cooked image</h3>
