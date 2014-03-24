@@ -14,6 +14,10 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.0.3 March 24, 2014
+
+ * Allows `dmjob` object to take 2 or mroe device destinations
+
 ## 1.0.2 May 10, 2013
 
  * Adds a new parameter <code>q</code> to resource type query.

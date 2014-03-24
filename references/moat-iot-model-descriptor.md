@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2013-09-28T00:00:00
+ lastmod: 2014-03-24T00:00:00
 name: moat-iot-model-descriptor.html
 title: "Inventit Iot developer Network | References | MOAT IoT Model Descriptor"
 layout: references
@@ -22,6 +22,12 @@ MOAT IoT Model Descriptor is a text data to describe your models, what kind of a
 This descriptor is used in MOAT js, MOAT Java and MOAT C. And it should be included in a package.json of each application package. You have to use the same model descriptors between them since all these APIs handle originally the same data models.
 
 The API specific limitations are illustrated below.
+
+## Version
+
+1.1.0
+
+See [here](/references/moat-iot-model-descriptor/changes.html) for the model specification change history.
         
 ### MOAT js
 
@@ -48,7 +54,7 @@ The following example shows a typical model descriptor.
 ```json
 "MyModel" : {
   "array" : true,
-  "shared" : false,
+  "scope" : "user",
   "attributes" : {
     "my16bitIntField" : {"type" : "int16"},
     "my32BitIntField" : {"type" : "int32"},
@@ -73,10 +79,22 @@ The following example shows a typical model descriptor.
  * `array` is a boolean value to determine whether or not the model represents a collection type object. `false` by default
  * `shared` tells whether or not the model is shared between devices. `array` attribute will be ignored if the annotation is set to `true`. `false` by default.
 
-### Shared Models vs Non-shared Models
+### Scope of Models
 
-The difference between shared models and non-shared models is whether the model objects are shared between devices or not. The shared models can be accessed (<strong>read-only</strong>) from each device via `Database.querySharedByUids()`([See here](/references/moat-js-api-document.html#ClassesDatabase)).<br/>
-  On the other hand, the non-shared models cannot be used between devices. They are device-private data rather than application-wide as the shared models are.
+Models are accessible at 3 scopes, `device`, `user`, and `global`.
+
+At `device` scope, every model object is associated with a device, but is isolated from other devices. A user owning the device is able to read/write the object.
+
+At `user` scope, every model object is associated with a user, but is isolated from other users. Devices owned by the user are able to access the object.
+
+At `global` scope, every model object is public to all users and devices.
+
+The default scope is `device` when the `scope` attribute is missing.
+
+The old `shared` attribute is translated as follows depedning on its value:
+
+ * _shared = true_ => `scope = 'global'`
+ * _shared = false_ => `scope = 'device'`
 
 ### Attribute Data Types
 

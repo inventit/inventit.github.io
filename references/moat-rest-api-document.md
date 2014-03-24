@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2013-09-28T00:00:00
+ lastmod: 2014-03-24T00:00:00
 name: moat-rest-api-document.html
 title: "Inventit Iot developer Network | References | MOAT REST"
 layout: references
@@ -507,7 +507,7 @@ It includes the following attributes.</p>
     <td> name<br /></td>
     <td><b>Mandatory for POST</b><br />
       <b>Updatable only for POST</b><br />
-      The addressing name of the device.<br /></td>
+      The addressing name of the device. You can specify 2 or more names in the JSON Array format.<br /></td>
   </tr>
   <tr>
     <td> status<br /></td>

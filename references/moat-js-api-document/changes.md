@@ -14,10 +14,14 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.3.0 March 24, 2014
+
+ * Removes `querySharedByUid` function and use `queryByUid` as `queryByUid` now automatically resolves the model scope
+
 ## 1.2.0 June 1, 2013
 
  * Adds new functions for calculating a message digest value and an hmac value to <a href="moat-js-api-document.html#ClassesMessageSession">MessageSession</a> object
- * Adds new functions for converting a hex ascii string to/from Base64 string to <a href="moat-js-api-document.html#ClassesMessageSession">MessageSession</a> object</p>
+ * Adds new functions for converting a hex ascii string to/from Base64 string to <a href="moat-js-api-document.html#ClassesMessageSession">MessageSession</a> object
 
 ## 1.1.0 February 6, 2013
 

@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2013-09-28T00:00:00
+ lastmod: 2014-03-24T00:00:00
 name: moat-js-api-document.html
 title: "Inventit Iot developer Network | References | MOAT js"
 layout: references
@@ -831,17 +831,6 @@ stub.myResourceField = ["put", "get"];
         &nbsp;r:Array) </td>
       <td> Array </td>
       <td> Queries records of the given type identified by the given uid array.<br />
-        <code>f</code> ... the fields to fetch<br />
-        <code>r</code> ... HTTP methods for resource fields if any<br />
-        * <code>f</code> and <code>r</code> are optional. </td>
-    </tr>
-    <tr>
-      <td>querySharedByUids(<br />
-        &nbsp;type:String,<br />
-        &nbsp;uids:Array,<br />
-        &nbsp;f:Array,&nbsp;r:Array)</td>
-      <td>Array</td>
-      <td>Queries records of the given shared model type identified by the given uid array.<br />
         <code>f</code> ... the fields to fetch<br />
         <code>r</code> ... HTTP methods for resource fields if any<br />
         * <code>f</code> and <code>r</code> are optional. </td>
