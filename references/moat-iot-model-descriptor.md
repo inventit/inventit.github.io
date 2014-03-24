@@ -77,7 +77,7 @@ The following example shows a typical model descriptor.
 ### Model Meta Data Annotations
 
  * `array` is a boolean value to determine whether or not the model represents a collection type object. `false` by default
- * `shared` tells whether or not the model is shared between devices. `array` attribute will be ignored if the annotation is set to `true`. `false` by default.
+ * `scope` tells the scope of model objects. See below for futher information. `device` by default.
 
 ### Scope of Models
 
