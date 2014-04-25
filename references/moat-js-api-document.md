@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-03-24T00:00:00
+ lastmod: 2014-04-25T00:00:00
 name: moat-js-api-document.html
 title: "Inventit Iot developer Network | References | MOAT js"
 layout: references
@@ -14,6 +14,8 @@ breadcrumbs:
  name: MOAT js
 ---
 <h1>MOAT js</h1>
+<p>Javascript API for server-side MOAT applications</p>
+
 <h3>Version</h3>
 <p>1.3.0</p>
 <p>See <a href="/references/moat-js-api-document/changes.html">here</a> for change history.<br />

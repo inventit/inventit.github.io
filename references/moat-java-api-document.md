@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2013-09-28T00:00:00
+ lastmod: 2014-04-25T00:00:00
 name: moat-java-api-document.html
 title: "Inventit Iot developer Network | References | MOAT Java/Android"
 layout: references
@@ -14,6 +14,9 @@ breadcrumbs:
  name: MOAT Java/Android
 ---
 # MOAT Java/Android
+
+Java API for client MOAT applications
+
 ### Version
 1.0.0
 　　

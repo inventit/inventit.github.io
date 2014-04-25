@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2013-09-28T00:00:00
+ lastmod: 2014-04-25T00:00:00
 name: moat-c-api-document.html
 title: "Inventit Iot developer Network | References | MOAT C"
 layout: references
@@ -14,7 +14,10 @@ breadcrumbs:
  name: MOAT C
 ---
   
-# MOAT Java/Android
+# MOAT C
+
+C API for client MOAT applications
+
 ### Version
 1.0.0
 　　

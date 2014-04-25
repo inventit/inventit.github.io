@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-03-24T00:00:00
+ lastmod: 2014-04-25T00:00:00
 name: moat-rest-api-document.html
 title: "Inventit Iot developer Network | References | MOAT REST"
 layout: references
@@ -15,6 +15,8 @@ breadcrumbs:
  url: /references/moat-rest-api-document.html
 ---
 <h1>MOAT REST</h1>
+<p>REST API for MOAT applications</p>
+
 <h3>Version</h3>
 <p>1.0.3</p>
 <p>See <a href="/references/moat-rest-api-document/changes.html">here</a> for change history.</p>
