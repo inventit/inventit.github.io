@@ -94,8 +94,7 @@ The following snippet is a part of our `Berksfile`. We use our own private cookb
 	
 	cookbook 'cassandra', path: "cassandra"
 	
-	# workaround for iis's encoding error (https://github.com/opscode-cookbooks/iis/pull/53)
-	cookbook 'iis', github: "rarenerd/iis"
+	cookbook 'some-cookbook', github: "user/cookbook-name"
 	
 	cookbook 'memcached'
 
