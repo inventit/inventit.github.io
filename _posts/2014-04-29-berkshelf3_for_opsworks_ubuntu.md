@@ -41,6 +41,10 @@ OpsWorks provides the way to specify the arbitrary version of Berkshelf when we 
 The error said `HTTP 403 Forbidden` for the access to the resource `node[:opsworks_custom_cookbooks][:berkshelf_package_url]`. I think it weird because the dumped source code declrared `ignore_failure true` but the error was NOT ignored.
 Probably AWS guys are now investigating it but I cannot wait for them to address it.
 
+### UPDATE
+
+The symptom is already gone. You can change Berkshelf version without HTTP 403 error. But either 3.0.1 or 3.1.1 is recommended by an AWS guy.
+
 # Trying to overwrite the package url
 
 As the [source code](https://github.com/aws/opsworks-cookbooks/blob/release-chef-11.10/opsworks_custom_cookbooks/recipes/checkout.rb#L96-L103) shown above, the `node[:opsworks_custom_cookbooks][:berkshelf_package_url]` has the location to the Berkshelf package. So I tried to overwrite the attribute with a dummy URL in my own custom JSON like this.
@@ -128,5 +132,5 @@ In the end, the only way left seems to be creating a pre-built Berkshelf package
 
 ### UPDATE
 
-According to [requena@AWS](https://forums.aws.amazon.com/thread.jspa?threadID=150520&tstart=0), the error has occured on EC2 64 bit instances with less than 4 cores and suggested me to use 32bit instances or 64 bit instances with 4 or more cores.
+According to [requena@AWS](https://forums.aws.amazon.com/thread.jspa?threadID=150520&tstart=0), the error has occured on EC2 64 bit instances with less than 4 cores and suggested me to use 32 bit instances or 64 bit instances with 4 or more cores.
 
