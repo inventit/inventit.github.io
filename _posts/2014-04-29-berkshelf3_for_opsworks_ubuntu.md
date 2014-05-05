@@ -66,6 +66,9 @@ When I launched a new instance, I found the dummy url worked, all opsworks cookb
 
 As the first line above shows, HTTP 404 was returned. This means the overwritten URL worked. So currently Chef's `remote` provider seems to ignore HTTP 404 error but not to ignore HTTP 403.
 
+## UPDATE
+Around April 30th, the updated version of OpsWorks seemed to be deployed. The information above is now obsolete. 
+
 # Resolving Version Conflict
 I still got an error though I could resolve the weird Chef's `remote` behavior. Here is the error portion of the log file.
 
