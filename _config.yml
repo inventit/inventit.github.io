@@ -25,3 +25,4 @@ author :
   facebookpage : InventitIotDeveloperNetwork
   linkedin : inventit-inc./inventit-iot-developer-network-1365558/product
 
+exclude: ['vendor']
