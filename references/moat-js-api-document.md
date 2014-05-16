@@ -162,8 +162,6 @@ Or, command functions defined in developer defined model play the role as well.
 Every command function of the model stub object transmits its request to the remote device whenever it is invoked.
 See [here](#ClassesModelStub) for detail.
 
-As of version 1.1.0, `MessageSession` object has the following properties.
-
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -182,11 +180,6 @@ As of version 1.1.0, `MessageSession` object has the following properties.
       <td>packageId</td>
       <td>String</td>
       <td>The package identifier of this ongoing script.</td>
-    </tr>
-    <tr>
-      <td>domainId</td>
-      <td>String</td>
-      <td>The domain identifier the device belongs to.</td>
     </tr>
   </tbody>
 </table>
