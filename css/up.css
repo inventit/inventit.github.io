@@ -4057,9 +4057,9 @@ Breadcrumb
 /* ------------------------------
 Jump to
 ------------------------------ */
-#ServiceSync-Product-Overview, #ServiceSync-Gateway, #ServiceSync-Client, #ServiceSync-Server, #Temp2Twitter, #PushFromTwitter, #Checkout-Sample-Project-from-GitHub, #Kick-off-your-first-IoT-app, #Appendix, #Download_MOAT_Android_API, #build-your-first-moatiot-application, #System_Defined_Models, #System_Defined_Models_URI_Form, #auth, #package, #device, #dmjob, #oauth2auth, #account, #log, #Developer_Defined_Models, #Developer_Defined_Models_URI_Form, #Resource_Type_Query, #Single_Model_Query, #List_Model_Query, #Create_Model_Object, #Update_Model_Object, #Delete_Model_Object, #NamingConvention, #GlobalObject, #GlobalObjectMOAT, #GlobalFunction, #GlobalFunctionrequire, #Classes, #ClassesMessageSession, #ClassesModelMapperStub, #ClassesModelStub, #ClassesOperationResult, #ClassesDatabase, #ClassesQueryResult, #ClassesClientRequest, #ClassesDevice, #ClassesDmJobnotificationUri, #ClassesModelMapperadd, #CallbackFunctionObject, #Moat, #ModelMapper, #Command, #Commandjdk14, #ResourceType, #ResourceTypejdk14, #MoatAndroidFactory, #MoatAndroidFactoryCallback, #AndroidManifestxml, #JobServiceIdentifier, #PlatformSecurity, #MoatApp, #DataStore, #MoatValue, #MoatObject, #PrimitiveDataTypes, #UnidirectionalLinkedList, #ModelMapperOpaqueTypes, #MoatAddProc, #MoatRemoveProc, #MoatUpdateProc, #MoatUpdateFieldsProc, #MoatFindAllUidsProc, #MoatFindByUidProc, #MoatCountProc, #MoatObjectIterator, #beta-service-limitations  {
+.anchor  {
 	padding-top: 80px;
-    margin-top: -80px;
+  margin-top: -80px;
 		
 }
 

@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-04-25T00:00:00
+ lastmod: 2014-05-16T00:00:00
 name: moat-c-api-document.html
 title: "Inventit Iot developer Network | References | MOAT C"
 layout: references
@@ -24,16 +24,14 @@ C API for client MOAT applications
 ## Table of Contents
 　　
 ### MOAT C
-<ol>
-  <li><a href="#MoatApp">MoatApp</a> interfaces</li>
-  <li><a href="#Moat">Moat</a> interfaces</li>
-  <li><a href="#ModelMapper">ModelMapper</a> interfaces</li>
-  <li><a href="#DataStore">DataStore</a> interfaces</li>
-  <li><a href="#MoatValue">MoatValue</a> type interfaces</li>
-  <li><a href="#MoatObject">MoatObject</a> type interfaces</li>
-  <li><a href="#PrimitiveDataTypes">Primitive Data Types</a></li>
-  <li><a href="#UnidirectionalLinkedList">Unidirectional Linked List</a> interface</li>
-</ol>
+- [MoatApp](#MoatApp) interfaces
+- [Moat](#Moat) interfaces
+- [ModelMapper](#ModelMapper) interfaces
+- [DataStore](#DataStore) interfaces
+- [MoatValue](#MoatValue) type interfaces
+- [MoatObject](#MoatObject) type interfaces
+- [Primitive Data Types](#PrimitiveDataTypes)
+- [Unidirectional Linked List](#UnidirectionalLinkedList)interfaces
 
 ## MOAT C
 <div class="alert alert-info"> <b>NOTICE:</b><br />
@@ -51,7 +49,7 @@ This document focuses on MOAT C API used for developing the device side applicat
 #### MOAT C app specific function
 Your MOAT C apps must implement the following function so that the underlying MOAT runtime environment is able to start/stop your apps.
 
-<div id="MoatApp"></div>
+<div id="MoatApp" class="anchor"></div>
 ### MoatApp interfaces
 
 #### MOAT C application specific function
@@ -137,7 +135,7 @@ The following functions offer your MOAT C app main entry point to manage the app
 </tbody>
 </table>
 
-<div id="Moat"></div>
+<div id="Moat" class="anchor"></div>
 ### Moat Interfaces
 
 The Moat interfaces allow MOAT C applications to manage and/or manipulate model data.
@@ -308,7 +306,7 @@ This is an opaque type representing a callback function to be invoked when `moat
 </tbody>
 </table>
 
-<div id="ModelMapper"></div>
+<div id="ModelMapper" class="anchor"></div>
 ### ModelMapper Interfaces
 
 These interfaces represent Create/Read/Update/Delete operations for a single data model, one model for one ModelMapper.<br />
@@ -389,10 +387,10 @@ See [ModelMapper Opaque Types](#ModelMapperOpaqueTypes) for the following type d
 </tbody>
 </table>
 
-<div id="ModelMapperOpaqueTypes"></div>
+<div id="ModelMapperOpaqueTypes" class="anchor"></div>
 #### ModelMapper Opaque Types
 
-<div id="MoatAddProc"></div>
+<div id="MoatAddProc" class="anchor"></div>
 ##### MoatAddProc
 
 This is an opaque type representing a callback function to be invoked when `ModelMapperStub.add` is performed on the MOAT server runtime.<br />
@@ -424,7 +422,7 @@ Note that MOAT C API specification doesn't care of the way to persist the object
 </tbody>
 </table>
 
-<div id="MoatRemoveProc"></div>
+<div id="MoatRemoveProc" class="anchor"></div>
 MoatRemoveProc
 
 This is an opaque type representing a callback function to be invoked when `ModelMapperStub.remove` is performed on the MOAT server runtime.<br />
@@ -453,7 +451,7 @@ MOAT C app must implement this function to remove the object specified by the gi
 </tbody>
 </table>
 
-<div id="MoatUpdateProc"></div>
+<div id="MoatUpdateProc" class="anchor"></div>
 ##### MoatUpdateProc
 
 This is an opaque type representing a callback function to be invoked when `ModelMapperStub.update` is performed on the MOAT server runtime.<br />
@@ -484,7 +482,7 @@ MOAT C app must implement this function to update all fields in the object speci
 </tbody>
 </table>
 
-<div id="MoatUpdateFieldsProc"></div>
+<div id="MoatUpdateFieldsProc" class="anchor"></div>
 ##### MoatUpdateFieldsProc
 
 This is an opaque type representing a callback function to be invoked when `ModelMapperStub.updateFields` is performed on the MOAT server runtime.<br />
@@ -515,7 +513,7 @@ MOAT C app must implement this function to update all fields in the object speci
 </tbody>
 </table>
 
-<div id="MoatFindAllUidsProc"></div>
+<div id="MoatFindAllUidsProc" class="anchor"></div>
 ##### MoatFindAllUidsProc
 
 This is an opaque type representing a callback function to be invoked when `ModelMapperStub.findAllUids` is performed on the MOAT server runtime.<br />
@@ -574,7 +572,7 @@ MOAT C app must implement this function to return a model object specifed by the
 </tbody>
 </table>
 
-<div id="MoatCountProc"></div>
+<div id="MoatCountProc" class="anchor"></div>
 ##### MoatCountProc
 
 This is an opaque type representing a callback function to be invoked when `ModelMapperStub.count` is performed on the MOAT server runtime.<br />
@@ -638,7 +636,7 @@ The responsibility of the function is to offer the MOAT runtime to invoke an ins
 </tbody>
 </table>
 
-<div id="DataStore"></div>
+<div id="DataStore" class="anchor"></div>
 ### DataStore Interfaces
 
 The DataStore interfaces allow MOAT C applications to manage and/or manipulate model data on a built-in store.
@@ -729,7 +727,7 @@ The following functions offer your MOAT C apps to store/load/remove `MoatObject`
 </tbody>
 </table>
 
-<div id="MoatValue"></div>
+<div id="MoatValue" class="anchor"></div>
 ### MoatValue type
 
 #### MoatValue struct type

@@ -14,6 +14,10 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.1.0 May 16, 2014
+
+ * Supports challenge and response style authentication
+
 ## 1.0.3 March 24, 2014
 
  * Allows `dmjob` object to take 2 or mroe device destinations

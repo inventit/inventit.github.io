@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-04-25T00:00:00
+ lastmod: 2014-05-16T00:00:00
 name: moat-js-api-document.html
 title: "Inventit Iot developer Network | References | MOAT js"
 layout: references
@@ -13,54 +13,52 @@ breadcrumbs:
 -
  name: MOAT js
 ---
-<h1>MOAT js</h1>
-<p>Javascript API for server-side MOAT applications</p>
+# MOAT js
+Javascript API for server-side MOAT applications
 
-<h3>Version</h3>
-<p>1.3.0</p>
-<p>See <a href="/references/moat-js-api-document/changes.html">here</a> for change history.<br />
-</p>
-　　
-<h3>Table of Contents</h3>
-<p><a href="#NamingConvention">1. Naming Convention</a></p>
-<p><a href="#GlobalObject">2. Global Object</a></p>
-<ul>
-  <li><a href="#GlobalObjectMOAT">MOAT</a></li>
-</ul>
-<p><a href="#GlobalFunction">3. Global Function</a></p>
-<ul>
-  <li><a href="#GlobalFunctionrequire">require()</a></li>
-</ul>
-<p><a href="#Classes">4. Classes</a></p>
-<ul>
-  <li><a href="#ClassesMessageSession">MessageSession</a></li>
-  <li><a href="#ClassesModelMapperStub">ModelMapperStub</a></li>
-  <li><a href="#ClassesModelStub">ModelStub</a></li>
-  <li><a href="#ClassesOperationResult">OperationResult</a></li>
-  <li><a href="#ClassesDatabase">Database</a></li>
-  <li><a href="#ClassesQueryResult">QueryResult</a></li>
-  <li><a href="#ClassesClientRequest">ClientRequest</a></li>
-  <li><a href="#ClassesDevice">Device</a></li>
-  <li><a href="#ClassesDmjob">Dmjob</a></li>
-</ul>
+### Version
+1.3.0
 
-<div id="NamingConvention">
-  <h3>Naming Convention</h3>
-</div>
-<p>All javascript files must follow the naming convention below:</p>
-<pre>[operation]![version].js</pre>
-<p>when the file corresponds to the URN (JobServiceId)&nbsp;<code>urn:moat:app-id:package-id:operation:version</code>.<br />
-  e.g. <code>install!1.0.js</code>, <code>start!1.0.js</code><br />
-  The <code>version</code> must be identical with the one declared in <code>package.json</code>.<br />
+See [here](/references/moat-js-api-document/changes.html) for change history.
 
-<div id="GlobalObject">
-  <h3>Global Object</h3>
-</div>
-<div id="GlobalObjectMOAT">
-  <h4>MOAT</h4>
-</div>
-<p>This object is a globally accessible object from any scope in your script. It contains the meta information such as version and a function to provide a context object.<br />
-  However, you <u><b>should not use</b></u> this object directly but use <b><a href="#GlobalFunctionrequire">require()</a></b> function like Node.js.</p>
+### Table of Contents
+1. [Naming Convention](#NamingConvention)
+1. [Global Object](#GlobalObject)
+ * [MOAT](#GlobalObjectMOAT)
+1. [Global Function](#GlobalFunction)
+ * [require(String)](#GlobalFunctionrequire)
+1. [Classes](#Classes)
+ * [MessageSession](#ClassesMessageSession)
+ * [ModelMapperStub](#ClassesModelMapperStub)
+ * [ModelStub](#ClassesModelStub)
+ * [OperationResult](#ClassesOperationResult)
+ * [Database](#ClassesDatabase)
+ * [QueryResult](#ClassesQueryResult)
+ * [ClientRequest](#ClassesClientRequest)
+ * [Device](#ClassesDevice)
+ * [Dmjob](#ClassesDmjob)
+
+<div id="NamingConvention" class="anchor"></div>
+### Naming Convention
+All javascript files must follow the naming convention below:
+
+    [operation]![version].js
+
+when the file corresponds to the URN (JobServiceId)&nbsp;`urn:moat:app-id:package-id:operation:version`.
+
+e.g. `install!1.0.js`, `start!1.0.js`
+
+The `version` must be identical with the one declared in `package.json`.
+
+<div id="GlobalObject" class="anchor"></div>
+### Global Object
+
+<div id="GlobalObjectMOAT" class="anchor"></div>
+#### MOAT
+This object is a globally accessible object from any scope in your script.
+It contains the meta information such as version and a function to provide a context object.
+
+However, you <u>**should not use**</u> this object directly but use **[require(String)](#GlobalFunctionrequire)** function like Node.js.
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -134,26 +132,38 @@ breadcrumbs:
   </tbody>
 </table>
 
-<div id="GlobalFunction">
-  <h3>Global Function</h3>
-</div>
-<div id="GlobalFunctionrequire">
-  <h4>require(String) </h4>
-</div>
-<p>This function is a factory function to provide a MOAT object. The string parameter must be always '<b><u>moat</u></b>'. Other text cannot be taken.<br />
-  The purpose of this function is to offer the script the source code compatibility with Node.js. WIth this function, developers are able to perform the unit testing with a test stub module and libraries available on Node.js.<br />
-  Inventit provides a testing library, <a href="https://github.com/inventit/moatjs-stub">moatjs-stub</a>, at <a href="http://npmjs.org/">npm</a>, which is working with <a href="http://sinonjs.org/">SinonJS</a> and <a href="https://github.com/caolan/nodeunit/">nodeunit</a>. You can test your code with the modules on your local environment without deployment on a server. </p>
+<div id="GlobalFunction" class="anchor"></div>
+### Global Function
 
-<div id="Classes">
-  <h3>Classes</h3>
-</div>
-<div id="ClassesMessageSession">
-  <h4>MessageSession</h4>
-</div>
-<p>The MessageSession provides functions associated with the ongoing script execution. On the server side script, developers are able to code operations to a remote device. These operations are not automatically transmitted to the remote device but must be directed by several functions.<br />
-  <code>commit()</code> function is one of the commands to perform the transmission, which is used for applying model stub object manipulation to the device. Prior to call this function, one or more property set/get operations to a model stub object are required.<br />
-  Or, command functions defined in developer defined model play the role as well. Every command function of the model stub object transmits its request to the remote device whenever it is invoked. See <a href="#ClassesModelStub">here</a> for detail.<br />
-  As of version 1.1.0, MessageSession object has the following properties.</p>
+<div id="GlobalFunctionrequire" class="anchor"></div>
+#### require(String)
+This function is a factory function to provide a MOAT object. The string parameter must be always '<b><u>moat</u></b>'.
+Other text cannot be taken.
+
+The purpose of this function is to offer the script the source code compatibility with Node.js. WIth this function, developers are able to perform the unit testing with a test stub module and libraries available on Node.js.
+
+Inventit provides a testing library, [moatjs-stub](https://github.com/inventit/moatjs-stub), at [npm](http://npmjs.org/), which is working with [SinonJS](http://sinonjs.org/) and [nodeunit](https://github.com/caolan/nodeunit/).
+
+You can test your code with the modules on your local environment without deployment on a server.
+
+<div id="Classes" class="anchor"></div>
+### Classes
+
+<div id="ClassesMessageSession" class="anchor"></div>
+#### MessageSession
+The MessageSession provides functions associated with the ongoing script execution.
+On the server side script, developers are able to code operations to a remote device.
+These operations are not automatically transmitted to the remote device but must be directed by several functions.
+
+`commit()` function is one of the commands to perform the transmission, which is used for applying model stub object manipulation to the device.
+Prior to call this function, one or more property set/get operations to a model stub object are required.
+
+Or, command functions defined in developer defined model play the role as well.
+Every command function of the model stub object transmits its request to the remote device whenever it is invoked.
+See [here](#ClassesModelStub) for detail.
+
+As of version 1.1.0, `MessageSession` object has the following properties.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -172,6 +182,11 @@ breadcrumbs:
       <td>packageId</td>
       <td>String</td>
       <td>The package identifier of this ongoing script.</td>
+    </tr>
+    <tr>
+      <td>domainId</td>
+      <td>String</td>
+      <td>The domain identifier the device belongs to.</td>
     </tr>
   </tbody>
 </table>
@@ -215,7 +230,7 @@ breadcrumbs:
         tf ... boolean. Whether or not a device accesses the runtime later<br /></td>
     </tr>
     <tr>
-      <td><a name="MessageSession_log" id="MessageSession_log"></a>log(tag:String, message:String)</td>
+      <td><div id="MessageSession_log" class="anchor"></div>log(tag:String, message:String)</td>
       <td>void</td>
       <td>Prints a message log to the runtime environment.<br />
         <br />
@@ -345,21 +360,20 @@ breadcrumbs:
     </tr>
   </tbody>
 </table>
-<h4>Notification Functions</h4>
-<p>You can emit arbitrary javascript objects to a remote system with HTTP/S protocol both synchronously and asynchronously.<br />
-  MOAT js provides 2 ways of remote accessing:</p>
-<ul>
-  <li><b>Synchronous or asynchronous notification to the pre-defined destination</b><br />
-    Developers are able to specify the notification destination by:
-    <ol>
-      <li>Setting <code><a href="/references/moat-rest-api-document.html#package">notification</a></code> in a <code>package.json</code> for MOAT js application package</li>
-      <li>Or, setting <code>notificationUri</code> in a <code><a href="/references/moat-rest-api-document.html#dmjob">dmjob</a></code> object</li>
-    </ol>
-  </li>
-  <li><b>Synchronous and arbitrary destination access</b><br />
-    This is used for interacting with public third-party web services such as <a href="https://twitter.com">Twitter</a>, <a href="http://www.salesforce.com">Salesforce.com</a> or whatever. </li>
-</ul>
-<p>Regarding <code><a href="/references/moat-rest-api-document.html#dmjob">dmjob</a></code>s created by users via MOAT REST API, the runtime environment ALWAYS sends the notification when they are completed.</p>
+
+#### Notification Functions
+You can emit arbitrary javascript objects to a remote system with HTTP/S protocol both synchronously and asynchronously.
+
+MOAT js provides 2 ways of remote accessing:
+
+- **Synchronous or asynchronous notification to the pre-defined destination**
+ 1. Setting [`notification`](/references/moat-rest-api-document.html#package)in a `package.json` for MOAT js application package
+ 1. Or, setting `notificationUri` in a [`dmjob`](/references/moat-rest-api-document.html#dmjob) object
+- **Synchronous and arbitrary destination access**
+ * This is used for interacting with public third-party web services such as [Twitter](https://twitter.com), [Salesforce.com](http://www.salesforce.com) or whatever.
+
+Regarding [`dmjob`](/references/moat-rest-api-document.html#dmjob)s created by users via MOAT REST API, the runtime environment ALWAYS sends the notification when they are completed.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -478,15 +492,20 @@ breadcrumbs:
   </tbody>
 </table>
 
-<h5>Example</h5>
-<p>This is an example for <code>fetchUrlSync()</code>.</p>
+##### Example
+This is an example for `fetchUrlSync()`.
 <script src="https://gist.github.com/dbaba/2943421.js" type="text/javascript"></script>
-<div id="ClassesModelMapperStub">
-  <h4>ModelMapperStub</h4>
-</div>
-<p>The instance of this class is created via <code>MessageSession.newModelMapperStub()</code> with specifying the type of Model. However, you cannot directly instantiate it wtih <code>new</code> key word. The type must be declared in a <code>package.json</code> associated with the executing script.</p>
-<p>As the name says, this is a stub for a <a href="/references/moat-java-api-document.html#ModelMapper"><code>ModelMapper</code></a> on a remote device. You can request the model object manipulation to the remote device thorough the stub object.</p>
-<h5>Stub Creation Operation</h5>
+
+<div id="ClassesModelMapperStub" class="anchor"></div>
+#### ModelMapperStub
+The instance of this class is created via `MessageSession.newModelMapperStub()` with specifying the type of Model.
+However, you cannot directly instantiate it wtih `new` key word.
+The type must be declared in a `package.json` associated with the executing script.
+
+As the name says, this is a stub for a [`ModelMapper`](/references/moat-java-api-document.html#ModelMapper) on a remote device.
+You can request the model object manipulation to the remote device thorough the stub object.
+
+##### Stub Creation Operation
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -504,20 +523,22 @@ breadcrumbs:
   </tbody>
 </table>
 
-<h5>Usage of Model Operations</h5>
-<p>There are several functions in the class allowing you to access/manipulate model objects on a remote device.</p>
-<ul>
-  <li><a href="#ClassesModelMapper.add">add</a> for adding new model objects</li>
-  <li><a href="#ClassesModelMapper.update">update</a> for updating existing model objects</li>
-  <li><a href="#ClassesModelMapper.updateFields">updateFields</a> for updating one or more fields in a model object</li>
-  <li><a href="#ClassesModelMapper.remove">remove</a> for removing the existing model object</li>
-  <li><a href="#ClassesModelMapper.findByUid">findByUid</a> for finding a model object by a given UID</li>
-  <li><a href="#ClassesModelMapper.findAllUids">findAllUids</a> for listing all UIDs associated with a model type</li>
-  <li><a href="#ClassesModelMapper.count">count</a> for counting the number of model objects</li>
-</ul>
-<p>These functions are performed asynchronously. <code>MessageSession.commit()</code> or command functions in a model stub object triggers the operations on a remote device. In order for you to look into the operation results, you can append a callback function object (see below) to above functions.</p>
+##### Usage of Model Operations
+There are several functions in the class allowing you to access/manipulate model objects on a remote device.
+- [add](#ClassesModelMapper.add) for adding new model objects
+- [update](#ClassesModelMapper.update) for updating existing model objects
+- [updateFields](#ClassesModelMapper.updateFields) for updating one or more fields in a model object
+- [remove](#ClassesModelMapper.remove) for removing the existing model object
+- [findByUid](#ClassesModelMapper.findByUid) for finding a model object by a given UID
+- [findAllUids](#ClassesModelMapper.findAllUids) for listing all UIDs associated with a model type
+- [update](#ClassesModelMapper.count) for counting the number of model objects
 
-<div id="CallbackFunctionObject"><h5></a>Callback Function Object</h5></div>
+These functions are performed asynchronously.
+`MessageSession.commit()` or command functions in a model stub object triggers the operations on a remote device.
+In order for you to look into the operation results, you can append a callback function object (see below) to above functions.
+
+<div id="CallbackFunctionObject" class="anchor"></div>
+##### Callback Function Object
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -548,9 +569,11 @@ breadcrumbs:
     </tr>
   </tbody>
 </table>
-<a name="ClassesModelMapper.add"></a>
-<h5>Add Operation</h5>
-<p>You can add an object, the class of which is defined as a MOAT data model.</p>
+
+<div id="ClassesModelMapper.add" class="anchor"></div>
+##### Add Operation
+You can add an object, the class of which is defined as a MOAT data model.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -576,13 +599,15 @@ breadcrumbs:
   </tbody>
 </table>
 
-<h5>Example</h5>
-<h5>add</h5>
+##### Example
+##### add
 <script src="https://gist.github.com/dbaba/3142705.js" type="text/javascript"></script>
-<a name="ClassesModelMapper.update"></a>
-<a name="ClassesModelMapper.updateFields"></a>
-<h5>Update Operations</h5>
-  <p>You can update the object retrieved from a device and persist the modification to the device.></p>
+
+<div id="ClassesModelMapper.update" class="anchor"></div>
+<div id="ClassesModelMapper.updateFields" class="anchor"></div>
+##### Update Operations
+You can update the object retrieved from a device and persist the modification to the device.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -623,14 +648,17 @@ breadcrumbs:
   </tbody>
 </table>
 
-<h5>Examples</h5>
-<h5>update</h5>
+##### Examples
+##### update
 <script src="https://gist.github.com/dbaba/3143020.js" type="text/javascript"></script>
-<h5>updateFields</h5>
+
+##### updateFields
 <script src="https://gist.github.com/dbaba/3143092.js" type="text/javascript"></script>
-<a name="ClassesModelMapper.remove"></a> 
-<h5>Remove Operation</h5>
-<p>You can remove an object in a device.</p>
+
+<div id="ClassesModelMapper.remove" class="anchor"></div> 
+##### Remove Operation
+You can remove an object in a device.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -655,16 +683,18 @@ breadcrumbs:
   </tbody>
 </table>
 
-<h5>Example</h5>
-<h5>remove</h5>
+##### Example
+##### remove
 <script src="https://gist.github.com/dbaba/3142802.js" type="text/javascript"></script>
-<a name="ClassesModelMapper.findByUid"></a>
-<a name="ClassesModelMapper.findAllUids"></a>
-<a name="ClassesModelMapper.count"></a>
-<h5>Query Operations</h5>
-<p>You can retrieve data stored in a device via find* and count functions as similar as you do so from a database via DAO class.<br />
-  Unlike a generic database, the query operations require 'commit' operation in order for you to complete them.<br />
-</p>
+
+<div id="ClassesModelMapper.findByUid" class="anchor"></div>
+<div id="ClassesModelMapper.findAllUids" class="anchor"></div>
+<div id="ClassesModelMapper.count" class="anchor"></div>
+##### Query Operations
+You can retrieve data stored in a device via find* and count functions as similar as you do so from a database via DAO class.
+
+Unlike a generic database, the query operations require `commit()` operation in order for you to complete them.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -715,86 +745,101 @@ breadcrumbs:
   </tbody>
 </table>
 
-<h5>Examples</h5>
-<h5>findByUid</h5>
+##### Examples
+##### findByUid
 <script src="https://gist.github.com/dbaba/3122106.js" type="text/javascript"></script>
-<h5>findAllUids</h5>
+
+##### findAllUids
 <script src="https://gist.github.com/dbaba/3123410.js" type="text/javascript"></script>
-<h5>count</h5>
+
+##### count
 <script src="https://gist.github.com/dbaba/3123774.js" type="text/javascript"></script>
-<div id="ClassesModelStub">
-  <h4>ModelStub</h4>
+
+<div id="ClassesModelStub" class="anchor"></div>
+#### ModelStub
+
+The `ModelStub` is a stub object created via `ModelMapperStub.newModelStub()`, or retrieved by find* functions.
+You can set and/or get field values of the created object, or even run commands if they are defined in its model descriptor.
+
+##### 'Resource' Type
+The 'Resource' represents an abstract data object.
+The value of this type can be accessed via HTTP.
+'Resource' type value is usually empty and is NOT transferred to a remote device. However, with the following operations, the device is able to receive URLs to GET/PUT/DELETE/HEAD the resource (<u>POST is not included</u>).
+
+    var mapper = session.newModelMapper(...);
+    var stub = mapper.newModelStub();
+    stub.myResourceField = ["put", "get"];
+
+In this example above, the string array is assigned to a field named 'myResourceField', which is, for example, a resource type field. With this array, the runtime automatically converts the field value (String Array) into a resource type object, like this:
+
+    {
+      "put" : "http://....",
+      "get" : "http://....",
+      "type" : "...."
+    }
+
+However, the value can be 'empty' unless a string array is assigned.
+
+#### Commands
+Model objects can have one or more commands which are executed on a remote device. With MOAT js, you can direct the command execution from the server side script as the remote procedure call.
+Command takes the following signature:
+
+    function commandName(<session>, <parameter>, <callbackObject>) {
+      ...
+    }
+
+The `session` parameter is an instance of `MessageSession`.
+
+The second parameter is transferred to a remote device.
+
+The last parameter is an instance of [CallbackFunctionObject](#CallbackFunctionObject).
+
+<div class="alert alert-warning"> <b>IMPORTANT!</b><br />
+  <p>The runtime environment will call <code>MessageSession.commit()</code> automatically when a command is invoked.</p>
 </div>
-<p>The <code>ModelStub</code> is a stub object created via <code>ModelMapperStub.newModelStub()</code>, or retrieved by find* functions.</p>
-<p>You can set and/or get field values of the created object, or even run commands if they are defined in its model descriptor.</p>
-<h5>'Resource' Type</h5>
-<p>The 'Resource' represents an abstract data object. The value of this type can be accessed via HTTP. 'Resource' type value is usually empty and is NOT transferred to a remote device. However, with the following operations, the device is able to receive URLs to GET/PUT/DELETE/HEAD the resource (<u>POST is not included</u>).</p>
-<pre>var mapper = session.newModelMapper(...);
-var stub = mapper.newModelStub();
-stub.myResourceField = ["put", "get"];
-</pre>
-<br />
-<p>In this example above, the string array is assigned to a field named 'myResourceField', which is, for example, a resource type field. With this array, the runtime automatically converts the field value (String Array) into a resource type object, like this:</p>
-        <pre>{
-  "put" : "http://....",
-  "get" : "http://....",
-  "type" : "...."
-}
-</pre>
-        <p>However, the value can be 'empty' unless a string array is assigned.</p>
-        <br />
-        <h4>Commands</h4>
-        <p>Model objects can have one or more commands which are executed on a remote device. With MOAT js, you can direct the command execution from the server side script as the remote procedure call.
-          Command takes the following signature:</p>
-        <pre>function <i>commandName</i>(<i>session</i>, <i>parameter</i>, <i>callbackObject</i>) {
-...
-}
-</pre>
-        <p>The <code>session</code> parameter is an instance of <code>MessageSession</code>.<br />
-          The second parameter is transferred to a remote device. The last parameter is an instance of <a href="#CallbackFunctionObject">CallbackFunctionObject</a>.</p>
-        <div class="alert alert-warning"> <b>IMPORTANT!</b><br />
-          <p>The runtime environment will call <code>MessageSession.commit()</code> automatically when a command is invoked.</p>
-        </div>
-        <h5>Command in a model object</h5>
-        <script src="https://gist.github.com/dbaba/3142814.js" type="text/javascript"></script><br />
-        <div id="ClassesOperationResult">
-          <h3>OperationResult</h3>
-        </div>
-        <p>This is a return object by ModelMapperStub and ModelStub operations.<br />
-          You cannot directly instantiate it.</p>
-        <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th> Name </th>
-              <th> Return Type </th>
-              <th> Description </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td> success </td>
-              <td> Boolean </td>
-              <td> Whether or not the command is successful. The field is NOT available for find* and count functions result. </td>
-            </tr>
-            <tr>
-              <td> async </td>
-              <td> Boolean </td>
-              <td> Whether or not the operation is performed asynchronously. This property is available ONLY for the command result. </td>
-            </tr>
-            <tr>
-              <td> array </td>
-              <td> Array </td>
-              <td> The model objects array. The field is available ONLY for find* and count functions result. </td>
-            </tr>
-          </tbody>
-        </table>
+
+##### Command in a model object
+<script src="https://gist.github.com/dbaba/3142814.js" type="text/javascript"></script>
+
+<div id="ClassesOperationResult" class="anchor"></div>
+### OperationResult
+This is a return object by ModelMapperStub and ModelStub operations.
+
+You cannot directly instantiate it.
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Return Type </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> success </td>
+      <td> Boolean </td>
+      <td> Whether or not the command is successful. The field is NOT available for find* and count functions result. </td>
+    </tr>
+    <tr>
+      <td> async </td>
+      <td> Boolean </td>
+      <td> Whether or not the operation is performed asynchronously. This property is available ONLY for the command result. </td>
+    </tr>
+    <tr>
+      <td> array </td>
+      <td> Array </td>
+      <td> The model objects array. The field is available ONLY for find* and count functions result. </td>
+    </tr>
+  </tbody>
+</table>
         
-<div id="ClassesDatabase">
-  <h3>Database</h3>
-</div>
-<p>The instance of this class is passed by <code>database</code> attribute of a context instance returned via <code>require('moat').init()</code>.<br />
-  You cannot directly instantiate it.<br />
-</p>
+<div id="ClassesDatabase" class="anchor"></div>
+### Database
+The instance of this class is passed by `database` attribute of a context instance returned via `require('moat').init()`.
+
+You cannot directly instantiate it.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -840,12 +885,12 @@ stub.myResourceField = ["put", "get"];
   </tbody>
 </table>
 
-<div id="ClassesQueryResult">
-  <h3>QueryResult</h3>
-</div>
-<p>The instance of this class is a return object by Databse.query() function or Database.queryWithFilter() function.<br />
-  You cannot directly instantiate it.<br />
-</p>
+<div id="ClassesQueryResult" class="anchor"></div>
+### QueryResult
+The instance of this class is a return object by `Databse.query()` function or `Database.queryWithFilter()` function.
+
+You cannot directly instantiate it.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -873,12 +918,12 @@ stub.myResourceField = ["put", "get"];
   </tbody>
 </table>
 
-<div id="ClassesClientRequest">
-  <h3>ClientRequest</h3>
-</div>
-<p>The instance of this class is passed by 'clientRequest' property of a context instance returned via require('moat').init().<br />
-  You cannot directly instantiate it.<br />
-</p>
+<div id="ClassesClientRequest" class="anchor"></div>
+### ClientRequest
+The instance of this class is passed by `clientRequest` property of a context instance returned via `require('moat').init()`.
+
+You cannot directly instantiate it.
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -906,12 +951,12 @@ stub.myResourceField = ["put", "get"];
   </tbody>
 </table>
 
-<div id="ClassesDevice">
-  <h3>Device</h3>
-</div>
-<p>The instance of this class is passed by <code>device</code> property of the ClientRequest object.<br />
-  You cannot directly instantiate it.<br />
-  The class has the following READONLY attributes:</p>
+<div id="ClassesDevice" class="anchor"></div>
+### Device
+The instance of this class is passed by `device` property of the ClientRequest object.
+You cannot directly instantiate it.
+The class has the following READONLY attributes:
+
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -958,9 +1003,9 @@ stub.myResourceField = ["put", "get"];
   </tbody>
 </table>
 
-<div id="ClassesDmjob">
-  <h3>Dmjob</h3>
-</div>
-<p> The instance of this class is passed by <code>dmjob</code> property of the ClientRequest object.<br />
-  You cannot directly instantiate it.<br />
-  The class has the same attributes as MOAT REST <code>dmjob</code> object described <a href="/references/moat-rest-api-document.html#dmjob">here</a>. Refer to <a href="/references/moat-rest-api-document.html#dmjob">the page</a> for detail. </p>
+<div id="ClassesDmjob" class="anchor"></div>
+### Dmjob
+The instance of this class is passed by `dmjob` property of the ClientRequest object.
+You cannot directly instantiate it.
+The class has the same attributes as MOAT REST `dmjob` object described [here](/references/moat-rest-api-document.html#dmjob).
+Refer to the [page](/references/moat-rest-api-document.html#dmjob) for detail.

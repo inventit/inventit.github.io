@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-04-25T00:00:00
+ lastmod: 2014-05-16T00:00:00
 name: moat-java-api-document.html
 title: "Inventit Iot developer Network | References | MOAT Java/Android"
 layout: references
@@ -23,22 +23,19 @@ Java API for client MOAT applications
 ## Table of Contents
 　
 ### MOAT Java
-<ol>
-  <li> <a href="#Moat">Moat</a> interface </li>
-  <li> <a href="#ModelMapper">ModelMapper</a> interface </li>
-  <li> <a href="#Command">Command</a> annotation (JDK1.5+ only. See <a href="#Commandjdk14">here</a> for JDK1.4) </li>
-  <li> <a href="#ResourceType">ResourceType</a> annotation (JDK1.5+ only. See <a href="#ResourceTypejdk14">here</a> for JDK1.4) </li>
-</ol>
-　　
+- [Moat](#Moat) interface
+- [ModelMapper](#ModelMapper) interface
+- [Command](#Command) annotation (JDK1.5+ only. See [here](#Command.jdk14) for JDK1.4)
+- [ResourceType](#ResourceType) annotation (JDK1.5+ only. See [here](#ResourceType.jdk14) for JDK1.4)
+
 ### MOAT Android
-<ol>
-  <li> <a href="#MoatAndroidFactory">MoatAndroidFactory</a> class </li>
-  <li> <a href="#MoatAndroidFactoryCallback">Callback</a> interface </li>
-  <li> <a href="#AndroidManifestxml">AndroidManifest.xml</a> for your APK </li>
-</ol>
+- [MoatAndroidFactory](#MoatAndroidFactory) class
+- [Callback](#MoatAndroidFactoryCallback) interface
+- [AndroidManifest.xml](#AndroidManifestxml) for your APK
 
 ## MOAT Java
-<div id="Moat"></div>
+
+<div id="Moat" class="anchor"></div>
 ### MOAT Interface
 
 This is an entry point of MOAT Java/Android/OSGi API. You don't have to implement this interface since the instance of the interface should be provided by the underlying runtime application or library.
@@ -146,7 +143,7 @@ final Moat moat = MoatAndroidFactory.getInstance()
   </tbody>
 </table>
 
-<div id="ModelMapper"></div>
+<div id="ModelMapper" class="anchor"></div>
 ### ModelMapper Interface
 
 This interface represents Create/Read/Update/Delete operations for a single POJO data model, one model for one ModelMapper.<br />
@@ -209,7 +206,7 @@ Each model object must have an identifier field named 'uid' like the primary key
   </tbody>
 </table>
         
-<div id="Command"></div>
+<div id="Command" class="anchor"></div>
 ### Command Annotation
 This interface annotates a method so that it can be invoked from a MOAT js script via a [ModelStub](/references/moat-js-api-document.html#ClassesModelStub) object.<br />
 Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single <code>Map</code> argument containing the context information which is created by a appropriate <code>ContextFactory</code>, specified via <code>Moat#registerModel(String, Class, ModelMapper, ContextFactory)</code>. <br />
@@ -255,7 +252,7 @@ public int associate(Map<String, Object> context) {
 }
 ```
         
-<div id="Command.jdk14"></div>
+<div id="Command.jdk14" class="anchor"></div>
 #### For JDK1.4
 
 With regard to bundles compiled with JDK1.4, the following method declaration convention is provided instead of the annotation mechanism.
@@ -299,7 +296,7 @@ public int associate(Map context) {
 }
 ```
 
-<div id="ResourceType"></div>
+<div id="ResourceType" class="anchor"></div>
 ### ResourceType Annotation
 The `resource` type field contains URLs to fetch a binary object or to store it. You can retrieve the URL from the passed Map value. Its keys are corresponding to HTTP methods available.
 
@@ -335,7 +332,7 @@ Map<String,String> value) {
 
 You need to declare the accessor methods as well.
 
-<div id="ResourceTypejdk14"></div>
+<div id="ResourceTypejdk14" class="anchor"></div>
 #### For JDK1.4
 Use `Resource` suffix to your resource field name.
 
@@ -363,7 +360,7 @@ These classes are included in `inventit-dmc-android-lib-api-4.0.0-prod.jar` whic
 
 The minimum API level required in the jar file is 10 ([Gingerbread MR1](http://developer.android.com/about/versions/android-2.3.3.html)). You can also use higher level of API set in your APK.
 
-<div id="MoatAndroidFactory"></div>
+<div id="MoatAndroidFactory" class="anchor"></div>
 ### MoatAndroidFactory Class
 This is a factory class for creating Android Platform dependent <code><a href="#Moat">Moat</a></code> object.
 
@@ -407,7 +404,7 @@ Once the inconsistency happens, your application doesn't work properly until the
   </tbody>
 </table>
 
-<div id="MoatAndroidFactoryCallback"></div>
+<div id="MoatAndroidFactoryCallback" class="anchor"></div>
 ### Callbck Interface
 This interface is used for receiving <code<a href="#Moat">>Moat</code></a> object from <code<a href="MoatAndroidFactory">>MoatAndroidFactory</a></code>. Or you may also receive an exception raised during the initialization process.
 
@@ -436,7 +433,7 @@ This interface is used for receiving <code<a href="#Moat">>Moat</code></a> objec
   </tbody>
 </table>
 
-<div id="AndroidManifestxml"></div>
+<div id="AndroidManifestxml" class="anchor"></div>
 ### AndroidManifest.xml for your APK
 
 There are several chores prior to finishing your APK regarding AndroidManifest.xml.

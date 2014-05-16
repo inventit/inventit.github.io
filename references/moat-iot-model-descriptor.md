@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-03-24T00:00:00
+ lastmod: 2014-05-16T00:00:00
 name: moat-iot-model-descriptor.html
 title: "Inventit Iot developer Network | References | MOAT IoT Model Descriptor"
 layout: references
@@ -79,6 +79,8 @@ The following example shows a typical model descriptor.
  * `array` is a boolean value to determine whether or not the model represents a collection type object. `false` by default
  * `scope` tells the scope of model objects. See below for futher information. `device` by default.
 
+
+<div id="ScopeOfModels" class="anchor"></div>
 ### Scope of Models
 
 Models are accessible at 3 scopes, `device`, `user`, and `global`.
