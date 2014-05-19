@@ -1,0 +1,80 @@
+---
+name: get-started/for-windows.html
+collapse: collapse
+layout: base
+title: "Inventit Iot developer Network | Guides | Get started | for Windows"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+	  {% include guides_side_menu.html %}
+      <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="/index.html">Home&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="/guides.html">Guides&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="/guides/get-started.html">Get started&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li class="avtive">for Windows</li>
+        </ul>
+        
+        <h1>Vagrant Setup Tips</h1>
+        <h2>for Windows Users</h2>
+        <p>Unfortunately, Vagrant installation to Windows is quite different from Linux and Mac OS. Here, we describe installation tips for you to successfully install Vagrant.</p>
+        
+        <h3>Using id/password with an arbitrary SSH client</h3>
+        <p>You can enter the following settings to your favorite SSH client whenever you need to ssh to a Vagrant instance:</p>
+        <ol>
+          <li>user id: <code>vagrant</code></li>
+          <li>password: <code>vagrant</code></li>
+          <li>port: <code>2222</code></li>
+        </ol>
+        
+        <h3>id file based login with PuTTY</h3>
+        <p>Alternatively, you can skip entering user id/password by specifying Vagrant's id file. We describe how to use the id file with PuTTY.</p>
+        
+        <h4>Importing Vagrant Private Key with PuTTYGen</h4>
+
+        <p>Download PuTTYGen from <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">this site</a> and save your local disk.
+           Then run the downloaded <code>puttygen.exe</code> executable file.<br />
+           After opening PuTTYGen window, choose <strong>Conversions</strong> &gt; <strong>Import Key</strong> from the top menu.<br />
+           Then you need to choose Vagrant's provided private key at <code>%HOMEDRIVE%\%HOMEPATH\.vagrant.d\insecure_private_key</code>. For many cases, by default, <code>%HOMEDRIVE%</code> is C: and <code>%HOMEPATH%</code> is \Documents and Settings\your-user-name.<br />
+           Finally, select <code>SSH2-RSA</code> as <code>Parameters</code>, and <code>1024</code> as <code>Number of bits...</code>.</p>
+           
+        <h4>Generating Keypair</h4>
+        <p>Next, you need to generate a keypair with the imported private key. Select <b>Key</b> &gt; <b>Generate Key Pair</b> from the menu bar.<br />
+           Move mouse cursor to create random number and enter comment and passphrase as shown below.&nbsp;</p><br />
+        
+        <p>Here you need to enter the following items:</p>
+        <ol>
+          <li>Key comment ... any text</li>
+          <li>Key passphrase ... used for generating a private key, any text</li>
+        </ol>
+        <p>Note that the passphrase is used for sealing the generated private key. Do not forget it, or you need to re-generate the private key.</p>
+
+        <h4>Starting PuTTY</h4>
+        <p>Now the time to run PuTTY, download PuTTY from <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">the same site</a> and save your local disk.<br />
+           Then, run <code>putty.exe</code> and you will see the following window:</p>
+
+        <p>Select <b>Connection</b> &gt; <b>SSH</b> &gt; <b>Auth</b> from the <b>Category</b> pane on the left and you can specify the generated PuTTY key file on the right pane.<br />
+           Now select <b>Session</b> to set SSH host and port, <b>127.0.0.1</b> and <b>2222</b> like this:</p>
+           
+        <p>When you click Open button, you can see the following terminal window: </p>
+        
+        <p>OK! Have fun!<br />
+           Click <a href="/guides/get-started.html#build-your-first-moatiot-application">here to return to the Get Started Tutorial</a>.</p>
+        
+      <!-- col-lg-9 End --> 
+      </div>
+     <!-- row End --> 
+    </div>
+   <!-- container End --> 
+  </div>
+</section>

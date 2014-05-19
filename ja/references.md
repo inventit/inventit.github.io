@@ -4,7 +4,7 @@ sitemap:
  changefreq: weekly
  lastmod: 2013-09-28T00:00:00
 name: ja/references.html
-title: "Inventit Iot developer Network | References"
+title: "Inventit Iot developer Network | リファレンス"
 layout: references
 lang: ja
 breadcrumbs:
@@ -19,32 +19,32 @@ breadcrumbs:
 
 [MOAT IoT Model Descriptor](/ja/references/moat-iot-model-descriptor.html)
 
- * The way to describe your models
+ * モデルの記述方法について説明します。
 
 [MOAT REST](/ja/references/moat-rest-api-document.html)
 
- * Version 1.0.3, HTTP based REST API set
+ * HTTP ベースの REST API について説明します。(Version 1.0.3)
 
 [MOAT js](/ja/references/moat-js-api-document.html)
 
- * Version 1.1.0, Server side javascript running on the sandbox server
+ * サーバ上で動作する Javascript について説明します。(Version 1.1.0)
 
 [MOAT Java/Android](/ja/references/moat-java-api-document.html)
 
- * Version 1.0.0, Android, OSGi and generic Java SE version of API set
+ * Android と OSGi、そしてジェネリック Java SE の API セット について説明します。(Version 1.0.0)
 
 [MOAT C](/ja/references/moat-c-api-document.html)
 
- * Version 1.0.0, C-based API set
+ * C ベースの API セットについて説明します。(Version 1.0.0)
 
-### Relationships between MOAT IoT API sets
+### MOAT IoT API セットの関連
 
-There are several significant objects for MOAT IoT API sets. The respective elements are emerged on each MOAT IoT API set as illustrated below.
+MOAT IoT API セットには、いくつかの重要なオブジェクトが定義されています。各 API セットのそれぞれの要素は、以下の表のように表すことができます。
 
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th rowspan="2"> Key MOAT Objects </th>
+      <th rowspan="2"> MOAT オブジェクト </th>
       <th> MOAT REST </th>
       <th> MOAT <span class="GINGER_SOFATWARE_correct" grcontextid="js:0" ginger_sofatware_markguid="25da4cd2-7738-488d-a4c7-8ca9a92b825f" ginger_sofatware_uiphraseguid="d77a4332-46a4-4491-ac38-3b0be565094e">js</span></th>
       <th> MOAT Java/C </th>
@@ -89,6 +89,7 @@ There are several significant objects for MOAT IoT API sets. The respective elem
   </tbody>
 </table>
 
- * (in a URL form) means MOAT object appears on a URL path
- * (Stub) means ModelMapper is always handled as a Stub object
- * (incl. Stub) means that a model object can be created as a stub via API (`newModelStub()`). The model entity can be handled via another APIs (`findByUid()`, etc.)
+ * (in a URL form) は、MOAT オブジェクトが、URL のパスで表現されることを意味します。
+ * (Stub) は、ModelMapper が、常にスタブオブジェクトとして扱われることを意味します。
+ * (incl. Stub) は、モデルオブジェクトが API 経由 (`newModelStub()`) でスタブとして生成できることを意味します。モデルの実体は、`findByUid()` 等のAPI経由で操作することができます。
+

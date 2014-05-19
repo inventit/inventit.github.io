@@ -1,0 +1,87 @@
+---
+name: MOAT-IoT/overview.html
+layout: base
+lang: ja
+title: "Inventit Iot developer Network | Platform | 概要"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+	  {% include ja/guides_side_menu.html %}
+        <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="/index.html">Home&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="/guides.html">Guides&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li><a href="/guides/moat-iot.html">MOAT IoT&nbsp;</a></li>
+          <i class="icon-angle-right"></i>
+          <li class="avtive">Overview</li>
+        </ul>
+        
+        <h1>Overview</h1>
+        <p>The <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a>, model-view-controller, pattern is a very traditional popular design in the UI, user-interface, and application development.<br />
+          MOAT IoT provides the ways to enhance the <strong>M</strong> and the <strong>C</strong> in your IoT application so that your application can be lightweight, easily developed, and quickly delivered.</p>
+        <div class="img">
+          <img src="/img/guides/overwiew01.png" alt="Responsive image" class="img-rounded img-responsive" />
+          <p><i>Fig. Mapping MOAT IoT to MVC</i><p>
+        </div>
+        
+        <h3>Models</h3>
+        <p>Regarding Models, under the MOAT IoT concept, each MOAT IoT API allows you to handle the same models even if its underlying architecture is different.<br/>
+          In other words, you have to find and elaborate carefully such the common models through your class design modeling process because the modeling affects all application stacks from the web tier to the device tier.</p>
+        <div class="img">
+          <img src="/img/guides/overwiew02.png" alt="Responsive image" class="img-rounded img-responsive" />
+          <p><i>Fig. Each API spec provides the way to access to essentially identical models<br />
+Note that unlike Value Objects (VO), the models should have functions associated with their domain if any.</i></p>
+        </div>
+      
+        <h3>Models in MOAT REST</h3>
+        <p>Web applications are usually familiar with the <a href="http://json.org/">JSON</a> representation of models. They are able to marshal and unmarshal objects and JSON texts on invoking MOAT <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> APIs.
+          There are much more models in the applications to render web pages. Some of these models are the universal models mentioned here.
+          In addition, the URI of the REST APIs are reflected by the structure design of the models. For example, if your app 'my-app' has a model named 'MyModel' and suppose the model is a singleton, the URI to fetch shall be '<a href="#">http://host/path/to/moat/v1/my-app/1.0/MyModel</a>'. </p>
+        
+        <h3>Models in MOAT js</h3>
+        <p>Javascript is, of course, good at tweaking JSON representation strings as the name says. Therefore, MOAT js allows you to send/receive JSON texts to the web applications.<br />
+          With MOAT js, you can get a plain javascript object as the model representation, which is much easier to operate in the javascript code.<br />
+          MOAT js enables you to invoke a remote method of a model object in a device as well. </p>
+        
+        <h3>Models in MOAT Android and MOAT OSGi Gateway</h3>
+        <p>In your <a href="http://developer.android.com/index.html">Android</a>/Java application, your <a href="http://en.wikipedia.org/wiki/Plain_Old_Java_Object">Plain Old Java Objects</a> (POJO) are the representations of the models. You can store them to SQLite databases, files or other databases with <a href="http://en.wikipedia.org/wiki/SQL">SQL</a>, <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">O-R mappers</a></p>
+        , or whatever.<br />
+        You can even implement operations to the POJO if you design so.<br />
+        MOAT Android and MOAT <a href="http://www.osgi.org/Main/HomePage">OSGi</a> Gateway certainly propagate the commands of the remote method call from MOAT js implicitly to the POJO with the secured, reliable and proven way.
+        </p>
+        
+        <h3>Model Example</h3>
+        <p>Suppose there is a model, the Photovoltaic Panel (PVP), it will be represented in each component like this: </p>
+        <div class="img">
+          <img src="/img/guides/overwiew03.png" alt="Responsive image" class="img-rounded img-responsive" />
+        </div>
+        
+        <h3>OMA-DM Capability</h3>
+        <p>If your device is capable of <a href="http://en.wikipedia.org/wiki/OMA_Device_Management">OMA-DM</a>, it is quite easy to integrate it with MOAT IoT applications.<br />
+          This is because MOAT IoT specifies the conventions to map OMA-DM management objects to MOAT IoT models.<br />
+          The conventions are easy to learn if you are familiar with recent OMA-DM enabler specifications since they are based upon the design trends of the management objects.</p>
+        
+        <h3>Controllers</h3>
+        <p>MOAT IoT never provides Controllers themselves but APIs to create them, the language to describe them, and conventions to form MOAT IoT applications.<br />
+          The following picture illustrates each controller module with the corresponding API set interacts with models. </p>
+        <div class="img">
+          <img src="/img/guides/overwiew04.png" alt="Responsive image" class="img-rounded img-responsive" />
+        </div>
+        <p>The arrows mean each module manipulates or handles the represented models. </p>
+        
+        <!-- col-lg-9 End --> 
+      </div>
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>

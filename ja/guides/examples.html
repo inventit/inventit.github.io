@@ -1,0 +1,751 @@
+---
+name: example.html
+collapse: collapse
+layout: base
+lang: ja
+title: "Inventit Iot developer Network | Platform | Example"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+	  {% include ja/guides_side_menu.html %}
+      <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="guides.html">Guides&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li>Example</li>
+        </ul>
+        
+        <h1>MOAT IoT Example Applications</h1>
+        <p>Here's two MOAT IoT applications:</p>
+        <ol>
+          <li><strong>Temp2Twitter</strong>: Send temperature to twitter</li>
+          <li><strong>PushFromTwitter</strong>: Fetch a tweet message and shows onto LCD when a button pushed</li>
+        </ol>
+        <ul class="nav nav-tabs nav-justified">　
+          <li class="active"><a href="#Temp2Twitter">Temp2Twitter</a></li>
+          <li><a href="#PushFromTwitter">PushFromTwitter</a></li>　　
+        </ul>
+        
+        <div id="Temp2Twitter">
+          <h2>Example app: emp2Twitter</h2>
+        </div>
+        <h3>Overview</h3>
+        <h4>Function</h4>
+        <p><i>Temp2Twitter</i> is an application that monitors temperature and upload filtered data to <i>Temp2Twitter</i> server app through MOAT IoT platform, <i>Temp2Twitter</i> server app will send these data to twitter, as well as showing them on its web pages. </p>
+        <div class="img-photo">
+          <img src="/img/guides/temp2twitter_p01.jpg" width="600" alt="Responsive image" class="img-responsive" />
+        </div>
+        <p>Temperature is took by an <a href="http://arduino.cc/">arduino</a> board equiped with a temperature sensor. The board is connected to a notebook through USB port, where Temp2Twitter client app runs on.</p>
+        <div class="img-photo">
+          <img src="/img/guides/temp2twitter_p02.jpg" width="600" alt="Responsive image" class="img-responsive" />
+        </div>
+        <p><i>Temp2Twitter</i> client app takes temperature every specified seconds, each temperature data will be handled by CEP rules, if passed through, they'll be seen on twitter and web page, or the data will be throw away.</p>
+        <div class="img-photo">
+          <img src="/img/guides/temp2twitter_p03.jpg" width="600" alt="Responsive image" class="img-responsive" />
+        </div>
+        
+        <h4>Workflow</h4>
+        <div class="img">
+          <img src="/img/guides/temp2twitter_p04.png" alt="Responsive image" class="img-responsive" />
+        </div>
+        <p>Temp2Twitter send request to arduino server for current temperature</p>
+        <ol>
+          <li>Arduino server send command to arduino board to get temperature</li>
+          <li>Arduino board send current temperature to arduino server, arduino server send http response to Temp2Twitter client app</li>
+          <li>Temp2Twitter client app send notification to Service-Sync server</li>
+          <li>ServiceSync server notify Temp2Twitter server app with http request</li>
+          <li>Temp2Twitter server app send the temperature message to twitter</li>
+        </ol>
+        
+        <h3>Implementation Detail</h3>
+        <h4>NOTE THAT THIS EXAMPLE USES DRAFT VERSION OF APIs</h4>
+        <p><strong>1. First You need defined The Temperature Model.</strong><br />
+          That is a simple POJO Class. Note that UID is a required.</p>
+{% highlight java %}
+package com.yourinventit.iot.temperature.model;
+
+public class TemperatureModel {
+  private String uid;
+  private Double temperature;
+  private long dt;
+  public String getUid() {
+    return uid;
+  }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
+  public Double getTemperature() {
+    return temperature;
+  }
+  public void setTemperature(Double temperature) {
+    this.temperature = temperature;
+  }
+  public long getDt() {
+    return dt;
+  }
+  public void setDt(long dt) {
+    this.dt = dt;
+  }
+} 
+{% endhighlight %}
+        <p>And The PluginDao defined :</p>
+{% highlight java %}
+package com.yourinventit.iot.temperature.moat; 
+import java.util.ArrayList;
+import java.util.HashMap; 
+import java.util.List; 
+import java.util.Map; 
+import com.yourinventit.dmc.api.moat.PluginDao;
+import  com.yourinventit.iot.temperature.model.TemperatureModel;public
+
+ class TemperatureModelPluginDao implements  
+    PluginDao<TemperatureModel> { 
+    private final Map<String,TemperatureModel> myModelStore = 
+        new  HashMap<String,TemperatureModel>(); 
+    public void remove(String uid) {
+        myModelStore.remove(uid);
+    } 
+    public TemperatureModel findByUid(String uid) {
+         return myModelStore.get(uid);
+    } 
+    public List<String> findAllUids() {
+         return new ArrayList<String>(myModelStore.keySet());
+    } 
+    public long getCount() {
+         return myModelStore.size();
+    } 
+    public TemperatureModel findByUidOrCreate(String uid) {
+        final TemperatureModel object = findByUid(uid);
+        if (object != null) {
+             return object;
+        }
+        final TemperatureModel entity = create();
+        entity.setUid(uid);
+        myModelStore.put(uid, entity);
+        return entity;
+    }
+    protected TemperatureModel create() {
+         return new TemperatureModel();
+    } 
+    public void update(TemperatureModel entity) {
+         myModelStore.put(entity.getUid(), entity);
+    } 
+} 
+{% endhighlight %}
+        <p>Factory defined:</p>
+{% highlight java %}
+package com.yourinventit.iot.temperature.osgi;
+
+import  java.lang.reflect.Method;
+import  java.util.HashMap;
+import  java.util.Map;
+import  org.osgi.framework.BundleContext;
+import  com.yourinventit.dmc.api.moat.ContextFactory;
+import  com.yourinventit.iot.temperature.moat.TemperatureModelPluginDao;
+
+class  TemperatureContextFactory implements ContextFactory {
+
+      private BundleContext bundleContext;
+      private TemperatureModelPluginDao temperatureModelPluginDao;
+
+     public void setBundleContext(BundleContext bundleContext) {
+         this.bundleContext = bundleContext;
+     }
+
+      public void setMyTemperatureModelPluginDao(
+            TemperatureModelPluginDao myTempModelPluginDao) {
+        this.temperatureModelPluginDao = myTempModelPluginDao;
+     }
+
+     public Map createExecutionContext(Object model, Method method) {
+         final Map context = new HashMap();
+         context.put(BundleContext.class, bundleContext);
+                  context.put(TemperatureModelPluginDao.class,
+                   temperatureModelPluginDao);
+         return context;
+     }
+} 
+{% endhighlight %}
+        <p><strong>2. Secode Let's write a BundleActivator Class</strong>.<br />
+          Please note that the comment content.</p>
+{% highlight java %}
+package com.yourinventit.iot.temperature.osgi;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Logger;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import com.yourinventit.dmc.api.moat.Moat;
+import com.yourinventit.iot.temperature.moat.TemperatureModelPluginDao;
+import com.yourinventit.iot.temperature.model.TemperatureModel;
+
+public class TemperatureActivator implements BundleActivator {
+  private static final Logger LOGGER = Logger.getLogger("Activator");
+  private ServiceReference moatreference = null;
+  @Override
+  public void start(final BundleContext context) throws Exception {
+    LOGGER.fine("[START] start()");
+    /**
+         * Step 1
+         * Initialize variables.
+         */
+        final TemperatureModelPluginDao temperatureModelPlugnDao = new TemperatureModelPluginDao();
+        moatreference = context.getServiceReference(Moat.class.getName());        
+        final TemperatureContextFactory contextFactory = new TemperatureContextFactory();
+contextFactory.setBundleContext(context);        contextFactory.setMyTemperatureModelPluginDao(temperatureModelPlugnDao);
+        final Moat moat = (Moat) context.getService(moatreference);
+        //The modelRootUri Must be unique,And consistent with the package.json file.
+        final String modelRootUri = "./DevDetail/Ext/InventIt/IoTDemo";
+        /**
+         * Step 2
+         * register Model
+         */
+        moat.registerModel(modelRootUri,
+                TemperatureModel.class, 
+                temperatureModelPlugnDao,
+                contextFactory);
+
+        /**
+         * Step 3
+         * Send temperature data.
+         * 
+         * We regularly send data, because web application
+         * need show real-time graphs.
+         * In other case, You can transmit data when needed.
+         */
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //Create the new Model Object instance
+                TemperatureModel model = new TemperatureModel();
+                
+                //The attribute uid must be unique.
+                model.setUid(String.valueOf(System.currentTimeMillis()));
+                model.setDt(System.currentTimeMillis());
+                
+                //get sensor data 
+                Double temp = getTempDateFromSensor();
+                model.setTemperature(temp);
+                
+                //The JobServiceId defined 
+                //please Please refer to API doc
+                String jobServiceId = "urn:moat:9999d129-5ba5-4912-963e-0edecee52664:twitter-demo:save-data:1.0";
+                //Send Data
+                moat.sendNotification( 
+                      jobServiceId, 
+                      null, 
+                      new Object[]{model});
+                
+            }
+    
+        }, 10 * 1000, 60 * 1000);
+
+        LOGGER.fine("[END] start()");
+    }
+
+    /**
+     * Get the Temperature Data from sensor
+     * @return
+     */
+    private Double getTempDateFromSensor(){
+        //TODO: Depends on your implementation ...
+        //Here we use the random number for demo.
+        return new Random().nextDouble() * 10 + 26;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void stop(BundleContext context) throws Exception {
+        LOGGER.fine("[START] stop()");
+        if (moatreference != null) {
+            context.ungetService(moatreference);
+        }
+        LOGGER.fine("[END] stop()");
+    }
+}
+{% endhighlight %}
+        <p><strong>3. Write a moat js file.</strong><br />
+          Statement package info at "package.json", <strong>rootMoUri</strong> is particularly important. It determines the position of your model registration.</p>
+
+{% highlight javascript %}
+{
+    "name": "Iot-Demo",    
+    "version": "1.0",    
+    "description": "For Inventiti IoT developer demo.",    
+    "maintainers": [        
+        {            
+            "name": "Inventit Inc.",            
+            "email": "example@yourinventit.com"        
+       }
+    ],    
+    "bugs": {        
+        "mail": "lshen@yourinventit.com"    
+    },    
+    "engines": ["rhino"],    
+    "rootMoUri": "./DevDetail/Ext/InventIt/IoTDemo",    
+    "notification" : { 
+        "http" : "http://localhost:7120/status/debug" 
+    }
+ }
+{% endhighlight %}
+        <p>Write your app moat js like follow "save-data!1.0.js" ,it will save you temp data to Amazon database.</p>
+		{% highlight java %}
+var moat = require('moat');
+ var context = moat.init();
+ var session = context.session;
+ var clientRequest = context.clientRequest;
+ var database = context.database; 
+ var objects = clientRequest.objects; 
+ var size = objects.length;
+
+
+ for ( var i = 0; i < size; i++) {
+     var container = objects[i];
+     if (container['@array']) {
+         var array = container['array'];
+         for ( var j = 0; j < array.length; j++) {
+           save(array[j]); 
+           session.log("array["+j+"]:"+array[j]); 
+         }
+      } else { 
+         save(container); 
+      } 
+ } 
+ function save(entity) { 
+     var result = database.insert(entity); 
+    session.log('The object@uid:' + result.uid + ' has been saved to the database.');
+ } 
+{% endhighlight %}
+        <p>If your web app want to receive the real-time temp data, you can send the data by method <a href="/references/moat-js-api-document.html">fetchUrlSync</a>, like this</p>
+		{% highlight java %}
+try { 
+     var targetUrl = 'http://localhost:8080/IoTDemo/TwitterServlet';   
+     var tokenResponse = session.fetchUrlSync(
+         targetUrl, {
+         method : 'POST',
+         payload : {
+             senserData:array[0]
+         }
+    }); 
+ } catch (e) {
+     session.log(e);
+ } 
+{% endhighlight %}
+        <p><strong>4. In your Web app.</strong><br />
+          Query temperature data. your can use the REST API query all you saved data:</p>
+		{% highlight java %}
+package com.yourinventit.iot.temperature.model;
+
+public class TemperatureModel {
+  private String uid;
+  private Double temperature;
+  private long dt;
+  public String getUid() {
+    return uid;
+  }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
+  public Double getTemperature() {
+    return temperature;
+  }
+  public void setTemperature(Double temperature) {
+    this.temperature = temperature;
+  }
+  public long getDt() {
+    return dt;
+  }
+  public void setDt(long dt) {
+    this.dt = dt;
+  }
+} 
+{% endhighlight %}
+        <p>And The PluginDao defined :</p>
+
+{% highlight ruby %}
+curl -X GET -H "Acept application/json" -d "l=1"  
+'http://${server_ip}/${server_port}/moat/v1/sys/device/9999e63a3a4a0fd7013a4a65d273014c/
+twitter-demo/TemperatureModel?l=500&token=aaaaaaaaaaaaaa'
+{% endhighlight %}
+        <div id="PushFromTwitter">
+          <h2> Example app: PushFromTwitter</h2>
+        </div>
+        <h3>Overview</h3>
+        <h4>Function</h4>
+        <p><i>PushFromTwitter</i> is an application that fetchs <a href="https://twitter.com/IVIatEXPO">twitter</a> messages  and shows it on a LCD when a button clicked. The button to be pushed and LCD used to show tweet message are connected to an <a href="http://arduino.cc/">arduino</a> board. The pushing action and tweets fetched back will shows on web pages of <i>PushFromTwitter</i> server app. </p>
+        <div class="img-photo">
+          <img src="/img/guides/pushfromtwitter_p01.jpg" width="600" alt="Responsive image" class="img-responsive" />
+        </div>
+        <div class="img-photo">
+          <img src="/img/guides/pushfromtwitter_p02.jpg" width="600" alt="Responsive image" class="img-responsive" />
+        </div>
+        <p>The <a href="http://arduino.cc/">arduino</a> board with LCD and buttons is connected to a notebook through USB port, where PushFromTwitter client app runs on.</p>
+        <h4>Workflow</h4>
+        <div class="img">
+          <img src="/img/guides/pushfromtwitter_p03.png" alt="Responsive image" class="img-responsive" />
+        </div>
+        <ol>
+          <li>Button been pushed</li>
+          <li>Arduino notify arduino server runs on notebook</li>
+          <li>PushFromTwitter client app got a http response from a long polling request to arduino server</li>
+          <li>PushFromTwitter client sends notification of push action to ServiceSync server </li>
+          <li>ServiceSync server notify PushFromTwitter server app (by http request)</li>
+          <li>PushFromTwitter server app search from twitter (with configured keywords) and got the latest message from search results</li>
+          <li>PushFromTwitter server app send the twitter message to PushFromTwitter client app through MOAT IoT platform</li>
+          <li>PushFromTwitter client app send the twitter message to arduino server</li>
+          <li>Arduino server send command to arduino board to show the message on the LCD.</li>
+        </ol>
+        <h3>Implementation Detail</h3>
+        <h4>NOTE THAT THIS EXAMPLE USES DRAFT VERSION OF APIs</h4>
+        <p><strong>1. First You need defined The LCDControll Model.</strong><br />
+          That method display(Map  context) receive param data from Moat service and send message to Arduino server by http post. Note that UID is a required.</p>
+		{% highlight java %}
+package com.yourinventit.iot.lcd.model;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
+import org.json.JSONObject;
+import com.yourinventit.dmc.api.moat.Operation;
+import com.yourinventit.iot.lcd.osgi.LCDActivator;
+
+public class LCDControllModel {
+
+  private String uid;
+  private String text;
+  
+  @Operation(async = false, updateRequired = true)
+  public void display(Map context){
+   
+    try{
+        String data = context.get("data").toString();
+        JSONObject jsonObj = new JSONObject(data);
+        String lcdShowText =  jsonObj.getString("text");
+        
+         /*Arduino server*/
+        String lcdAdress = "http://${server_ip}/${server_port}/lcd";
+   
+         /**send message to Arduino server  by http post*/
+        httpPostLCD(lcdAdress,lcdShowText.getBytes());
+      
+    }catch(Exception ex){
+        ex.printStackTrace();
+    }
+  }
+
+  public String getUid() {
+       return uid;
+  }
+
+  public void setUid(String uid) {
+       this.uid = uid;
+  }
+
+  public String getText() {
+      return text;
+  }
+
+  public void setText(String text) {
+      this.text = text;
+  }
+  
+  /**
+   * @param address
+   * @param request
+   */
+  protected void httpPostLCD(String address, byte[] request){
+      HttpURLConnection httpUrlConn = null;
+    
+      try{
+          final URL url = new URL(address);
+          httpUrlConn  = (HttpURLConnection) url.openConnection();
+          httpUrlConn.setRequestMethod("POST");
+          httpUrlConn.setRequestProperty("Accept", "application/json");
+
+          httpUrlConn.setConnectTimeout(2000);
+          httpUrlConn.setDoInput(true);
+          httpUrlConn.setDoOutput(true);
+          httpUrlConn.setUseCaches(false);
+      
+         if (request != null) {
+            httpUrlConn.setRequestProperty("Content-Length",String.valueOf(request.length));
+            final OutputStream outputStream = httpUrlConn.getOutputStream();
+            outputStream.write(request);
+            outputStream.flush();
+            outputStream.close();
+      } else {
+            httpUrlConn.connect();
+      }
+      
+          final int statusCode = httpUrlConn.getResponseCode();
+          if (statusCode / 100 == 2){
+                System.out.println("****send twitter mag to LCD sensor OK!");
+      }
+          
+          httpUrlConn.disconnect();
+
+    }catch(Exception ex){
+          ex.getMessage();
+          httpUrlConn.disconnect();
+    }finally{
+          httpUrlConn  = null;
+    }
+  }
+}
+
+{% endhighlight %}
+        <p>And The PluginDao defined :</p>
+		{% highlight java %}
+package com.yourinventit.iot.lcd.moat;
+
+import com.yourinventit.dmc.api.moat.PluginDao.SingletonOnMemory;
+import com.yourinventit.iot.lcd.model.LCDControllModel;
+
+
+public class LCDControllModelPluginDao extends SingletonOnMemory<LCDControllModel>{
+
+    public LCDControllModelPluginDao(LCDControllModel singleton) {
+        super(singleton);
+    }
+
+}
+{% endhighlight %}
+        <p>Factory defined:</p>
+		{% highlight java %}
+package com.yourinventit.iot.lcd.osgi;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import org.osgi.framework.BundleContext;
+import com.yourinventit.dmc.api.moat.ContextFactory;
+import com.yourinventit.iot.lcd.moat.LCDControllModelPluginDao;
+
+class LCDContextFactory implements ContextFactory {
+
+    private BundleContext bundleContext;
+    private LCDControllModelPluginDao lcdControllModelPluginDao;
+
+    public void setBundleContext(BundleContext bundleContext) {
+        this.bundleContext = bundleContext;
+    }
+  
+    public void setLcdControllModelPluginDao(
+            LCDControllModelPluginDao lcdControllModelPluginDao) {
+        this.lcdControllModelPluginDao = lcdControllModelPluginDao;
+    }
+
+    public Map createExecutionContext(Object model, Method method) {
+        final Map context = new HashMap();
+        context.put(BundleContext.class, bundleContext);
+        context.put(LCDControllModelPluginDao.class, lcdControllModelPluginDao);
+        return context;
+    }
+}
+{% endhighlight %}
+        <p><strong>2. Let's write a BundleActivator Class.</strong><br />
+          Source code,  please note that the comment content:</p>
+		{% highlight java %}
+package com.yourinventit.iot.lcd.osgi;
+
+import java.util.logging.Logger;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import com.yourinventit.dmc.api.moat.Moat;
+import com.yourinventit.iot.lcd.moat.LCDControllModelPluginDao;
+import com.yourinventit.iot.lcd.model.LCDControllModel;
+
+
+public class LCDActivator implements BundleActivator {
+
+    private static final Logger LOGGER = Logger.getLogger("Activator");
+
+    private LCDContextFactory contextFactory = null;
+    private ServiceReference moatReference = null;
+    private Moat moat = null;
+    
+    
+    public LCDContextFactory getContextFactory() {
+        return contextFactory;
+    }
+
+    protected ServiceReference getMoatReference() {
+        return moatReference;
+    }
+
+    protected Moat getMoat() {
+        return moat;
+    }
+    
+    private void initContextFactory(BundleContext bundleContext,
+            LCDControllModelPluginDao lcdControllModelPluginDao) {
+        final LCDContextFactory contextFactory = new LCDContextFactory();
+        contextFactory.setBundleContext(bundleContext);
+        contextFactory.setLcdControllModelPluginDao(lcdControllModelPluginDao);
+        this.contextFactory = contextFactory;
+    }
+
+    private LCDControllModelPluginDao initLCDControllModelPluginDao(BundleContext context) {
+        LCDControllModel singleton = new LCDControllModel();
+        final LCDControllModelPluginDao lcdControllModelPluginDao = new LCDControllModelPluginDao(singleton);
+        return lcdControllModelPluginDao;
+    }
+    
+    /**init the moat service*/
+    private void initMoatReference(BundleContext bundleContext) {
+        final ServiceReference reference = bundleContext
+                .getServiceReference(Moat.class.getName());
+        this.moatReference = reference;
+        this.moat = (Moat) bundleContext.getService(reference);
+    }
+
+    @Override
+    public void start(BundleContext context) throws Exception {
+        LOGGER.fine("[START] start()");
+         /**
+           * Step 1        
+           * Initialize variables.        
+            */
+        final LCDControllModelPluginDao lcdControllModelPluginDao = initLCDControllModelPluginDao(context);
+        initMoatReference(context);
+        initContextFactory(context,lcdControllModelPluginDao);
+
+        /**get the moat service*/
+        final Moat moat = getMoat();
+
+        /**
+         * Step 2
+         * register Model 
+         * the String "./DevDetail/Ext/InventIt/IoTDemo" must be as same as
+         *  value of keywords rootMoUri in package.json
+         */
+        moat.registerModel(context.getProperty("./DevDetail/Ext/InventIt/IoTDemo"),
+                LCDControllModel.class, lcdControllModelPluginDao,
+                getContextFactory());
+
+        LOGGER.fine("[END] start()");
+    }
+
+     @Override
+    public void stop(BundleContext context) throws Exception {
+        LOGGER.fine("[START] stop()");
+        if (getMoatReference() != null) {
+            context.ungetService(getMoatReference());
+        }
+        LOGGER.fine("[END] stop()");
+    }
+}
+{% endhighlight %}
+        <p><strong>3. Write a moat js file.</strong><br />
+          Statement package info at "package.json", <strong>rootMoUri</strong> is particularly important. It determines the position of your model registration.</p>
+{% highlight javascript %}
+{    
+    "name": "Iot-Demo",    
+    "version": "1.0",    
+    "description": "For Inventiti IoT developer demo.",    
+    "maintainers": [        
+        {            
+            "name": "Inventit Inc.",            
+            "email": "example@yourinventit.com"        
+       }
+    ],    
+    "bugs": {        
+        "mail": "lshen@yourinventit.com"    
+    },    
+    "engines": ["rhino"],    
+    "rootMoUri": "./DevDetail/Ext/InventIt/IoTDemo",    
+    "notification" : {
+        "http" : "http://localhost:7120/status/debug"
+    }
+ } 
+{% endhighlight %}
+        <p>Write your app moat js like follow "exec-bundle-method!1.0.js" ,it will invoke the method display of LCDControllModel class and send the parameter "args" value to bundle.</p>
+{% highlight javascript %}
+var moat = require('moat');
+var context = moat.init();
+var session = context.session;
+// Get dmJob arguments.
+
+session.log("\n\n   This is exec-bundle-method!1.0.js  [START]");
+var args = context.clientRequest.dmJob.arguments;
+
+session.log("dmJob.arguments:"+args);
+
+var token = session.runSingleton('LCDControllModel','display', args);
+
+// Commits all preset requests
+// and a result object is returned.
+var result = session.commit();
+
+// Gets the execution result
+// with the query token.
+var doItResult = result[token];
+
+// Check if the result status is OK.
+if (doItResult.status == '200') {
+    // do something
+    session.log("execute successful!!!");
+	{% endhighlight %}
+        <p><strong>4. In your Web app.</strong><br />
+          Query temperature data. your can use the REST API query all you saved data:</p>
+		{% highlight java %}
+package com.yourinventit.iot.temperature.model;
+
+public class TemperatureModel {
+  private String uid;
+  private Double temperature;
+  private long dt;
+  public String getUid() {
+    return uid;
+  }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
+  public Double getTemperature() {
+    return temperature;
+  }
+  public void setTemperature(Double temperature) {
+    this.temperature = temperature;
+  }
+  public long getDt() {
+    return dt;
+  }
+  public void setDt(long dt) {
+    this.dt = dt;
+  }
+} 
+{% endhighlight %}
+        <p>Use curl command post dm job. it'll exec the "exec-bundle-method!1.0.js" code to invoke method runSingleton, send arguments value to display method of LCDControllModel.</p>
+
+		{% highlight java %}
+curl -v -X POST -H "Accept:application/json" -H "Content-Type:application/json"
+-d "{\"name\":\"ivi-186\",\"jobServiceId\":
+\"urn:moat:336ad129-5ba5-4912-963e-0edecee52664:Houston-SMD:exec-bundle-method:1.0\",
+\"activatedAt\":\"Wed, 22 Oct 2012 03:15:03 GMT\",
+\"expiredAt\":\"Wed, 22 Oct 2012 04:30:03 GMT\",\"arguments\":
+{\"text\":\"TO LCD DISPLAY\"}}" http://${server_ip}/${server_port}/moat/v1/sys/dmjob/?token=aaaaaaaaaaaaaaa
+{% endhighlight %}
+        
+      <!-- col-lg-9 End --> 
+      </div>
+      
+    <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>

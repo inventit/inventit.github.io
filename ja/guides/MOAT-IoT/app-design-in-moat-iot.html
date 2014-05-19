@@ -1,0 +1,99 @@
+---
+name: MOAT-IoT/app-design-in-moat-iot.html
+layout: base
+lang: ja
+title: "Inventit Iot developer Network | Platform | MOAT IoT のアプリ設計"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+	  {% include guides_side_menu.html %}
+      <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="/index.html">Home&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="/guides.html">Guides&nbsp;</a></li>
+		  <i class="icon-angle-right"></i>
+          <li><a href="/guides/moat-iot.html">MOAT IoT&nbsp;</a>
+		  </li><i class="icon-angle-right"></i>
+          <li class="avtive">App Design in MOAT IoT</li>
+        </ul>
+        
+        <h1>App Design in MOAT IoT</h1>
+        <p>Data models are the fundamentals in MOAT IoT paradigm as well as a general application.<br />
+          Therefore, it is very important for the MOAT IoT application development to identify Data Models commonly shared between Web App and Device App.
+          In order for you to apply MOAT IoT, there are several steps to do.
+        <ol>
+          <li>Create Data Models</li>
+          <li>Find Data Models shared between Web App and Device App</li>
+          <li>Apply MOAT IoT Naming Convention to them</li>
+        </ol>
+        Note that MOAT IoT doesn't provide any methodology to create data models. Through your own way of development, the introduced models are the ones to be applied for MOAT IoT.
+        </p>
+        
+        <h3>Create Data Models</h3>
+        <p>We assume you will create data models of your application so to design the UI or the database schema.<br />
+          MOAT IoT requires some of your data models so that the entire stack of MOAT IoT application can share the structures of the models.<br />
+          Suppose we are about to create a heart rate monitoring app. Here is a class diagram.</p>
+        
+        <h3>Find Data Models used in both Web App and Device App</h3>
+        <p>Device App is sometimes just a collection of sensors such as electric current/voltage or temperature. In such case, you can easily specify the data models as these are just representing the sensors.<br />
+          For Smartphone App, you may need more complicated process, designing UI, drawing models then find the shared ones.<br />
+          Whatever your application is, through these kind of processes, the primary data models for MOAT IoT application are discovered.</p>
+        
+        <h3>Apply MOAT IoT Naming Convention</h3>
+        <p>What do you need to do next?<br />
+          That is to provide the concrete representations corresponding to the data models.<br />
+          Data models in MOAT IoT have multiple representations per single data model. </p>
+        <div class="img">
+          <img src="/img/guides/app-design-in-moat-iot01.png" alt="Responsive image" class="img-rounded img-responsive" />
+          <p><i>fig. A single data model has multiple representations applied to each application stack.</i></p>
+        </div>
+        
+        <h3>MOAT IoT Data Model Name Convention</h3>
+        <p>There are 5 elements to identify Data models, their attributes and their operations.</p>
+        <ol>
+          <li>Application ID<br />
+            is a UUID value provided by MOAT IoT runtime on the application registration.<br />
+            e.g.11e90c60-cda1-11e1-9b23-0800200c9a66</li>
+          <br />
+          <li>Package ID<br />
+            is a string identifier by an application developer.<br />
+            Alphabet, numeric, hyphen '-', and underscore character '_' are acceptable. The first character of the ID should be an alphabet character.</li>
+          <br />
+          <li>Version<br />
+            is a version identifier to identify the revision of the same package ID.<br />
+            Alphabet, numeric, underscore character '_', dot '.' and hyphen '-' are acceptable.</li>
+          <br />
+          <li>Data Model Type<br />
+            Alphabet, numeric and underscore character '_' are acceptable. The first character of the ID should be a capitalized character and follow CamelCase.</li>
+          <br />
+          <li>Attribute/Command Type<br />
+            is an attribute name or a command name of the model.<br />
+            Alphabet, numeric and underscore character '_' are acceptable.</li>
+        </ol>
+        <p>For example,</p>
+        
+        <h3>REST API URI</h3>
+        <p>Data models can be represented in URI form so that Web apps are able to access to the models.</p>
+        
+        <div id="JobServiceIdentifier"><h3>Job Service Identifier</h3></div>
+        <p>Job Service Identifier (or Service Identifier) is a system wide global identifier representing a single unit of device control job request.<br />
+          The identifier follows URN format starting with urn:moat prefix. For instance, suppose the following job service id; </p>
+        <pre>urn:moat:485b593b-45ce-40e1-88e1-658fbf20e5fa:MyApp:alert-notificaton-request:1.0</pre>
+        <p>As you can see, each element is separated with ':' character and 'urn:moat:' is always same. The next element '485b593b-45ce-40e1-88e1-658fbf20e5fa' to the prefix is an applicationId which contains one or more packages.<br />
+          'MyApp' is a packageId which enables you to categorise models and scripts. 'alert-notification-request' is a service name, which identifies a MOAT js file to run. The js file name must follow <code>{:service_name}!{:version}.js</code>. The service name is case-sensitive, should be identical to the corresponding js file name. The value must be unique within a same packageId. The last part '1.0' is the version number of the definition. </p>
+        
+        <!-- col-lg-9 End --> 
+      </div>
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>

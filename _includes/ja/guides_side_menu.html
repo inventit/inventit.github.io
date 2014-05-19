@@ -1,0 +1,110 @@
+<div class="sideMenu">
+	<div class="accordion" id="accordion2">
+		<div class="accordion-group menu-name">
+			<p><strong>ガイド</strong></p>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading avtive">
+				{% if page.name == "guides.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="guides.html">
+				{% endif %}
+				開発ガイド
+				{% if page.name == "guides.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "get-started.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="get-started.html">
+				{% endif %}
+				ひと通りやってみる
+				{% if page.name == "get-started.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">MOAT IoT</a> <span>4</span>
+			</div>
+			<div id="collapseTwo" class="accordion-body {{page.collapse}}">
+				<div class="accordion-inner">
+				<ul>
+					<li>
+						{% if page.name == "moat-iot.html" %}
+						<a href="#"><strong>
+						{% else %}
+						<a href="moat-iot.html">
+						{% endif %}
+						MOAT IoTとは?
+						{% if page.name == "moat-iot.html" %}
+						</strong>
+						{% endif %}
+						</a>
+					</li>
+					<li>
+						{% if page.name == "MOAT-IoT/overview.html" %}
+						<a href="#"><strong>
+						{% else %}
+						<a href="MOAT-IoT/overview.html">
+						{% endif %}
+            概要
+						{% if page.name == "MOAT-IoT/overview.html" %}
+						</strong>
+						{% endif %}
+						</a>
+					</li>
+					<li>
+						{% if page.name == "MOAT-IoT/deployment.html" %}
+						<a href="#"><strong>
+						{% else %}
+						<a href="MOAT-IoT/deployment.html">
+						{% endif %}
+						デプロイ
+						{% if page.name == "MOAT-IoT/deployment.html" %}
+						</strong>
+						{% endif %}
+						</a>
+					</li>
+					<li>
+						{% if page.name == "MOAT-IoT/app-design-in-moat-iot.html" %}
+						<a href="#"><strong>
+						{% else %}
+						<a href="MOAT-IoT/app-design-in-moat-iot.html">
+						{% endif %}
+						MOAT IoT のアプリ設計
+						{% if page.name == "MOAT-IoT/app-design-in-moat-iot.html" %}
+						</strong>
+						{% endif %}
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				{% if page.name == "examples.html" %}
+				<a href="#"><strong>
+				{% else %}
+				<a href="examples.html">
+				{% endif %}
+				サンプル
+				{% if page.name == "examples.html" %}
+				</strong>
+				{% endif %}
+				</a>
+			</div>
+		</div>
+		<!-- accordion End --> 
+	</div>
+<!-- sideMenu End --> 
+</div>

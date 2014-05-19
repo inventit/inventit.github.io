@@ -1,0 +1,277 @@
+---
+layout: base
+title: "Inventit Iot developer Network | Guides | MOAT-IoT | Deployment| MOAT REST"
+---
+<section class="content">
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-3"> 
+        <!-- sideMenu -->
+        <div class="sideMenu">
+          <div class="accordion" id="accordion2">
+            <div class="accordion-group menu-name">
+              <p><strong>Guides</strong></p>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a href="/guides.html">Guides</a></div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a href="/guides/get-started.html">Get Started</a></div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo"><strong>MOAT IoT</strong></a><span>4</span> </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul>
+                    <li><a href="/guides/moat-iot.html">MOAT IoT?</a></li>
+                    <li><a href="/guides/MOAT-IoT/overview.html">Overview</a></li>
+                    <li><a href="/guides/MOAT-IoT/deployment.html"><strong>Deployment</strong></a></li>
+                    <li><a href="/guides/MOAT-IoT/app-design-in-moat-iot.html">App Design in MOAT IoT</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading"> <a href="/guides/examples.html">Examples</a></div>
+            </div>
+            
+            <!-- accordion End --> 
+          </div>
+          <!-- sideMenu End --> 
+        </div>
+        <!-- col-lg-3 End --> 
+      </div>
+      
+      <div class="col-lg-9">
+        <ul class="breadcrumb">
+          <li><a href="/index.html">Home&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/guides.html">Guides&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li><a href="/guides/MOAT-IoT/deployment.html">Deployment&nbsp;</a></li><i class="icon-angle-right"></i>
+          <li class="avtive">MOAT REST</li>
+        </ul>
+        
+        <h1>MOAT REST</h1>
+        <p>MOAT REST is an API set to trigger your MOAT IoT application. </p>
+        
+        <h3>API Document</h3>
+        <p>MOAT REST API is described at the following page.<br />
+           MOAT REST API Document</p>
+          
+        <h3>API Basics</h3>
+        <p>The URL form is as follows.<br />
+           For Systemwide Predefined Models: https://host:port/{:api_version}/sys/{:model_name}/{:uid}[?l={:limit}&o={:offset}&f={:fields}&v={:version}&m={:http_method}&callback={:callback}</p>
+        <p>For Developer Defined Models:  https://host:port/{:api_version}/{:package_id}/{:model_name}/{:uid}[?l={:limit}&o={:offset}&f={:fields}&v={:version}&m={:http_method}&callback={:callback}</p>
+        <p>The application ID is not contained in the user defined model URLs since the application ID is determined when the account authentication is completed. </p>
+        
+        <h3>Authentication</h3>
+        <p>Most of APIs require authentication. You can call these APIs with an authentication token which you will receive when your signing-in request is successful. Let's start from how-to-sign-in.</p>
+        
+        <h3>Getting an authentication token</h3>
+        <p>At first, you need to sign in to MOAT IoT runtime environment with an appropriate account.</p>
+        <script src="https://gist.github.com/3148400.js?file=Admin-Login.example.sh"></script>
+        <p>Then you'll get the following response:</p>
+        <script src="https://gist.github.com/3148751.js?file=Admin-Login.response.example.json"></script>
+        
+        <p>Here you can get the <i>accessToken</i> which is the authentication token to be used along with the further method call.</p>
+        
+        <h3>Using the authentication token</h3> 
+        <p>For example, you can call the following API with the token.</p>
+        
+        <h3>Signing out</h3> 
+        <p>In order for you to sign out from the current session, you need to call the following API. </p>
+        
+        <h3>Roles and Permissions</h3> 
+        <p>The underlying MOAT IoT runtime manages roles and permission per account. Your account is always associated with a single role with some permissions.</p>
+        
+        <h3>Scope of accessible objects</h3> 
+        <p>All accounts must be associated with a domain in which MOAT IoT runtime determines the scope of object manipulation (including object reading). <br /> 
+         The domain is represented in the latter part of user id separated by '@' like e-mail address format. Once you sign in MOAT IoT runtime, the backend system automatically narrows the accessible range.</p> 
+         
+         <h3>HTTP Headers</h3> 
+         <p>The required request header is as follows:</p>
+         <table class="table table-hover table-bordered">
+           <thead>
+             <tr>
+               <th>Name</th>
+               <th>Description</th>
+             </tr>
+           </tbody>
+           <tbody>
+             <tr>
+               <td>Content-Type</td>
+               <td>One of 'application/x-www-form-urlencoded', 'application/json' or 'application/octet-stream'is available.</td>
+             </tr>
+           </tbody>
+         </table>
+         
+         <p>Optionally you can add the following headers:</p>
+         <table class="table table-hover table-bordered">
+           <thead>
+             <tr>
+               <th>Name</th>
+               <th>Description</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td>Accept</td>
+               <td>Should be always 'application/json'.<br/>Alternatively you can use <b>.json</b> suffix to a request URL.</td>
+             </tr>
+           </tbody>
+           <tbody>
+             <tr>
+               <td>Accept-Encoding</td>
+               <td>The value should be 'gzip'. You need to decompress the response if it is compressed with Content-Encoding header.</td>
+             </tr>
+             <tr>
+               <td>Content-Encoding</td>
+               <td>You can compress the request content with gzip format. The value should be 'gzip'.</td>
+             </tr>
+           </tbody>
+         </table>
+         
+         <h2>Common HTTP Status Codes for MOAT REST</h2> 
+         <p>You may receive the following HTTP status code.</p>
+         <table class="table table-hover table-bordered">
+           <thead>
+             <tr>
+               <th>Code</th>
+               <th>Description</th>
+               </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td>200</td>
+               <td>The API call is successful.</td>
+             </tr>
+             <tr>
+               <td>400</td>
+               <td>Input parameter error.&nbsp;The response body may contain the precise error info with JSON format.</td>
+             </tr>
+             <tr>
+               <td>401</td>
+               <td>Authentication error.</td>
+             </tr>
+             <tr>
+               <td>403</td>
+               <td>Unprivileged API call. The current session doesn't have enough permission to call the API.</td>
+             </tr>
+             <tr>
+               <td>404</td>
+               <td>Missing URL.</td>
+             </tr>
+             <tr>
+               <td>405</td>
+               <td>Unsupported HTTP method.</td>
+             </tr>
+             <tr>
+               <td>500</td>
+               <td>Server error.</td>
+             </tr>
+             <tr>
+               <td>503</td>
+               <td>Service temporary unavailable because of overload, maintenance or other reason.</td>
+             </tr>
+           </tbody>
+         </table>
+         
+         <h3>Session Timeout</h3> 
+         <p>The authentication token will be retained for 30 minutes since the last valid HTTP access (including HTTP 400/403/405/500 errors) is performed.</p>
+         
+         <h3>JSONP Support</h3> 
+         <p>With a callback request parameter, you can call MOAT REST APIs as <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>.<br />  
+            The required request parameter is as follows:</p>
+         <table class="table table-hover table-bordered">
+           <thead> 
+             <tr>
+               <th>Name</th>
+               <th>Description</th>
+               </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td>callback</td>
+               <td>The name of javascript function to be called with a javascript object.</td>
+             </tr>
+           </tbody>
+         </table>
+         
+         <p>URL form  The URLs of MOAT REST API take the following form:  {scheme}://{host}:{port}/dms/moat/{package-id}/{model}/{uid}[?{query}]<br />  
+         Each parameter is described below:</p>
+         <table class="table table-hover table-bordered">
+           <tbody>
+             <tr>
+               <th>Name</th>
+               <th>Description</th>
+             </tr>
+             <tr>
+               <td>scheme</td>
+               <td>Either http or https.</td>
+             </tr>
+             <tr>
+               <td>host</td>
+               <td>The host name or ip address.</td>
+             </tr>
+             <tr>
+               <td>port</td>
+               <td>The destination port or empty if it is default.</td>
+             </tr>
+             <tr>
+               <td>package-id</td>
+               <td></td>
+             </tr>
+             <tr>
+               <td>model</td>
+               <td></td>
+             </tr>
+             <tr>
+               <td>uid</td>
+               <td></td>
+             </tr>
+             <tr>
+               <td>query</td>
+               <td>See below table.</td>
+             </tr>
+           </tbody>
+         </table>
+         
+         <p>The query parameters as follows:</p>
+         <table>
+           <thead>
+             <tr>
+               <th>Name</th>
+               <th>Description</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td>m</td>
+               <td>HTTP method to be overwritten, either GET, POST, PUT, DELETE or OPTIONS.<br/>Optional.</td>
+             </tr>
+             <tr>
+               <td>v</td>
+               <td>The version number of the model definition. Optional.<br/>The latest version is applied by default.</td>
+             </tr>
+             <tr>
+               <td>f</td>
+               <td>Field names to be queried in the specified model.<br/>Optional.</td>
+             </tr>
+             <tr>
+               <td>o</td>
+               <td>The offset position value returned by a preceding query response.</td>
+             </tr>
+             <tr>
+               <td>l</td>
+               <td>The maximum number of the items to fetch at once.<br/>The default limit is 10.<br/>Optional.</td>
+             </tr>
+           </tbody>
+         </table>
+
+        <!-- col-lg-9 End --> 
+      </div>
+      <!-- row End --> 
+    </div>
+    <!-- container End --> 
+  </div>
+</section>
