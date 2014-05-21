@@ -3,10 +3,10 @@ sitemap:
  priority: 0.8
  changefreq: weekly
  lastmod: 2013-09-28T00:00:00
-name: ja/references.html
 title: "Inventit Iot developer Network | リファレンス"
-layout: references
+name: ja/references.html
 lang: ja
+layout: references
 breadcrumbs:
 -
  name: リファレンス
