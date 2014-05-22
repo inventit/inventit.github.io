@@ -18,65 +18,64 @@ title: "Inventit Iot developer Network | Platform | 概要"
         <ul class="breadcrumb">
           <li><a href="/index.html">Home&nbsp;</a></li>
           <i class="icon-angle-right"></i>
-          <li><a href="/guides.html">Guides&nbsp;</a></li>
+          <li><a href="/guides.html">ガイド&nbsp;</a></li>
           <i class="icon-angle-right"></i>
           <li><a href="/guides/moat-iot.html">MOAT IoT&nbsp;</a></li>
           <i class="icon-angle-right"></i>
-          <li class="avtive">Overview</li>
+          <li class="avtive">概要</li>
         </ul>
         
-        <h1>Overview</h1>
-        <p>The <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a>, model-view-controller, pattern is a very traditional popular design in the UI, user-interface, and application development.<br />
-          MOAT IoT provides the ways to enhance the <strong>M</strong> and the <strong>C</strong> in your IoT application so that your application can be lightweight, easily developed, and quickly delivered.</p>
+        <h1>概要</h1>
+        <p><a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> (Model-View-Controller) は、ユーザインタフェースやアプリケーション開発における、伝統的で有名な設計手段です。<br />
+          MOAT IoT は、あなたの IoT アプリケーションの <strong>M</strong>odel と <strong>C</strong>ontroller を拡張する手段を提供します。ServiceSync 上にアプリケーションを構築することにより、簡単に素早くサービスを展開することができます。</p>
         <div class="img">
           <img src="/img/guides/overwiew01.png" alt="Responsive image" class="img-rounded img-responsive" />
           <p><i>Fig. Mapping MOAT IoT to MVC</i><p>
         </div>
         
-        <h3>Models</h3>
-        <p>Regarding Models, under the MOAT IoT concept, each MOAT IoT API allows you to handle the same models even if its underlying architecture is different.<br/>
-          In other words, you have to find and elaborate carefully such the common models through your class design modeling process because the modeling affects all application stacks from the web tier to the device tier.</p>
+        <h3>モデル(Models)</h3>
+        <p>MOAT IoT のコンセプトにおけるモデルとは、内在するアーキテクチャが異なっていようとも、MOAT IoT API を介して画一的にアプリケーションデータやビジネスロジックを取り扱うことができることを示します。<br/>
+          言い換えると、クラスのモデリングを通して、共通のモデルを、入念かつ注意深く洗い出さなければなりません。なぜなら、モデリングは、Web から デバイスまで全てのアプリケーションスタックに影響するからです。</p>
         <div class="img">
           <img src="/img/guides/overwiew02.png" alt="Responsive image" class="img-rounded img-responsive" />
           <p><i>Fig. Each API spec provides the way to access to essentially identical models<br />
 Note that unlike Value Objects (VO), the models should have functions associated with their domain if any.</i></p>
         </div>
       
-        <h3>Models in MOAT REST</h3>
-        <p>Web applications are usually familiar with the <a href="http://json.org/">JSON</a> representation of models. They are able to marshal and unmarshal objects and JSON texts on invoking MOAT <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> APIs.
-          There are much more models in the applications to render web pages. Some of these models are the universal models mentioned here.
-          In addition, the URI of the REST APIs are reflected by the structure design of the models. For example, if your app 'my-app' has a model named 'MyModel' and suppose the model is a singleton, the URI to fetch shall be '<a href="#">http://host/path/to/moat/v1/my-app/1.0/MyModel</a>'. </p>
+        <h3>MOAT REST におけるモデル</h3>
+        <p>Web アプリケーションは、<a href="http://json.org/">JSON</a> で表現されたモデルと親和性が高いです。MOAT <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> API を起動することにより、異なるシステム間でデータを交換することができます。
+          アプリケーションの世界では、Web ページをレンダリングする多くのモデルが存在します。ここでは、一般的なモデルについて言及します。
+          加えて、REST API の URI は、モデルの構造設計により左右されます。例えば、あなたのアプリケーション <code>my-app</code> が、<code>MyModel</code> という名前で、かつシングルトンで定義されていると仮定すると、取得の URI の定義は、<code>http://host/path/to/moat/v1/my-app/1.0/MyModel</code> となるでしょう。</p>
         
-        <h3>Models in MOAT js</h3>
-        <p>Javascript is, of course, good at tweaking JSON representation strings as the name says. Therefore, MOAT js allows you to send/receive JSON texts to the web applications.<br />
-          With MOAT js, you can get a plain javascript object as the model representation, which is much easier to operate in the javascript code.<br />
-          MOAT js enables you to invoke a remote method of a model object in a device as well. </p>
+        <h3>MOAT js におけるモデル</h3>
+        <p>Javascriptは、その名の通り、JSON 表現の文字列を扱うのに適しています。従って、MOAT js は、JSON 形式のテキストを Web アプリケーションに送受信することに適していると言えます。<br />
+          MOAT js を利用すると、モデルをプレーンな Javascript のオブジェクトとして取得することができます。これは、Javascript のコードで簡単にモデルを扱うことができることを示しています。<br />
+          同様に、MOAT js 介して、デバイス側のモデルオブジェクトのメソッドを起動することもできます。</p>
         
-        <h3>Models in MOAT Android and MOAT OSGi Gateway</h3>
-        <p>In your <a href="http://developer.android.com/index.html">Android</a>/Java application, your <a href="http://en.wikipedia.org/wiki/Plain_Old_Java_Object">Plain Old Java Objects</a> (POJO) are the representations of the models. You can store them to SQLite databases, files or other databases with <a href="http://en.wikipedia.org/wiki/SQL">SQL</a>, <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">O-R mappers</a></p>
-        , or whatever.<br />
-        You can even implement operations to the POJO if you design so.<br />
-        MOAT Android and MOAT <a href="http://www.osgi.org/Main/HomePage">OSGi</a> Gateway certainly propagate the commands of the remote method call from MOAT js implicitly to the POJO with the secured, reliable and proven way.
-        </p>
+        <h3>MOAT Android と MOAT OSGi Gateway におけるモデル</h3>
+        <p><a href="http://developer.android.com/index.html">Android</a> や Java アプリケーションでは、<a href="http://en.wikipedia.org/wiki/Plain_Old_Java_Object">Plain Old Java Objects</a> (POJO) が、モデルの表現となります。
+          モデルは SQLite データベースに保存することもできますし、ファイルに保存することもできます。または、<a href="http://en.wikipedia.org/wiki/SQL">SQL</a> や <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">O-R mappers</a> を利用して、その他のデータベースに保存することもできます。</p>
+        また、あなたの設計次第で、POJO に対する操作を実装することさえ可能です。<br />
+        MOAT Android と MOAT <a href="http://www.osgi.org/Main/HomePage">OSGi</a> Gateway は、リモートメソッドで起動されたコマンドを、確実にセキュアに、信頼性の高い手段で受信します。</p>
         
-        <h3>Model Example</h3>
-        <p>Suppose there is a model, the Photovoltaic Panel (PVP), it will be represented in each component like this: </p>
+        <h3>モデルのサンプル</h3>
+        <p>例えば、太陽光パネルのモデルがあるとします。この太陽光パネルのモデルは、各コンポーネントにおいて、以下のように表現されます。</p>
         <div class="img">
           <img src="/img/guides/overwiew03.png" alt="Responsive image" class="img-rounded img-responsive" />
         </div>
         
         <h3>OMA-DM Capability</h3>
-        <p>If your device is capable of <a href="http://en.wikipedia.org/wiki/OMA_Device_Management">OMA-DM</a>, it is quite easy to integrate it with MOAT IoT applications.<br />
-          This is because MOAT IoT specifies the conventions to map OMA-DM management objects to MOAT IoT models.<br />
-          The conventions are easy to learn if you are familiar with recent OMA-DM enabler specifications since they are based upon the design trends of the management objects.</p>
+        <p>もし、あなたのデバイスが、<a href="http://en.wikipedia.org/wiki/OMA_Device_Management">OMA-DM</a> を利用可能であれば、MOAT IoT アプリケーションを組み込むのは本当に簡単です。<br />
+          これは、MOAT IoT が、OMA-DM のマネジメントオブジェクトからMOAT IoT のモデルにマッピングするよう、規約を規定しているためです。<br />
+          この規約は、最近の OMA-DM Enabler の仕様に詳しければ、習得するのが簡単です。なぜなら、マネジメントオブジェクトの設計トレンドに基づいて設計しているからです。</p>
         
-        <h3>Controllers</h3>
-        <p>MOAT IoT never provides Controllers themselves but APIs to create them, the language to describe them, and conventions to form MOAT IoT applications.<br />
-          The following picture illustrates each controller module with the corresponding API set interacts with models. </p>
+        <h3>コントローラ</h3>
+        <p>MOAT IoT は、それ自身でコントローラを提供しませんが、コントローラの作成やコントローラを記述するための言語、そして利便性のためのAPIを提供します。<br />
+          以下の図は、コントローラモジュールと、各コントローラモジュールに対応する API セットを示しています。</p>
         <div class="img">
           <img src="/img/guides/overwiew04.png" alt="Responsive image" class="img-rounded img-responsive" />
         </div>
-        <p>The arrows mean each module manipulates or handles the represented models. </p>
+        <p>矢印は、各モジュールがモデルを操作することを示しています。</p>
         
         <!-- col-lg-9 End --> 
       </div>
