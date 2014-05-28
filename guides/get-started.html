@@ -35,7 +35,7 @@ title: "Inventit Iot developer Network | Guides | Get started"
             Appendix</a></li>　
         </ul>
         
-        <div id="build-your-first-moatiot-application">
+        <div id="build-your-first-moatiot-application" class="anchor">
           <h2>Build your first MOAT IoT Application</h2>
         </div>
         <h3>Overview</h3>
@@ -53,6 +53,8 @@ title: "Inventit Iot developer Network | Guides | Get started"
         <h3>Need Building Environment?</h3>
         <p>The tutorial includes the step to build MOAT IoT application development environment as a <a href="https://www.virtualbox.org/">VirtualBox</a> image via <a href="http://www.vagrantup.com/">Vagrant</a>, a strong virtual machine image management tool. You don't have to care about how it is prepared precisely.<br />
           Once you type a couple of lines, <a href="http://www.vagrantup.com/">Vagrant</a> will work for you. </p>
+        
+        <p>However, we strongly recommend you to install the <a href="https://developer.android.com/sdk/index.html">Android SDK</a> on your machine if you're a Windows user because of the better USB driver connectivity.
         
         <h3>So what should I do?</h3>
         <p> At first, install <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> (4.3.x).<br />
@@ -145,6 +147,7 @@ HT9ABC999999	device</pre>
         </p>
         <p>So you can just copy and paste the commands described on this tutorial.</p>
         
+        <div id="SignUp" class="anchor"></div>
         <h3>Sign up </h3>
         <p>You can sign up with your <a href="https://github.com/">GitHub</a> account or your <a href="https://www.facebook.com/">Facebook</a> account. Unfortunately, we don't offer other OAuth2 provider services yet. We are planning to provide BitBucket and LinkedIn support when they employ OAuth2 (they don't support OAuth2 yet).<br />
           So in order for you to sign up with GitHub account, just enter the following command on the vagrant box (use <code>vagrant ssh</code> to login).
@@ -206,7 +209,7 @@ You can copy and paste them when <code>iidn-cli</code> prompts you to enter the 
           Don't worry if you forget your API credentials printed above.
           You can use <code>reset</code> command to re-issue your password and print all credentials. The command is available as of <a href="https://github.com/inventit/iidn-cli">iidn-cli version 1.0.1.</a> </div>
         <p>Let's go to the next step where you can create your first application by checking out from GitHub.</p>
-        <div id="Checkout-Sample-Project-from-GitHub">
+        <div id="Checkout-Sample-Project-from-GitHub" class="anchor">
           <h2>Checkout Sample Project from GitHub </h2>
         </div>
         
@@ -266,7 +269,7 @@ sh $CLI/iidn jsdeploy ./simple-example.zip</pre>
           <li>Copy the token to assets/moat folder</li>
         </ol>
         
-        <div id="Download_MOAT_Android_API">
+        <div id="Download_MOAT_Android_API" class="anchor">
           <h3>Download MOAT Android API jar</h3>
         </div>
         <p>You can download the jar file from the cli tool as shown below.</p>
@@ -422,7 +425,7 @@ bundle install
 bundle exec rake db:migrate</pre>
         <p>Once you run bundle install and bundle exec rake db:migrate, you don't have to do them next time.</p>
         
-        <div id="Kick-off-your-first-IoT-app">
+        <div id="Kick-off-your-first-IoT-app" class="anchor">
           <h2>Kick off your first IoT app</h2>
         </div>
         <h3>Run Web app on localhost </h3>
@@ -507,7 +510,7 @@ bundle exec rails server</pre>
         <p style="color:red"><strong>Again, this feature is currently not available as the load balancer disconnects long time TCP session connections. We will prepare another way later.</strong></p>
         <p>That's all. The resource Example is not yet ready for now. So skip it. </p>
         
-        <div id="Appendix">
+        <div id="Appendix" class="anchor">
           <h3>Appendix</h3>
         </div>
         
