@@ -26,7 +26,7 @@ breadcrumbs:
 
 [MOAT PubSub](/references/moat-pubsub-api-document.html)
 
- * Version 1.0.0, HTTP based REST API set
+ * Version 1.0.0, Publish/Subscribe API specification
 
 [MOAT js](/references/moat-js-api-document.html)
 
