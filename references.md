@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.8
  changefreq: weekly
- lastmod: 2013-09-28T00:00:00
+ lastmod: 2014-05-30T00:00:00
 name: references.html
 title: "Inventit Iot developer Network | References"
 layout: references
@@ -18,15 +18,19 @@ breadcrumbs:
 
 [MOAT IoT Model Descriptor](/references/moat-iot-model-descriptor.html)
 
- * The way to describe your models
+ * Version 1.1.0, The way to describe your models
 
 [MOAT REST](/references/moat-rest-api-document.html)
 
- * Version 1.0.3, HTTP based REST API set
+ * Version 1.1.0, HTTP based REST API set
+
+[MOAT PubSub](/references/moat-pubsub-api-document.html)
+
+ * Version 1.0.0, HTTP based REST API set
 
 [MOAT js](/references/moat-js-api-document.html)
 
- * Version 1.1.0, Server side javascript running on the sandbox server
+ * Version 1.3.0, Server side javascript running on the sandbox server
 
 [MOAT Java/Android](/references/moat-java-api-document.html)
 

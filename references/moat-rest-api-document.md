@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-05-16T00:00:00
+ lastmod: 2014-05-30T00:00:00
 name: moat-rest-api-document.html
 title: "Inventit Iot developer Network | References | MOAT REST"
 layout: references
