@@ -18,7 +18,7 @@ breadcrumbs:
 REST API for MOAT applications
 
 ### Version
-1.1.0
+1.1.1
 
 See <a href="/references/moat-rest-api-document/changes.html">here</a> for change history.
 
@@ -465,7 +465,7 @@ It includes the following attributes.
   <tr>
     <td> deviceId </td>
     <td><b>Not Updatable</b><br />
-      The URN form of a device specific identifier.<br /></td>
+      The URN form of a device specific identifier.<br />e.g. <code></td>
   </tr>
   <tr>
     <td> name </td>
@@ -489,6 +489,34 @@ It includes the following attributes.
     <td> rev </td>
     <td><b>Not Updatable</b><br />
       The object revision. </td>
+  </tr>
+  <tr>
+    <td> aesKey </td>
+    <td>
+      <b><a href="/references/moat-pubsub-api-document.html#DeviceEnrollment">MOAT PubSub Device Enrollment</a>  Only</b><br />
+      AES encryption key in Base64. </td>
+  </tr>
+  <tr>
+    <td> <i>expiredAt</i> </td>
+    <td>
+      <b><a href="/references/moat-pubsub-api-document.html#DeviceEnrollment">MOAT PubSub Device Enrollment</a>  Only</b><br />
+      Enrollment challenge expiration timestamp. <br/>
+      e.g. <code>Mon, 21 Jan 2013 13:05:55 +0000</code>
+    </td>
+  </tr>
+  <tr>
+    <td> <i>pubsubAddress</i> </td>
+    <td>
+      <b><a href="/references/moat-pubsub-api-document.html#DeviceEnrollment">MOAT PubSub Device Enrollment</a>  Only</b><br />
+      The address of a PubSub message broker.
+    </td>
+  </tr>
+  <tr>
+    <td> <i>pubsubTcpPort</i> </td>
+    <td>
+      <b><a href="/references/moat-pubsub-api-document.html#DeviceEnrollment">MOAT PubSub Device Enrollment</a>  Only</b><br />
+      The port number of a PubSub message broker.
+    </td>
   </tr>
   <tr>
     <td> {arbitrary key} </td>
@@ -633,33 +661,33 @@ It includes the following attributes.
     <td> createdAt </td>
     <td><b>Not Updatable</b><br />
       The timestamp when the dmjob is created.<br />
-	  <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
+	  e.g. <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> activatedAt </td>
     <td><b>Mandatory for POST</b><br />
 		<b>Updatable only for POST</b><br />
       The timestamp when the dmjob is activated. When a dmjob is activated, a device is able to receive a notification from the underlying server to initiate a new conversation.<br />
-  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
+  		e.g. <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> startedAt </td>
     <td><b>Not Updatable</b><br />
       The timestamp when the dmjob is started by a device contacting to the underlying server.<br />
-  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
+  		e.g. <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> endedAt </td>
     <td><b>Not Updatable</b><br />
       The timestamp when the dmjob is ended by an event, e.g. the conversation is terminated normally, timed out, or server/client error.<br />
-  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
+  		e.g. <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> expiredAt </td>
     <td><b>Mandatory for POST</b><br />
       <b>Updatable only for POST</b><br />
       The timestamp when the dmjob is expired.<br />
-  		<code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
+  		e.g. <code>Mon, 21 Jan 2013 13:05:55 +0000</code></td>
   </tr>
   <tr>
     <td> notificationType </td>

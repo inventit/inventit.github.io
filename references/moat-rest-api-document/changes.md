@@ -14,6 +14,10 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.1.1 May 30, 2014
+
+ * Support device enrollment functionality for resource-constrained devices
+
 ## 1.1.0 May 16, 2014
 
  * Supports challenge and response style authentication
