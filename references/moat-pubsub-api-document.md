@@ -383,7 +383,7 @@ where:
 
 - `{:host}` is the host of MOAT runtime environment
 - `{:port}` is the port numberof MOAT runtime environment
-- `{:deviceUid}` is `uid` of the phase 1 response body (Device UUID)
+- `{:deviceUid}` is `uid` of the [phase 1 response body (Device UUID)](#DeviceEnrollment.Phase1.ResponseBody)
 
 The recommended scheme is `http` since the request body is already encrypted. However, SSL can be applied if necessary.
 
