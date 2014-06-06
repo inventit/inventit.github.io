@@ -375,8 +375,17 @@ At this phase, a client must notify the acknowledgement message to MOAT runtime 
 #### HTTP Method
     PUT
 
+<div id="DeviceEnrollment.Phase2.URLform" class="anchor"></div>
 #### URL form
-Same as [Phase 1](#DeviceEnrollment.Phase1.URLform).
+    http://{:host}:{:port}/moat/v1/sys/device/{:deviceUid}
+
+where:
+
+- `{:host}` is the host of MOAT runtime environment
+- `{:port}` is the port numberof MOAT runtime environment
+- `{:deviceUid}` is `uid` of the phase 1 response body (Device UUID)
+
+The recommended scheme is `http` since the request body is already encrypted. However, SSL can be applied if necessary.
 
 #### Request Headers
 Same as [Phase 1](#DeviceEnrollment.Phase1.RequestHeaders).
