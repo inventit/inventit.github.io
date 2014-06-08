@@ -119,6 +119,7 @@ You can get the value by accessing `uid` property in the enrollment response JSO
 
 Make sure `dev:` prior to `<Device UUID>` is required as Client ID.
 
+<div id="Authentication.DeviceAuthentication.ClientGeneratingNonce" class="anchor"></div>
 ##### &lt;Client Generating Nonce&gt;
 This value must be a positive signed 64 bit integer. The value is expected to be incremented whenever a client repeatedly accesses MOAT runtime environment within a specific time window. However, the value can be an arbitrary value when:
 
@@ -301,7 +302,7 @@ In order to create an AES key, you need to compute [PBKDF2](http://en.wikipedia.
 1. 8-octet salt in the `enrollmentPassword`
 1. 20-octet passphrase in the `enrollmentPassword`
 1. the number of iteration is 1
-1. the length of the generated key is 256
+1. the length of the generated key is 256-bit (32 octets)
 
 Here is a Python example to generate a secret key (`pbkdf2` module, which can be installed by `sudo pip install pbkdf2`, is required).
 
