@@ -18,8 +18,10 @@ breadcrumbs:
 Java API for client MOAT applications
 
 ### Version
-1.0.0
-　　
+1.1.0 (library version: 4.1.0)
+
+See [here](/references/moat-java-api-document/changes.html) for change history.
+
 ## Table of Contents
 　
 ### MOAT Java
@@ -27,10 +29,13 @@ Java API for client MOAT applications
 - [ModelMapper](#ModelMapper) interface
 - [Command](#Command) annotation (JDK1.5+ only. See [here](#Command.jdk14) for JDK1.4)
 - [ResourceType](#ResourceType) annotation (JDK1.5+ only. See [here](#ResourceType.jdk14) for JDK1.4)
+- [Model](#Model) annotation (JDK1.5+ only. See [here](#Model.jdk14) for JDK1.4)
+- [PubSub](#MOATPubSub) Java/Android interfaces for [MOAT PubSub](/references/moat-pubsub-api-document.html)
+- [Future](#Future) interfaces
 
 ### MOAT Android
 - [MoatAndroidFactory](#MoatAndroidFactory) class
-- [Callback](#MoatAndroidFactoryCallback) interface
+- [MoatInitResult](#MoatInitResult) class
 - [AndroidManifest.xml](#AndroidManifestxml) for your APK
 
 ## MOAT Java
@@ -39,6 +44,34 @@ Java API for client MOAT applications
 ### MOAT Interface
 
 This is an entry point of MOAT Java/Android/OSGi API. You don't have to implement this interface since the instance of the interface should be provided by the underlying runtime application or library.
+
+#### Android Example
+
+```java
+final byte[] token = toByteArray(
+    context.getAssets().open(
+    "moat/signed-token-file"));
+final MoatAndroidFactory factory = MoatAndroidFactory.getInstance();
+factory.initMoat(token, context)
+  .then(
+    new DoneCallback<MoatInitResult, Throwable>() {
+      public void onSuccess(MoatInitResult result) {
+        final ContextFactory contextFactory = ...;
+        final ModelMapper blockDaoOrmlite = ...;
+        moat.registerModel(
+          result.getUrnPrefix(),
+          Block.class, blockDaoOrmlite, contextFactory);
+      }
+      public void onFailure(Throwable throwable) {
+        if ("....".eqauls(throwable.getMessage())) {
+             :
+             :
+        }
+             :
+             :
+      }
+});
+```
 
 #### OSGi Example
 
@@ -57,28 +90,6 @@ final Moat moat = bundleContext.getService(moatRef);
 `bundleContext` is an org.osgi.framework.BudleContext instance. <br/>
 `Moat` instance is associated with its FQDN in the bundleContext.
 
-#### Android Example
-
-```java
-final byte[] token = toByteArray(
-    context.getAssets().open(
-    "moat/signed-token-file"));
-final Moat moat = MoatAndroidFactory.getInstance()
-    .initMoat(token, context,
-    new MoatAndroidFactory.Callback() {
-      public void onInitialized(Moat moat, String prefix) {
-        final ContextFactory contextFactory = ...;
-        final ModelMapper blockDaoOrmlite = ...;
-        moat.registerModel(
-          prefix,
-          Block.class, blockDaoOrmlite, contextFactory);
-      }
-      public void onThrowable(Throwable throwable) {
-             :
-             :
-      }
-});
-```
 `context` is an android.content.Context instance.<br />
 `toByteArray` is a pseudo code, you can get the code by search engine with `inputstream to byte array`.<br />
 `moat/signed-token-file` is a token file signed by both MOAT server runtime environment and developers themselves.
@@ -139,6 +150,32 @@ final Moat moat = MoatAndroidFactory.getInstance()
         <code>urn</code> must be a job service id determining the type of client/server application flow.<br />
         <code>t</code> can be set if any, which is the continuation key when this method is used for notifying asynchronous operation result. You can get this value from a context object associated with the key `token` in the corresponding method when the method is defined as asynchronous.<br />
         <code>models</code> are the model objects to be sent if any. Can be null. Each model must be registered prior to the method invocation.</td>
+    </tr>
+    <tr>
+      <td> sendNotificationAsync(<br />
+        &nbsp; urn:String,<br />
+        &nbsp; t:String,<br />
+        &nbsp; models:Object[]) </td>
+      <td> <a href="#FutureResult">FutureResult</a>&lt;Map&lt;String, Object&gt;, Throwable&gt;<br /></td>
+      <td> The asynchronous form of sendNotification().</td>
+    </tr>
+    <tr>
+      <td> newInstance(<br />
+        &nbsp; c:Class&lt;T&gt;,<br />
+        &nbsp; additionalProeprties:Map&lt;String, Object&gt;)
+      </td>
+      <td> T<br /></td>
+      <td> Returns a new instance of the type T. Currently, <code><a href="#PubSubClient">PubSubClient.class</a></code> is available.<br />
+        <code>c</code> is a type of the created instance.<br />
+        <code>additionalProeprties</code> are arguments for creating a new instance.</td>
+    </tr>
+    <tr>
+      <td> newInstanceAsync(<br />
+        &nbsp; c:Class&lt;T&gt;,<br />
+        &nbsp; additionalProeprties:Map&lt;String, Object&gt;)
+      </td>
+      <td> <a href="#FutureResult">FutureResult</a>&lt;Map&lt;String, Object&gt;, Throwable&gt;<br /></td>
+      <td> The asynchronous form of newInstance().</td>
     </tr>
   </tbody>
 </table>
@@ -208,12 +245,14 @@ Each model object must have an identifier field named 'uid' like the primary key
         
 <div id="Command" class="anchor"></div>
 ### Command Annotation
-This interface annotates a method so that it can be invoked from a MOAT js script via a [ModelStub](/references/moat-js-api-document.html#ClassesModelStub) object.<br />
-Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single <code>Map</code> argument containing the context information which is created by a appropriate <code>ContextFactory</code>, specified via <code>Moat#registerModel(String, Class, ModelMapper, ContextFactory)</code>. <br />
-  The method should tell the MOAT IoT Client/Gateway if the method execution is performed synchronously or asynchronously (See the Examples below). The method is able to return arbitrary error code when you'd like to pass it to the server. The negative integer value can be sent back to the server automatically. </p>
+This interface annotates a method so that it can be invoked from a MOAT js script via a [ModelStub](/references/moat-js-api-document.html#ClassesModelStub) object.
+
+Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single `Map` argument containing the context information which is created by a appropriate `ContextFactory`, specified via `Moat#registerModel(String, Class, ModelMapper, ContextFactory)`.
+
+The method should tell the MOAT IoT Client/Gateway if the method execution is performed synchronously or asynchronously (See the Examples below). The method is able to return arbitrary error code when you'd like to pass it to the server. The negative integer value can be sent back to the server automatically.
 
 #### Examples
-1) This declaration means the method <code>associate</code> is performed synchronously.
+1) This declaration means the method `associate` is performed synchronously.
 
 ```java
 @Command
@@ -253,13 +292,13 @@ public int associate(Map<String, Object> context) {
 ```
         
 <div id="Command.jdk14" class="anchor"></div>
-#### For JDK1.4
+#### Command For JDK1.4
 
 With regard to bundles compiled with JDK1.4, the following method declaration convention is provided instead of the annotation mechanism.
 
 #### Examples (JDK 1.4)
 
-The following examples show the JDK 1.4 version of the above Examples.<br />
+The following examples show the JDK 1.4 version of the above Examples.
 
 1) This declaration means the method is performed synchronously.
 
@@ -332,8 +371,8 @@ Map<String,String> value) {
 
 You need to declare the accessor methods as well.
 
-<div id="ResourceTypejdk14" class="anchor"></div>
-#### For JDK1.4
+<div id="ResourceType.jdk14" class="anchor"></div>
+#### ResourceType For JDK1.4
 Use `Resource` suffix to your resource field name.
 
 ```java
@@ -353,16 +392,313 @@ public void setMyResourceTypeResource(Map value) {
 
 You need to declare the accessor methods as well.
 
+<div id="Model" class="anchor"></div>
+### Model Annotation
+
+The `Model` annotation can be used for providing meta information regarding a model class.
+
+With this annotation, developers are able to specify a different name from the defined class name as the model name and a field for storing a raw binary data when `Raw` codec is employed during [MOAT PubSub](/references/moat-pubsub-api-document.html) communication.
+
+Annotating a model type class with this annotation is NOT mandatory.
+
+For JDK1.4, see [here](#Model.jdk14) for annotating a model class.
+
+#### For JDK1.5 including Android
+Annotate your model class declaration with `@Model`.
+
+```java
+
+@Model(name="AnotherEvent", binaryPayloadField = "binary")
+public class SparkiEvent {
+  private byte[] binary;
+
+  public byte[] getBinary() {
+    if (this.binary == null) {
+      return null;
+    }
+    return this.binary.clone();
+  }
+  public void setBinary(byte[] binary) {
+    this.binary = binary;
+  }
+   :
+ (snip)
+   :
+}
+```
+
+You need to declare the getter and setter methods for the field as well.
+
+<div id="Model.jdk14" class="anchor"></div>
+#### Model annotation For JDK1.4
+With JDK 1.4, there is no alternative way to the `name` attribute of `Model` annotation.
+The class name is always employed as the model type name.
+
+Regarding `binaryPayloadField` attribute, use `Binary` suffix to your binary field name.
+
+```java
+public class AnotherEvent {
+  private byte[] payloadBinary;
+  public byte[] getPayloadBinary() {
+    ...
+  }
+  public void setPayloadBinary(byte[] binary) {
+    ...
+  }
+   :
+ (snip)
+   :
+}
+```
+
+You need to declare the accessor methods for the field as well.
+
+<div id="MOATPubSub" class="anchor"></div>
+### MOAT PubSub Interfaces
+The interfaces are Java implementation of [MOAT PubSub](/references/moat-pubsub-api-document.html) specification, offer developers to create an app using publish-subscribe message exchange.
+
+<div id="PubSubClient" class="anchor"></div>
+### PubSubClient&lt;M&gt; Interface
+A MOAT PubSub compliant client. Subclasses must implements this interface.
+
+`<M>` represents the meta data class describing a model type rather than the model type itself.
+
+`<T>` represents a model type.
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Return Type </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> begin() </td>
+      <td> N/A </td>
+      <td> Performs connecting with the preconfigured configuration info. You can re-connect a broker if connected() returns false unless end() is invoked. Note that the broker destination is automatically configured by the underlying MOAT runtime app.</td>
+    </tr>
+    <tr>
+      <td> begin(<br/>
+        upstreamEncoding:<a href="#PayloadCodec">PayloadCodec</a>,<br/>
+        downstreamDecoding:<a href="#PayloadCodec">PayloadCodec</a><br/>
+        ) </td>
+      <td> N/A </td>
+      <td> Performs connecting with the preconfigured configuration info with the given payload encoding and decoding. <br/>
+        <code>upstreamEncoding</code> is applied for uploading data from a device to Cloud whereas <code>downstreamDecoding</code> is used for incoming data from Cloud to a device.</td>
+    </tr>
+    <tr>
+      <td> end() </td>
+      <td> N/A </td>
+      <td> Disposes all allocated resources for the publish/subscribe communication. <br/>
+      You cannot connect/subscribe/unsubscribe/publish any more once the methodis invoked.</td>
+    </tr>
+    <tr>
+      <td> connected() </td>
+      <td> boolean </td>
+      <td> Whether or not the connection is established.</td>
+    </tr>
+    <tr>
+      <td> subscribe(<br/>
+        modelClass:M,<br/>
+        qos:<a href="#PubSubQoS">PubSubQoS</a>,<br/>
+        callback:<a href="#PubSubCallback">PubSubCallback&lt;T&gt;</a><br/>
+        ) </td>
+      <td> N/A </td>
+      <td> Subscribes the given <code>modelClass</code> actions. The <code>callback</code> will be invoked whenever the given <code>modelClass</code> action arrives repeatedly. <br/>
+        The subscription is valid unless <code>unsubscribe()</code> is invoked.</td>
+    </tr>
+    <tr>
+      <td> unsubscribe(<br/>
+        modelClass:M<br/>
+        ) </td>
+      <td> boolean </td>
+      <td> Unsubscribes the given <code>modelClass</code> actions. <br/>
+        The method returns true if the subscription is removed, false if it is missing.
+      </td>
+    </tr>
+    <tr>
+      <td> publish(<br/>
+        modelObject:T<br/>
+        ) </td>
+      <td> boolean </td>
+      <td> Publishes the given <code>modelObject</code> event.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="PayloadCodec" class="anchor"></div>
+### PayloadCodec Interface
+
+This interface provides various implementation for payload encoding/deconding.
+
+The following constant names are available by default:
+
+1. `PayloadCodec.RAW` for a raw binary container format described [here](/references/moat-pubsub-api-document.html#PayloadContainerFormats)
+1. `PayloadCodec.MOATV1_JSON_NOENC` for [MoatV1](/references/moat-pubsub-api-document.html#PayloadContainerFormats.MoatV1) container format with plain JSON content format
+1. `PayloadCodec.MOATV1_JSON_ECB_ENC` for [MoatV1](/references/moat-pubsub-api-document.html#PayloadContainerFormats.MoatV1) container format with `x-inventit-aes-256-ecb-pkcs7` encrypted JSON content format
+1. `PayloadCodec.MOATV1_JSON_CBC_ENC` for [MoatV1](/references/moat-pubsub-api-document.html#PayloadContainerFormats.MoatV1) container format with `x-inventit-aes-256-cbc-pkcs7` encrypted JSON content format
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Return Type </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> encode(<br/>
+        input:Object,<br/>
+        key:byte[]<br/>
+        ) </td>
+      <td> byte[] </td>
+      <td> Encodes the given input and returns the encoded binary.</td>
+    </tr>
+    <tr>
+      <td> decode(<br/>
+        input:Object,<br/>
+        key:byte[]<br/>
+        ) </td>
+      <td> byte[] </td>
+      <td> Decodes the given input and returns the decoded binary.</td>
+    </tr>
+    <tr>
+      <td> getUserNameQuery() </td>
+      <td> String </td>
+      <td> Returns the query parameter used for <code>UserName</code> on establishing a connection with <a href="/references/moat-pubsub-api-document.html">MOAT PubSub</a>.</td>
+    </tr>
+    <tr>
+      <td> name() </td>
+      <td> String </td>
+      <td> Returns the name of the codec.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="PubSubQoS" class="anchor"></div>
+### PubSubQoS Enum
+
+The enum represents QoS level for publish/subscribe messageing.
+
+The following constant names are available:
+
+1. `PubSubQoS.FIRE_AND_FORGET` ... At most once, low reliability but high throughput
+1. `PubSubQoS.ACKNOWLEDGED_DELIVERY` ... At least once, intermediate reliability and throughput
+1. `PubSubQoS.ASSURED_DELIVERY` ... Exactly once, high reliability but low throughput
+
+<div id="PubSubCallback" class="anchor"></div>
+### PubSubCallback&lt;T&gt; Interface
+
+A callback interface on an action arriving at the subscribing model type.
+
+This callback is associated with a specific model type.
+
+`<T>` represents a model type.
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Return Type </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> onAction(<br/>
+        modelObject:T<br/>
+        ) </td>
+      <td> N/A </td>
+      <td> Invoked when an action arrives.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="Future" class="anchor"></div>
+### Future Interfaces
+Future interfaces are generic types of `java.util.concurrent.Future` and `java.util.concurrent.Callable`.
+They are used for handling unfinished task results, both success and failure.
+
+<div id="FutureResult" class="anchor"></div>
+### FutureResult&lt;V&gt; Interface
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Return Type </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> get() </td>
+      <td> V </td>
+      <td> Returns the finished result. This method is blocking, waiting for the result being resolved.</td>
+    </tr>
+    <tr>
+      <td> get(<br />
+        timeout:long, <br/>
+        timeUnit:TimeUnit, <br/>
+        ) </td>
+      <td> N/A </td>
+      <td> Returns the finished result. This method is blocking, waiting for the result being resolved or the elapsed time reaching the given expiraton time.</td>
+    </tr>
+    <tr>
+      <td> isDone() </td>
+      <td> boolean </td>
+      <td> Returns whether or not the underlying task is completed. </td>
+    </tr>
+    <tr>
+      <td> then(<br />
+        callback: <a href="#DoneCallback">DoneCallback&lt;V, F&gt;</a>) </td>
+      <td> N/A </td>
+      <td> Sets a callback interface to be invoked when the underlying task is finished with success or failure.
+        The callback object is invoked even if the underlying task is already finished when this method is performed.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="DoneCallback" class="anchor"></div>
+### DoneCallback&lt;V, F&gt; Interface
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Return Type </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> onSuccess(<br />
+        &nbsp;&nbsp;result: V) </td>
+      <td> N/A </td>
+      <td> Invoked when an ongoing task is completed with success. The passed value is a result of the task, same as the return value of <code>FutureResult#get()</code>. </td>
+    </tr>
+    <tr>
+      <td> onFailure(<br />
+        &nbsp;&nbsp;cause: F) </td>
+      <td> N/A </td>
+      <td> Invoked when an unexpected event occurs while an ongoing task is executing. The <code>cause</code> argument contains information regarding the exceptional event. </td>
+    </tr>
+  </tbody>
+</table>
+
 ## MOAT Android
 MOAT Android is the Android Specific API set. These classes enable you to access the MOAT IoT runtime environment via a gateway application, which can be installed from [Google Play](https://play.google.com/store/search?q=pub:Inventit%20Inc.).
 
-These classes are included in `inventit-dmc-android-lib-api-4.0.0-prod.jar` which you can download via [iidn](https://github.com/inventit/iidn-cli) command. You need to embed the jar file into your APK.
+These classes are included in `inventit-dmc-android-lib-api-4.1.0-prod.jar` which you can download via [iidn](https://github.com/inventit/iidn-cli) command. You need to embed the jar file into your APK.
 
 The minimum API level required in the jar file is 10 ([Gingerbread MR1](http://developer.android.com/about/versions/android-2.3.3.html)). You can also use higher level of API set in your APK.
 
 <div id="MoatAndroidFactory" class="anchor"></div>
 ### MoatAndroidFactory Class
-This is a factory class for creating Android Platform dependent <code><a href="#Moat">Moat</a></code> object.
+This is a factory class for creating Android Platform dependent [`Moat`](#Moat) object.
 
 You need to invoke `initMoat` in order to obtain the instance. You also need to invoke `destroyMoat` so that the gateway application is able to discard unused state and information, which causes inconsistency between the gateway application and your application.
 
@@ -384,10 +720,16 @@ Once the inconsistency happens, your application doesn't work properly until the
     </tr>
     <tr>
       <td> initMoat(<br />
-        &nbsp;&nbsp;token:byte[], &nbsp;&nbsp;context:<a href="http://developer.android.com/reference/android/content/Context.html">Context</a>,<br />
-        &nbsp;&nbsp;cb:<a href="#Callback">Callback</a>) </td>
-      <td> N/A </td>
-      <td> Initializes Android specific <code><a href="#Moat">Moat</a></code> instance asynchronously. The initialized <code><a href="#Moat">Moat</a></code> instance can be passed via <code><a href="#Callback">Callback</a></code> object. </td>
+        &nbsp;&nbsp;token:byte[], &nbsp;&nbsp;context:<a href="http://developer.android.com/reference/android/content/Context.html">Context</a>) </td>
+      <td> <a href="#FutureResult">FutureResult</a>&lt;<a href="#MoatInitResult">MoatInitResult</a>, Throwable&gt; </td>
+      <td> Initializes Android specific <code><a href="#Moat">Moat</a></code> instance asynchronously. The initialized <code><a href="#Moat">Moat</a></code> instance can be passed via <code><a href="#FutureResult">FutureResult</a></code> object. </td>
+    </tr>
+    <tr>
+      <td> initMoat(<br />
+        token:byte[], enrollmentDomain:String, enrollmentId:String, enrollmentPassword:String, context:<a href="http://developer.android.com/reference/android/content/Context.html">Context</a>) </td>
+      <td> <a href="#FutureResult">FutureResult</a>&lt;<a href="#MoatInitResult">MoatInitResult</a>, Throwable&gt; </td>
+      <td> Initializes Android specific <code><a href="#Moat">Moat</a></code> instance asynchronously with the given enrollment parameters. The initialized <code><a href="#Moat">Moat</a></code> instance can be passed via <code><a href="#FutureResult">FutureResult</a></code> object.
+      </td>
     </tr>
     <tr>
       <td> destroyMoat(<br />
@@ -401,13 +743,19 @@ Once the inconsistency happens, your application doesn't work properly until the
       <td> boolean </td>
       <td> Returns whether or not the given <code><a href="#Moat">Moat</a></code> instance is valid. The return value is false when <code>null</code> is passed. You can check if it is valid so as not to receive <code>IllegalStateException</code> when invoking methods of the object. Invalid <code><a href="#Moat">Moat</a></code> object methods always throw the exception. </td>
     </tr>
+    <tr>
+      <td> isActivated(<br />
+        &nbsp;&nbsp;moat:<a href="#Moat">Moat</a>) </td>
+      <td> boolean </td>
+      <td> Returns whether or not the connected gateway app is already activated. </td>
+    </tr>
   </tbody>
 </table>
 
-<div id="MoatAndroidFactoryCallback" class="anchor"></div>
-### Callbck Interface
-This interface is used for receiving <code<a href="#Moat">>Moat</code></a> object from <code<a href="MoatAndroidFactory">>MoatAndroidFactory</a></code>. Or you may also receive an exception raised during the initialization process.
-
+<div id="MoatInitResult" class="anchor"></div>
+### MoatInitResult class
+A value object class containing a [`Moat`](#Moat) and the URN prefix associated with this app.
+The instance of the class is immutable.
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -418,36 +766,29 @@ This interface is used for receiving <code<a href="#Moat">>Moat</code></a> objec
   </thead>
   <tbody>
     <tr>
-      <td> onInitialized(<br />
-        &nbsp;&nbsp;moat:<a href="#Moat">Moat</a>,<br />
-        &nbsp;&nbsp;p:String) </td>
-      <td> N/A </td>
-      <td> Invoked when <code>initMoat</code> is completed with a <a href="#Moat">Moat</a> instance. The <code>p</code> is the prefix of MOAT URN having <a href="/guides/moat-iot/app-design-in-moat-iot.html#JobServiceIdentifier">applicationId and packageId</a> used in your application. The prefix always ends with <code>:</code>. </td>
+      <td> getMoat() </td>
+      <td> <a href="#Moat">Moat</a> </td>
+      <td> Returns the initialized <a href="#Moat">Moat</a> object.</td>
     </tr>
     <tr>
-      <td> onThrowable(<br />
-        &nbsp;&nbsp;t:<a href="http://developer.android.com/reference/java/lang/Throwable.html">Throwable</a>) </td>
-      <td> N/A </td>
-      <td> Invoked when an unexpected exception is thrown while <code>initMoat</code> is executing. </td>
+      <td> getUrnPrefix()</td>
+      <td> String </td>
+      <td> Returns the URN prefix associated with the application.</td>
     </tr>
   </tbody>
 </table>
 
+
 <div id="AndroidManifestxml" class="anchor"></div>
 ### AndroidManifest.xml for your APK
 
-There are several chores prior to finishing your APK regarding AndroidManifest.xml.
+Here is a chore prior to finishing your APK regarding AndroidManifest.xml.
 
-<ol>
-  <li>Putting a <a href="http://developer.android.com/guide/topics/manifest/uses-permission-element.html">uses-permission</a> named <code>com.yourinventit.servicesync.android.permission.MOAT_ANDROID</code></li>
-  <li>Defining a <a href="http://developer.android.com/guide/components/services.html">Service</a> named <code>com.yourinventit.dmc.api.moat.android.MoatClientEndpoint</code></li>
-</ol>
+* Putting a [uses-permission](http://developer.android.com/guide/topics/manifest/uses-permission-element.html) named `com.yourinventit.servicesync.android.permission.MOAT_ANDROID`
 
-The first one is required for interacting with Inventit ServiceSync Gateway application since it grants access to/from applications having this permission. Other securities regarding Interprocess Communication (IPC) between the gateway application and your APK than the Android permission.
+This is required for interacting with Inventit ServiceSync Gateway application since it grants access to/from applications having this permission. Other securities regarding Interprocess Communication (IPC) between the gateway application and your APK than the Android permission.
 
 Note that the name of the permission may be different from this depending on the distribution of the gateway application. The name is currently available for Inventit ServiceSync Android Gateway connecting Inventit IoT Developer Network Development Sandbox Server.
-
-The second is used by the gateway application so that it can invoke objects defined in your APK. The detailed info is described later.
 
 #### uses-permission
 
@@ -464,33 +805,3 @@ package="com.yourinventit.moat.android.example">
  (snip)
    :
 ```
-
-#### Android Service
-
-The Android [Service](http://developer.android.com/guide/components/services.html) you need to specify in your APK's AndroidManifest.xml is `MoatClientEndpoint`, which is embedded in the library jar.
-
-The service receives operations directed by the gateway application and propagates them to the local objects in your APK. You don't have to do something special for the service other than placing the service setting in your AndroidManifest.xml.
-
-```xml
-<application
-android:allowClearUserData="false"
-android:description="@string/app_desc"
-   :
->
-   :
- (snip)
-   :
-<service
-android:name="com.yourinventit.dmc.api.moat.android.MoatClientEndpoint"
-android:exported="true"
-android:permission="com.yourinventit.servicesync.android.permission.MOAT_ANDROID">
-<intent-filter>
-<action android:name="com.yourinventit.moat.android.example.MOAT_CLIENT" />
-</intent-filter>
-</service>
-   :
- (snip)
-   :
-</application>
-```
-You can find the working example [here](https://github.com/inventit/moat-iot-get-started/blob/master/simple-example-android/AndroidManifest.xml) at GitHub.

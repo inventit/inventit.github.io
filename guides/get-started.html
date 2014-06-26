@@ -274,7 +274,7 @@ sh $CLI/iidn jsdeploy ./simple-example.zip</pre>
         </div>
         <p>You can download the jar file from the cli tool as shown below.</p>
         <pre>sh $CLI/iidn sysdownload \
-  inventit-dmc-android-lib-api-4.0.0-prod.jar</pre>
+  inventit-dmc-android-lib-api-4.1.0-prod.jar</pre>
         <p>The command also asks you you to enter the credentials.</p>
         <pre>[IIDN] ** Using node... **
 [IIDN] Please read and accept the EULA:
@@ -292,13 +292,13 @@ yes
 [IIDN] Enter your password:
 (your-client-secret)
 [IIDN] Downloading the distribution package...
-[IIDN] The package:[inventit-dmc-android-lib-api-4.0.0-prod.jar] has been downloaded.</pre>
+[IIDN] The package:[inventit-dmc-android-lib-api-4.1.0-prod.jar] has been downloaded.</pre>
         <p>Then install them to your local repository with <code>mvn</code> command. </p>
         <pre>mvn install:install-file \
--Dfile=inventit-dmc-android-lib-api-4.0.0-prod.jar \
+-Dfile=inventit-dmc-android-lib-api-4.1.0-prod.jar \
 -DgroupId=com.yourinventit \
 -DartifactId=inventit-dmc-android-lib-api \
--Dversion=4.0.0 -Dclassifier=prod -Dpackaging=jar</pre>
+-Dversion=4.1.0 -Dclassifier=prod -Dpackaging=jar</pre>
         <p>You should see the success message. </p>
         <pre> :
 (snip)
@@ -384,7 +384,7 @@ androiddebugkey -storepass android -validity 10000 \
         <pre>cd $APP/simple-example-android
 mvn clean deploy</pre>
         <div class="alert alert-info"> <strong>NOTE:</strong><br />
-          If you have compilation errors, please download and install <code>inventit-dmc-android-lib-api-4.0.0-prod.jar</code> again. See <a href="#Download_MOAT_Android_API">here</a> to download. </div>
+          If you have compilation errors, please download and install <code>inventit-dmc-android-lib-api-4.1.0-prod.jar</code> again. See <a href="#Download_MOAT_Android_API">here</a> to download. </div>
         <p>Then install the built APK.</p>
         <pre>adb install target/moat-android-simple.apk</pre>
         　
