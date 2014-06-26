@@ -59,7 +59,6 @@ factory.initMoat(token, context)
         final ContextFactory contextFactory = ...;
         final ModelMapper blockDaoOrmlite = ...;
         moat.registerModel(
-          result.getUrnPrefix(),
           Block.class, blockDaoOrmlite, contextFactory);
       }
       public void onFailure(Throwable throwable) {
@@ -83,7 +82,6 @@ bundleContext.getServiceReference(
     Moat.class.getName());
 final Moat moat = bundleContext.getService(moatRef);
     moat.registerModel(
-    "urn:moat:b5db3806-43a6-4a7a-b974-6364099ea7d0:package-id:1.0",
     Block.class, blockDaoOrmlite, contextFactory);
 ```
 
@@ -105,24 +103,20 @@ final Moat moat = bundleContext.getService(moatRef);
   <tbody>
     <tr>
       <td> registerModel(<br />
-        &nbsp; urn:String,<br />
         &nbsp; c:Class&lt;T&gt;,<br />
         &nbsp; m:ModelMapper&lt;T&gt;) </td>
       <td> N/A<br /></td>
       <td> Registers a new model class and ModelMapper associated with the class.<br />
-        <code>urn</code> can be a job service id associated with the model or alternatively the prefix of job service id (applicationId and packageId are mandatory).<br />
         <code>c</code> is the class object of the model object.<br />
         <code>m</code> is a <code>ModelMapper</code> instance corresponding to the model. </td>
     </tr>
     <tr>
       <td> registerModel(<br />
-        &nbsp; urn:String,<br />
         &nbsp; c:Class&lt;T&gt;,<br />
         &nbsp; m:ModelMapper&lt;T&gt;,<br />
         &nbsp; f:ContextFactory) </td>
       <td> N/A<br /></td>
       <td> Registers a new model class and ModelMapper associated with the class.<br />
-        <code>urn</code> can be a job service id associated with the model or alternatively the prefix of job service id (applicationId and packageId are mandatory).<br />
         <code>c</code> is the class object of the model object.<br />
         <code>m</code> is a <code>ModelMapper</code> instance corresponding to the model. <code>f</code> is a <code>ContextFactory</code> instance associated with the model. </td>
     </tr>
@@ -247,7 +241,7 @@ Each model object must have an identifier field named 'uid' like the primary key
 ### Command Annotation
 This interface annotates a method so that it can be invoked from a MOAT js script via a [ModelStub](/references/moat-js-api-document.html#ClassesModelStub) object.
 
-Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single `Map` argument containing the context information which is created by a appropriate `ContextFactory`, specified via `Moat#registerModel(String, Class, ModelMapper, ContextFactory)`.
+Annotates a method so that MOAT IoT Client/Gateway can execute it. The argument of the method must have a single `Map` argument containing the context information which is created by a appropriate `ContextFactory`, specified via `Moat#registerModel(Class, ModelMapper, ContextFactory)`.
 
 The method should tell the MOAT IoT Client/Gateway if the method execution is performed synchronously or asynchronously (See the Examples below). The method is able to return arbitrary error code when you'd like to pass it to the server. The negative integer value can be sent back to the server automatically.
 
