@@ -176,7 +176,8 @@ This is a Vagrantfile example using vagrant-omnibus plugin and vagrant-berkshelf
 	        :cassandra => {
 	          :rpc_address => '0.0.0.0'
 	        }
-		  }
+	      }
+	    end
 	    c.vm.network :forwarded_port, guest: 11211, host: 11211
 	    c.vm.network :forwarded_port, guest: 9160, host: 9160
 	    c.vm.network :forwarded_port, guest: 9042, host: 9042
