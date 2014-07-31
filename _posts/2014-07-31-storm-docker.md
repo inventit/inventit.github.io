@@ -7,7 +7,7 @@ posted_by: dbaba
 With [storm-docker](https://github.com/wurstmeister/storm-docker) script, you can setup Apache Storm easily.
 I describe here how to install Apache Storm and how to deploy a topology on the running containers.
 
-I also forked the wurstmeister's project and customized it. I will create a new post at another time.
+I also forked the wurstmeister's project and customized it (found [here](https://github.com/inventit/storm-docker)). I will create a new post at another time.
 
 ## Docker 1.0.1 installation
 
