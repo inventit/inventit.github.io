@@ -77,15 +77,25 @@ factory.initMoat(token, context)
 ```java
 final ContextFactory contextFactory = ...;
 final ModelMapper blockDaoOrmlite = ...;
-final ServiceReference sysMoatRef =
-bundleContext.getServiceReference(
-    Moat.class.getName());
+final ServiceReference<Moat> sysMoatRef =
+    bundleContext.getServiceReference(Moat.class);
+
 // global Moat object
 final Moat sysMoat = bundleContext.getService(sysMoatRef);
+
 // local Moat object
-final Moat moat = sysMoat.newInstance(Moat.class);
-moat.registerModel(
-    Block.class, blockDaoOrmlite, contextFactory);
+final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+additionalProperties.put("urn:inventit:dmc:app:application-id", APP_ID);
+additionalProperties.put("urn:inventit:dmc:app:package-id", PACKAGE_ID);
+additionalProperties.put("urn:inventit:dmc:domain-id", DOMAIN_ID);
+
+final Moat moat = sysMoat.newInstance(Moat.class, additionalProperties);
+moat.registerModel(Block.class, blockDaoOrmlite, contextFactory);
+
+             :
+             :
+
+bundleContext.ungetService(sysMoat);
 ```
 
 `bundleContext` is an org.osgi.framework.BudleContext instance. <br/>
