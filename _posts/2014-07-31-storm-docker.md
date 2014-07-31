@@ -9,13 +9,13 @@ I describe here how to install Apache Storm and how to deploy a topology on the 
 
 I also forked the wurstmeister's project and customized it. I will create a new post at another time.
 
-# Docker 1.0.1 installation
+## Docker 1.0.1 installation
 
 At first, install Docker. Read the [page](https://docs.docker.com/installation/#installation) for the instllation instruction.
 
 As described above page, OS X and Windows requires Boot2docker, a tiny Linux VM for Docker, which includes Docker as well.
 
-# Boot2docker
+## Boot2docker
 
     host $ boot2docker init
 
@@ -30,11 +30,11 @@ Then for OSX users run:
 
 or for Windows users, use putty or your favorite SSH client instead of the above command line to ssh the boot2docker instance.
 
-# Installing bash
+## Installing bash
 
     boot2docker $ tce-load -wi bash.tcz
 
-# Cloning a docker script
+## Cloning a docker script
 
 Now you can clone [storm-docker](https://github.com/wurstmeister/storm-docker) with `git` command, which is installed by default.
 
@@ -50,7 +50,7 @@ And run the command on the host.
 
 After saving is finished, the instance is down. Use `boot2docker up` to re-launch the image.
 
-# Starting Apache Storm
+## Starting Apache Storm
 Start the boot2docker isntance.
 
     host $ boot2docker up
@@ -101,22 +101,24 @@ In order to stop the containers, run the following command.
     boot2docker $ cd ~/storm-docker
     boot2docker $ ./destroy-storm.sh
 
-# How to deploy and undeploy topologies
+## How to deploy and undeploy topologies
 
 In order to deploy your topology, you need to install Apache Storm on your host machine (untar/unzip the archive).
 Then set PATH so that you can run `storm` command from a terminal.
 
-## Deploying a topology
-Run the following command after creating a jar file for your topology.
+### Deploying a topology
+Run the following command on your **HOST** machine after creating a jar file for your topology.
 
 ```bash
-storm jar path/to/your/topology.jar fqdn.of.your.TopologyMainClass \
-  -c nimbus.host=HOST -c nimbus.thrift.port=49627
+your-host-machine $ storm jar path/to/your/topology.jar fqdn.of.your.TopologyMainClass \
+  -c nimbus.host=192.168.59.103 -c nimbus.thrift.port=49627
 ```
 
-## Undeploying a topology
-Run the following command and you can remove the deployed topology. You can specify the waiting time with -w before Storm shuts down the topology.
+### Undeploying a topology
+Run the following command on your **HOST** machine and you can remove the deployed topology.
+
+You can specify the waiting time with -w before Storm shuts down the topology. `-w 1` means Storm will wait 1 second before shutting down the topology.
 
 ```bash
-storm kill YourTopologyName -c nimbus.host=HOST -c nimbus.thrift.port=49627 -w 1
+your-host-machine $ storm kill YourTopologyName -c nimbus.host=192.168.59.103 -c nimbus.thrift.port=49627 -w 1
 ```
