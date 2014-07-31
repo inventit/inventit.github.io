@@ -14,6 +14,10 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.1.1 July 31, 2014
+
+ * Moat.newInstance() API now accespts a new class `Moat` as well (not available for Android)
+
 ## 1.1.0 June 25, 2014
 
  * Supports Java/Android based MOAT PubSub API (com.yourinventit.dmc.api.moat.pubsub package)

@@ -34,7 +34,7 @@ breadcrumbs:
 
 [MOAT Java/Android](/references/moat-java-api-document.html)
 
- * Version 1.1.0 (library version: 4.1.0), Android, OSGi and generic Java SE version of API set
+ * Version 1.1.1 (library version: 4.1.5), Android, OSGi and generic Java SE version of API set
 
 [MOAT C](/references/moat-c-api-document.html)
 

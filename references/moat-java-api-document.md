@@ -18,7 +18,7 @@ breadcrumbs:
 Java API for client MOAT applications
 
 ### Version
-1.1.0 (library version: 4.1.0)
+1.1.1 (library version: 4.1.5)
 
 See [here](/references/moat-java-api-document/changes.html) for change history.
 
@@ -77,11 +77,14 @@ factory.initMoat(token, context)
 ```java
 final ContextFactory contextFactory = ...;
 final ModelMapper blockDaoOrmlite = ...;
-final ServiceReference moatRef =
+final ServiceReference sysMoatRef =
 bundleContext.getServiceReference(
     Moat.class.getName());
-final Moat moat = bundleContext.getService(moatRef);
-    moat.registerModel(
+// global Moat object
+final Moat sysMoat = bundleContext.getService(sysMoatRef);
+// local Moat object
+final Moat moat = sysMoat.newInstance(Moat.class);
+moat.registerModel(
     Block.class, blockDaoOrmlite, contextFactory);
 ```
 
@@ -159,7 +162,7 @@ final Moat moat = bundleContext.getService(moatRef);
         &nbsp; additionalProeprties:Map&lt;String, Object&gt;)
       </td>
       <td> T<br /></td>
-      <td> Returns a new instance of the type T. Currently, <code><a href="#PubSubClient">PubSubClient.class</a></code> is available.<br />
+      <td> Returns a new instance of the type T. Either <code><a href="#PubSubClient">PubSubClient.class</a></code> or <code><a href="#Moat">Moat.class</a></code> (not available for Android, though) is available.<br />
         <code>c</code> is a type of the created instance.<br />
         <code>additionalProeprties</code> are arguments for creating a new instance.</td>
     </tr>
