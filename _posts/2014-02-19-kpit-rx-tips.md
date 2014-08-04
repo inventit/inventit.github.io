@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Fixed Address Memory Allocation with KPIT GNU Tools"
-category: posts
+categories: blog embedded_c embedded_cxx renesas_rx
 posted_by: dbaba
 ---
 Through the RX development with KPIT GNU tools, I've learnt the knowledge regarding how to get the linker to allocate variables to arbitrary addresses. This seems to be easily done with Renesas's IDEs, but with KPIT tools, I neeed to do a little bit more ;-b.

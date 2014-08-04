@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Local OpsWorks testing with Vagrant, Berkshelf 3.0 and Chef 11.10"
-category: posts
+categories: blog aws opsworks vagrant chef berkshelf
 posted_by: dbaba
 ---
 As of Mar. 27, [AWS announced OpsWorks started to support Chef 11.10](http://aws.typepad.com/aws/2014/03/aws-opsworks-now-supports-chef-1110.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+AmazonWebServicesBlog+(Amazon+Web+Services+Blog)). With the release, Berkshelf was supported as well. This is a very good news for OpsWorks users because they, including me, no longer need to copy public cookbooks into their private cookbook.

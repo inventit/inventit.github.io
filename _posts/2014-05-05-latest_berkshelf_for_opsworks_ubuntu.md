@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using the latest prebuilt Berkshelf package with OpsWorks on Ubuntu box"
-category: posts
+categories: blog aws opsworks chef berkshelf
 posted_by: dbaba
 ---
 OpsWorks with Chef 11.10 + Berkshelf 3.1.1 worked for me with c3.xlarge instances on Ubuntu box. However, I'd like to launch smaller instances.

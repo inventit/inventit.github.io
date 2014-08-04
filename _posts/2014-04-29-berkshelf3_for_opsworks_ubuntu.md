@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Error on installing Berkshelf 3.0.1+ with OpsWorks on Ubuntu box"
-category: posts
+categories: blog aws opsworks chef berkshelf
 posted_by: dbaba
 ---
 As I wrote before, OpsWorks now only supports Berkshelf 3.0.0.beta7 and 2.0.14 for Ubuntu 12.04.

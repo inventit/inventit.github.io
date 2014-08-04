@@ -1,0 +1,38 @@
+---
+sitemap:
+ priority: 0.8
+ changefreq: weekly
+ lastmod: 2014-08-04T00:00:00
+layout: base
+name: blog/categories.html
+title: "Inventit Iot developer Network | Blog"
+---
+<section class="content">
+ <div class="container">
+  <div class="row">
+  
+   <div class="col-lg-12">
+    <h1>POSTS by Categories</h1>
+    {% for category in site.categories %}
+      {% if category[0] != 'blog' %}
+        <div id="{{ category | first }}" class="anchor"></div>
+        <h3><code>{{ category | first }}</code></h3>
+        <ul class="listing">
+        {% for posts in category %}
+          {% for post in posts %}
+      		  {% if post.lang == nil %}
+      	      <li>
+      	       <span>{{ post.date | date: "%B %e, %Y" }}</span> <a href="{{ post.url }}">{{ post.title }}</a>
+      	      </li>
+      		  {% endif %}
+          {% endfor %}
+        {% endfor %}
+		  {% endif %}
+      </ul>
+      <br />
+    {% endfor %}
+   </div>
+  
+  </div>
+ </div>
+</section>

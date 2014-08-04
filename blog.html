@@ -1,33 +1,8 @@
 ---
-sitemap:
- priority: 0.8
- changefreq: weekly
- lastmod: 2013-09-28T00:00:00
-layout: base
+layout: none
 name: blog.html
 title: "Inventit Iot developer Network | Blog"
 ---
 
-<section class="content">
- <div class="container">
-  <div class="row">
-  
-   <div class="col-lg-12">
-    <h1>POSTS</h1>
-     <ul class="listing">
-      {% for post in site.posts %}
-		  {% if post.lang == nil %}
-	      <li>
-	       <span>{{ post.date | date: "%B %e, %Y" }}</span> <a href="{{ post.url }}">{{ post.title }}</a>
-	      </li>
-		  {% endif %}
-      {% endfor %}
-     </ul>
-   </div>
-   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-  
-  </div>
- </div>
-</section>
-
-
+<meta http-equiv="refresh" content="0; url=http://{{ site.production_url }}/blog/index.html">
+<link rel="canonical" href="http://{{ site.production_url }}/blog/index.html" />

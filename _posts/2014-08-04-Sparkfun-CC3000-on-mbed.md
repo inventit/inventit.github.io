@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sparkfun CC3000 Shield got worked with mbed"
-category: posts
+categories: blog sparkfun arduino mbed embedded_cxx arm cortex_m0 frdm_kl25z
 posted_by: dbaba
 ---
 I bought a Sparkfun's Wifi Shield for Arduino with TI CC3000 chip. Thanks to lots of the [examples](https://github.com/sparkfun/SFE_CC3000_Library/tree/master/examples), I successfully got it working on Arduino.

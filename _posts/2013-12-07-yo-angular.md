@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Yeoman AngularJS Generator Tips"
-category: posts
+categories: blog angular_js yeoman html5 javascript
 posted_by: dbaba
 ---
 I'm now trying to re-write a browser app with [AngularJS](http://angularjs.org/), which one of my colleagues introduced to me as a cool stuff. Prior to the development, I'm strugging with creating an initial development environment. I found issues and resolutions through the set up and I describe them as follows.

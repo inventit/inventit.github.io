@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Running Apache Storm on Docker"
-category: posts
+categories: blog storm docker
 posted_by: dbaba
 ---
 With [storm-docker](https://github.com/wurstmeister/storm-docker) script, you can setup Apache Storm easily.

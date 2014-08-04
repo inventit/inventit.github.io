@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "We have moved"
-category: posts
+categories: blog information
 ---
 
 The IIDN site has been updated.

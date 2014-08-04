@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cross GCC for nRF51822/ARM Cortex M0"
-category: posts
+categories: blog embedded_c embedded_cxx arm cortex_m0 nordic nRF51822
 posted_by: dbaba
 ---
 I created the building environment for nRF51822 on OSX (10.8.5).
