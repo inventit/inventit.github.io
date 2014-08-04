@@ -18,6 +18,7 @@ paginate_path: "blog/page:num"
 
 description: ""
 disqus_shortname: iidn
+googlecustomsearch_url : https://www.google.com/cse/publicurl?cx=012542340911661175669:hf-iw9g5y7a
 analytics: UA-32804324-3
 analytics_domain: inventit.io
 encoding: UTF-8
