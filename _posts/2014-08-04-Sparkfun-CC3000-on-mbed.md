@@ -10,7 +10,7 @@ Now, I want to make it work on my mbed board, FRDM-KL25Z (rev. E). According to 
 
 However, all the examples refer to either [WiGO](http://www.em.avnet.com/en-us/design/drc/Pages/Avnet-Wi-Go-Module.aspx) or [WiFi DipCortex](https://mbed.org/platforms/WiFi-DipCortex/). Sparkfun's CC3000 shiled information is missing. So I describe the information regarding Sparkfun CC3000 Shield on mbed boards through my trials-and-errors.
 
-![Sparkfun CC3000 and KL25Z](img/posts/2014-08-04-Sparkfun-CC-3000-on-mbed/sf_cc3000_kl25z.png)
+![Sparkfun CC3000 and KL25Z](/img/posts/2014-08-04-Sparkfun-CC-3000-on-mbed/sf_cc3000_kl25z.png)
 
 # Prerequisites
 
