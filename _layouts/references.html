@@ -4,31 +4,31 @@ layout: base
 <section class="content">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3"> 
-      
-        <!-- sideMenu -->
-		{% if page.lang == nil %}
-		  {% include references_side_menu.html %}
-		{% elsif page.lang == "ja" %}
-		  {% include ja/references_side_menu.html %}
-		{% endif %}
+      <div class="col-lg-3">
 
-      <!-- col-lg-3 End --> 
+        <!-- sideMenu -->
+    		{% if page.lang == nil %}
+    		  {% include references_side_menu.html %}
+    		{% elsif page.lang == "ja" %}
+    		  {% include ja/references_side_menu.html %}
+    		{% endif %}
+
+        <!-- col-lg-3 End --> 
       </div>
       
       <div class="col-lg-9">
         <ul class="breadcrumb">
           <li><a href="/index.html">Home&nbsp;</a></li>
 
-{% for breadcrumb in page.breadcrumbs %}
-<i class="icon-angle-right"></i>
-<li>{% if forloop.last %}
-		{{ breadcrumb.name }}
-	{% else %}
-		<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
-	{% endif %}
-</li>
-{% endfor %}
+          {% for breadcrumb in page.breadcrumbs %}
+          <i class="icon-angle-right"></i>
+          <li>{% if forloop.last %}
+          		{{ breadcrumb.name }}
+          	{% else %}
+          		<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+          	{% endif %}
+          </li>
+          {% endfor %}
 
         </ul>
         
