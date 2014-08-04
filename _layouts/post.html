@@ -52,15 +52,21 @@ layout: base
         {% endif %}
       {% endfor %}
     </div>
-    <div class="col-lg-9">
+    <div itemscope itemtype="http://schema.org/Article" class="col-lg-9">
       <h1>
-      <a href="{{ page.url }}">{{ page.title }}</a>
+      <a href="{{ page.url }}"><span itemprop="name">{{ page.title }}</span></a>
       </h1>
 
       <section class="byline">
-        {{ page.date | date: "%B %e, %Y" }}
+        <span itemprop="datePublished" content="{{ page.date | date: "%F" }}">{{ page.date | date: "%B %e, %Y" }}</span>
     	{% if page.posted_by != nil %}
-    	by <a href="https://github.com/{{ page.posted_by }}">{{ page.posted_by }}</a>
+    	by <a href="https://github.com/{{ page.posted_by }}">
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span itemprop="name">
+            {{ page.posted_by }}
+          </span>
+        </span>
+      </a>
     	{% endif %}
       </section>
       
@@ -74,7 +80,9 @@ layout: base
       {% endfor %}
       </p>
 
+      <span itemprop="articleBody">
       {{ content }}
+      </span>
 
       <div class="pull"></div>
       {% include twitter.html %}
