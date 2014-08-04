@@ -44,9 +44,9 @@ title: "Inventit Iot developer Network | Blog"
       {% if page == paginator.page %}
         <em>{{ page }}</em>
       {% elsif page == 1 %}
-        <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+        <a href="{{ site.paginate_path | prepend: '/' | replace: 'page:num', 'index.html' }}">{{ page }}</a>
       {% else %}
-        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        <a href="{{ site.paginate_path | prepend: '/' | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
       {% endif %}
     {% endfor %}
 
