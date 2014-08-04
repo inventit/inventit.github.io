@@ -17,12 +17,23 @@ layout: none
   {% endfor %}
   {% for page in site.pages %}
   {% if page.sitemap != null and page.sitemap != empty %}
-  <url>
-    <loc>{{ site.production_url }}{{ page.url }}</loc>
-    <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>
-    <changefreq>{{ page.sitemap.changefreq }}</changefreq>
-    <priority>{{ page.sitemap.priority }}</priority>
-  </url>
+    {% if site.i18n %}
+      <url>
+        <loc>{{ site.production_url }}{{ page.url }}</loc>
+        <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>
+        <changefreq>{{ page.sitemap.changefreq }}</changefreq>
+        <priority>{{ page.sitemap.priority }}</priority>
+      </url>
+    {% else %}
+      {% unless page.url contains '/ja/' %}
+      <url>
+        <loc>{{ site.production_url }}{{ page.url }}</loc>
+        <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>
+        <changefreq>{{ page.sitemap.changefreq }}</changefreq>
+        <priority>{{ page.sitemap.priority }}</priority>
+      </url>
+      {% endunless %}
+    {% endif %}
   {% endif %}
   {% endfor %}
 </urlset>
