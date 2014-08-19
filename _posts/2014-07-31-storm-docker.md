@@ -4,6 +4,11 @@ title: "Running Apache Storm on Docker"
 categories: blog storm docker
 posted_by: dbaba
 ---
+
+### UPDATE
+*This article refers to the old revision of storm-docker project. So I modified the description regarding the project cloning.*
+
+
 With [storm-docker](https://github.com/wurstmeister/storm-docker) script, you can setup Apache Storm easily.
 I describe here how to install Apache Storm and how to deploy a topology on the running containers.
 
@@ -39,6 +44,8 @@ or for Windows users, use putty or your favorite SSH client instead of the above
 Now you can clone [storm-docker](https://github.com/wurstmeister/storm-docker) with `git` command, which is installed by default.
 
     boot2docker $ git clone https://github.com/wurstmeister/storm-docker.git
+    boot2docker $ cd storm-docker
+    boot2docker $ git reset --hard 63fa338d9c5f6bc05ae63730d0101a5535ac9081
 
 In order to preserve these changes, exit the ssh session.
 
