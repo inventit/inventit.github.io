@@ -13,7 +13,8 @@ title: "Inventit Iot developer Network | Blog"
   
    <div class="col-lg-12">
     <h1>POSTS by Categories</h1>
-    {% for category in site.categories %}
+    {% assign sorted_categories = site.categories | sort %}
+    {% for category in sorted_categories %}
       {% if category[0] != 'blog' %}
         <div id="{{ category | first }}" class="anchor"></div>
         <h3><code>{{ category | first }}</code></h3>

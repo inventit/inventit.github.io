@@ -8,7 +8,8 @@ layout: base
     <div class="col-lg-3">
       <h3>Topics</h3>
       <ul>
-      {% for category in site.categories %}
+      {% assign sorted_categories = site.categories | sort %}
+      {% for category in sorted_categories %}
         {% if category[0] != 'blog' %}
           <li style="font-size:80%">
             <a href="{{ '/blog/categories.html' | prepend: site.baseurl | replace: '//', '/' }}#{{ category | first }}">
