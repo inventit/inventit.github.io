@@ -68,6 +68,7 @@ title: "Inventit Iot developer Network | Platform | App Design in MOAT IoT"
           <br />
           <li>Version<br />
             is a version identifier to identify the revision of the same package ID.<br />
+            Must follow [Major].[Minor].[Revision] format which [`npm`](https://www.npmjs.org/) is able to accept.<br />
             Alphabet, numeric, underscore character '_', dot '.' and hyphen '-' are acceptable.</li>
           <br />
           <li>Data Model Type<br />
@@ -85,9 +86,9 @@ title: "Inventit Iot developer Network | Platform | App Design in MOAT IoT"
         <div id="JobServiceIdentifier"><h3>Job Service Identifier</h3></div>
         <p>Job Service Identifier (or Service Identifier) is a system wide global identifier representing a single unit of device control job request.<br />
           The identifier follows URN format starting with urn:moat prefix. For instance, suppose the following job service id; </p>
-        <pre>urn:moat:485b593b-45ce-40e1-88e1-658fbf20e5fa:MyApp:alert-notificaton-request:1.0</pre>
+        <pre>urn:moat:485b593b-45ce-40e1-88e1-658fbf20e5fa:MyApp:alert-notificaton-request:1.0.0</pre>
         <p>As you can see, each element is separated with ':' character and 'urn:moat:' is always same. The next element '485b593b-45ce-40e1-88e1-658fbf20e5fa' to the prefix is an applicationId which contains one or more packages.<br />
-          'MyApp' is a packageId which enables you to categorise models and scripts. 'alert-notification-request' is a service name, which identifies a MOAT js file to run. The js file name must follow <code>{:service_name}!{:version}.js</code>. The service name is case-sensitive, should be identical to the corresponding js file name. The value must be unique within a same packageId. The last part '1.0' is the version number of the definition. </p>
+          'MyApp' is a packageId which enables you to categorise models and scripts. 'alert-notification-request' is a service name, which identifies a MOAT js file to run. The js file name must follow <code>{:service_name}.js</code>. The service name is case-sensitive, should be identical to the corresponding js file name. The value must be unique within a same packageId.</p>
         
         <!-- col-lg-9 End --> 
       </div>

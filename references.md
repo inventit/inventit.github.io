@@ -22,7 +22,7 @@ breadcrumbs:
 
 [MOAT REST](/references/moat-rest-api-document.html)
 
- * Version 1.1.1, HTTP based REST API set
+ * Version 1.1.2, HTTP based REST API set
 
 [MOAT PubSub](/references/moat-pubsub-api-document.html)
 
@@ -30,7 +30,7 @@ breadcrumbs:
 
 [MOAT js](/references/moat-js-api-document.html)
 
- * Version 1.3.0, Server side javascript running on the sandbox server
+ * Version 1.4.0, Server side javascript running on the sandbox server
 
 [MOAT Java/Android](/references/moat-java-api-document.html)
 

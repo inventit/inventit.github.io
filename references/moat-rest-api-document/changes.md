@@ -14,6 +14,10 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.1.2 September 26, 2014
+
+ * CSV format is available as well as JSON formtat on performing developer defined model objects query. 
+
 ## 1.1.1 May 30, 2014
 
  * Support device enrollment functionality for resource-constrained devices

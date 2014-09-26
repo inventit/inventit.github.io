@@ -14,6 +14,11 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.4.0 September 26, 2014
+
+ * `console.log` is available because of API compatibility improvement
+ * The version identifier included in a js file name is no longer mandatory. i.e. `start.js` is now a valid file name instead of `start!1.0.js`.
+
 ## 1.3.0 March 24, 2014
 
  * Removes `querySharedByUid` function and use `queryByUid` as `queryByUid` now automatically resolves the model scope

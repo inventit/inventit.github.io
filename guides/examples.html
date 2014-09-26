@@ -239,7 +239,7 @@ contextFactory.setBundleContext(context);        contextFactory.setMyTemperature
                 
                 //The JobServiceId defined 
                 //please Please refer to API doc
-                String jobServiceId = "urn:moat:9999d129-5ba5-4912-963e-0edecee52664:twitter-demo:save-data:1.0";
+                String jobServiceId = "urn:moat:9999d129-5ba5-4912-963e-0edecee52664:twitter-demo:save-data:1.0.0";
                 //Send Data
                 moat.sendNotification( 
                       jobServiceId, 
@@ -734,7 +734,7 @@ public class TemperatureModel {
 		{% highlight java %}
 curl -v -X POST -H "Accept:application/json" -H "Content-Type:application/json"
 -d "{\"name\":\"ivi-186\",\"jobServiceId\":
-\"urn:moat:336ad129-5ba5-4912-963e-0edecee52664:Houston-SMD:exec-bundle-method:1.0\",
+\"urn:moat:336ad129-5ba5-4912-963e-0edecee52664:Houston-SMD:exec-bundle-method:1.0.0\",
 \"activatedAt\":\"Wed, 22 Oct 2012 03:15:03 GMT\",
 \"expiredAt\":\"Wed, 22 Oct 2012 04:30:03 GMT\",\"arguments\":
 {\"text\":\"TO LCD DISPLAY\"}}" http://${server_ip}/${server_port}/moat/v1/sys/dmjob/?token=aaaaaaaaaaaaaaa

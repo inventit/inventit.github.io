@@ -18,7 +18,7 @@ breadcrumbs:
 REST API for MOAT applications
 
 ### Version
-1.1.1
+1.1.2
 
 See <a href="/references/moat-rest-api-document/changes.html">here</a> for change history.
 
@@ -983,7 +983,7 @@ as well.
 
 This format can also include an application id as shown below.
 
-    https://host:port/moat/v1/sys/device/{:device_uid}/{:application_id}:{:package_id}/{:model_name}/{:model_uid}?{:query_paramters}</pre>
+    https://host:port/moat/v1/sys/device/{:device_uid}/{:application_id}:{:package_id}/{:model_name}/{:model_uid}?{:query_paramters}
 
 <div id="Resource_Type_Query" class="anchor"></div>
 ### 'Resource' Type Query
@@ -1038,6 +1038,17 @@ Then the result would be like this;
 }
 ```
 
+#### CSV Format Support
+You can get model object data in CSV format as well as in JSON format.
+
+In order to get your model object data in CSV format, just set `text/csv` in `Accept` header like this:
+
+```bash
+curl -X GET -H "Accept: text/csv" "https://host:port/moat/v1/{:package_id}/{:model_name}/{:model_uid}?{:query_paramters}"
+```
+
+The response format is described later, in [Single Model Query](#Single_Model_Query) or [List Model Query](#List_Model_Query).
+
 #### Generic Query Parameters
 You can specify the following query parameters for REST URI.
 
@@ -1083,6 +1094,17 @@ You can specify the following query parameters for REST URI.
 ### Single Model Query
 A GET request with `{:model_uid}` returns a JSON string. Each property has a field name of the requested model.
 
+#### CSV Format for Single Model Query
+When the single model query is requested with the header `Accept:text/csv`, you will be get the following CSV, for instance.
+
+```
+"uid","rev","fs3","fs2","fs1","uts","fi1","cts" 
+"1411031420303603000","0","vs31","vs21","vs11","1411031420305","1","1411031420305" 
+```
+As shown above, model property names appear in the first line in the response CSV.
+
+Note that the property name order is irregular. The recipient always needs to care of the first line in order to assign each column value in the second row to a valid property.
+
 <div id="List_Model_Query" class="anchor"></div>
 ### List Model Query
 A GET request WITHOUT `{:model_uid}` returns a JSON string containing one or more model objects. The JSON string has the following structure:
@@ -1109,6 +1131,26 @@ A GET request WITHOUT `{:model_uid}` returns a JSON string containing one or mor
     </tr>
   </tbody>
 </table>
+
+#### CSV Format for List Model Query
+When the list model query is requested with the header `Accept:text/csv`, you will be get the following CSV, for instance.
+
+```
+"limit","array.cts","array.uid","array.rev","array.uts","array.fs3","array.fs2","array.fi1","array.fs1" 
+"25","1411031420305","1411031420303603000","0","1411031420305","vs31","vs21","1","vs11" 
+"25","1411031420353","1411031420351843000","1","1411031734854","ws32","ws22","102","ws12" 
+"25","1411031420409","1411031420407188000","0","1411031420409","vs33","vs23","3","vs13" 
+"25","1411031420474","1411031420470554000","1","1411031755753","ws34","ws24","104","ws14" 
+"25","1411031420516","1411031420514556000","0","1411031420516","vs35","vs25","5","vs15" 
+"25","1411031420562","1411031420560565000","1","1411031769242","ws36","ws26","106","ws16" 
+"25","1411031420614","1411031420612710000","0","1411031420614","vs37","vs27","7","vs17" 
+"25","1411031420661","1411031420659501000","1","1411031778084","ws38","ws28","108","ws18" 
+"25","1411031420722","1411031420719188000","0","1411031420722","vs39","vs29","9","vs19" 
+```
+
+Unlike the single model query result, the model property names include the prefix `array.`. Other properties not having the prefix are meta information regarding the result array list, `limit` and `offset`.
+
+Again, the column order is always irregular. The recipient always needs to care of the first line in order to assign each column value in the second or later rows to a valid property.
 
 <div id="Create_Model_Object" class="anchor"></div>
 ### Create Model Object

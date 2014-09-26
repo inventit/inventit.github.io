@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-05-16T00:00:00
+ lastmod: 2014-09-26T00:00:00
 name: moat-js-api-document.html
 title: "Inventit Iot developer Network | References | MOAT js"
 layout: references
@@ -42,13 +42,11 @@ See [here](/references/moat-js-api-document/changes.html) for change history.
 ### Naming Convention
 All javascript files must follow the naming convention below:
 
-    [operation]![version].js
+    [operation].js
 
 when the file corresponds to the URN (JobServiceId)&nbsp;`urn:moat:app-id:package-id:operation:version`.
 
-e.g. `install!1.0.js`, `start!1.0.js`
-
-The `version` must be identical with the one declared in `package.json`.
+e.g. `install.js`, `start.js`
 
 <div id="GlobalObject" class="anchor"></div>
 ### Global Object
