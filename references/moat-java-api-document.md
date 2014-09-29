@@ -495,7 +495,7 @@ A MOAT PubSub compliant client. Subclasses must implements this interface.
       <td> Performs connecting with the preconfigured configuration info with the given payload encoding and decoding. <br/>
         <code>upstreamEncoding</code> is applied for uploading data from a device to Cloud whereas <code>downstreamDecoding</code> is used for incoming data from Cloud to a device. <br />
         <div class="alert alert-warning"> <strong>IMPORTANT:</strong><br />
-          Currently, leave <code>downstreamDecoding</code> <code>null</code> or always set the same value as <code>upstreamEncoding</code> to <code>downstreamDecoding</code>. </div>
+          Currently, set the same value as <code>upstreamEncoding</code> to <code>downstreamDecoding</code> because PubSub API doesn't support separate pyaload codecs yet. </div>
       </td>
     </tr>
     <tr>
