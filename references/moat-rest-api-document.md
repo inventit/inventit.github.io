@@ -336,7 +336,7 @@ Like [npm](https://npmjs.org/), the node.js package management tool, you can cre
     <tr>
       <td> version </td>
       <td><b>Mandatory</b><br />
-        The version of the package. Alphabets, numbers and dot are allowed. The format must conform to the [Semantic Versioning requirements](http://semver.org/), i.e. the version always takes <pre>MAJOR.MINOR.PATCH</pre> format.<br />
+        The version of the package. Alphabets, numbers and dot are allowed. The format must conform to the <a href= "http://semver.org/">Semantic Versioning requirements</a>, i.e. the version always takes <code>MAJOR.MINOR.PATCH</code> format.<br />
         <pre>"version" : "1.0.0"
 </pre></td>
     </tr>
