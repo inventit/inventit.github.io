@@ -17,6 +17,7 @@ breadcrumbs:
 ## 1.1.2 September 26, 2014
 
  * CSV format is available as well as JSON formtat on performing developer defined model objects query. 
+ * `*.tgz` file is available as a MOAT js package archive format.
 
 ## 1.1.1 May 30, 2014
 

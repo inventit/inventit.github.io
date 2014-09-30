@@ -2,7 +2,7 @@
 sitemap:
  priority: 0.6
  changefreq: weekly
- lastmod: 2014-05-30T00:00:00
+ lastmod: 2014-09-30T00:00:00
 name: moat-rest-api-document.html
 title: "Inventit Iot developer Network | References | MOAT REST"
 layout: references
@@ -251,10 +251,37 @@ The MOAT js packages can be uploaded via POST or PUT method. On the other hand, 
 In order to upload client packages, you need to get an uploading URL via GET operation with `r` parameter.
 Then you can upload the packages to the acquired URL.
 
-#### For Server side MOAT js packages (zip)
+#### Server side MOAT js packaging
+You can create a javascript package with `npm` command as well as `zip` or `jar` command.
+
+`npm` command:
+```
+$ cd path/to/package.json/dir
+$ npm pack
+```
+Note that the output file has `.tgz` extension as the archiving format is TAR-GZip.
+
+`zip` command
+```
+$ cd path/to/package.json/dir
+$ zip -r command-1.0.0.zip .
+```
+
+`jar` command
+```
+$ cd path/to/package.json/dir
+$ jar cvf command-1.0.0.zip .
+```
+
+#### URIs for Server side MOAT js packages
 Uploading URL for POST/PUT requests is:
 
     https://host:port/moat/v1/sys/package
+
+The `Content-Type` header is always required. The applicable values are:
+
+1. `application/x-tgz` for `*.tgz` files
+1. `application/zip` for `*.zip` files
 
 For GET requests:
 
@@ -267,7 +294,7 @@ For DELETE request:
 https://host:port/moat/v1/sys/package/{:package_id}
 
 
-#### For Client packages
+#### URIs for Client packages
 Uploading URL for POST/PUT requests is <strong>NONE</strong>.
 
 For GET request to retrieve the uploading/deleting URL, the REST API URL will be:
