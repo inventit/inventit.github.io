@@ -261,12 +261,12 @@ You can create a javascript package with `npm` command as well as `zip` or `jar`
 
 Note that the output file has `.tgz` extension as the archiving format is TAR-GZip.
 
-`zip` command
+`zip` command:
 
     $ cd path/to/package.json/dir
     $ zip -r command-1.0.0.zip .
 
-`jar` command
+`jar` command:
 
     $ cd path/to/package.json/dir
     $ jar cvf command-1.0.0.zip .
@@ -336,8 +336,8 @@ Like [npm](https://npmjs.org/), the node.js package management tool, you can cre
     <tr>
       <td> version </td>
       <td><b>Mandatory</b><br />
-        The version of the package. Alphabets, numbers and dot are allowed.<br />
-        <pre>"version" : "1.0"
+        The version of the package. Alphabets, numbers and dot are allowed. The format must conform to the [Semantic Versioning requirements](http://semver.org/), i.e. the version always takes <pre>MAJOR.MINOR.PATCH</pre> format.<br />
+        <pre>"version" : "1.0.0"
 </pre></td>
     </tr>
     <tr>
