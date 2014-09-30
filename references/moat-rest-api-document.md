@@ -255,23 +255,21 @@ Then you can upload the packages to the acquired URL.
 You can create a javascript package with `npm` command as well as `zip` or `jar` command.
 
 `npm` command:
-```
-$ cd path/to/package.json/dir
-$ npm pack
-```
+
+    $ cd path/to/package.json/dir
+    $ npm pack
+
 Note that the output file has `.tgz` extension as the archiving format is TAR-GZip.
 
 `zip` command
-```
-$ cd path/to/package.json/dir
-$ zip -r command-1.0.0.zip .
-```
+
+    $ cd path/to/package.json/dir
+    $ zip -r command-1.0.0.zip .
 
 `jar` command
-```
-$ cd path/to/package.json/dir
-$ jar cvf command-1.0.0.zip .
-```
+
+    $ cd path/to/package.json/dir
+    $ jar cvf command-1.0.0.zip .
 
 #### URIs for Server side MOAT js packages
 Uploading URL for POST/PUT requests is:
