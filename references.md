@@ -30,7 +30,7 @@ breadcrumbs:
 
 [MOAT js](/references/moat-js-api-document.html)
 
- * Version 1.4.0, Server side javascript running on the sandbox server
+ * Version 1.5.0, Server side javascript running on the sandbox server
 
 [MOAT Java/Android](/references/moat-java-api-document.html)
 

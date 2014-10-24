@@ -14,6 +14,10 @@ breadcrumbs:
 ---
 # Change History
 
+## 1.5.0 October 24, 2014
+
+ * MOAT js server runtime now eliminates a blocking function. `session.commit()` is obsolete. Do not use this function.
+
 ## 1.4.0 September 26, 2014
 
  * `console.log` is available because of API compatibility improvement

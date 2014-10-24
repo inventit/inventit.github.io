@@ -14,10 +14,10 @@ breadcrumbs:
  name: MOAT js
 ---
 # MOAT js
-Javascript API for server-side MOAT applications
+Javascript API for MOAT applications
 
 ### Version
-1.3.0
+1.5.0
 
 See [here](/references/moat-js-api-document/changes.html) for change history.
 
@@ -153,13 +153,6 @@ The MessageSession provides functions associated with the ongoing script executi
 On the server side script, developers are able to code operations to a remote device.
 These operations are not automatically transmitted to the remote device but must be directed by several functions.
 
-`commit()` function is one of the commands to perform the transmission, which is used for applying model stub object manipulation to the device.
-Prior to call this function, one or more property set/get operations to a model stub object are required.
-
-Or, command functions defined in developer defined model play the role as well.
-Every command function of the model stub object transmits its request to the remote device whenever it is invoked.
-See [here](#ClassesModelStub) for detail.
-
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -195,21 +188,6 @@ See [here](#ClassesModelStub) for detail.
       <td>newModelMapperStub(type:String)</td>
       <td>object</td>
       <td>Creates a new <a href="#ClassesModelMapperStub">ModelMapperStub</a> object. The type must be declared in a <code>package.json</code>.</td>
-    </tr>
-    <tr>
-      <td>commit(state:String,<br />
-        block:object)</td>
-      <td>object</td>
-      <td>Commits the reserved operations and returns the result as an object.<br />
-        If you specify a function block with each reserved operation, the block function is performed at this time.<br />
-        <br />
-        <b>Parameters:</b><br />
-        state ... (optional) The name of the commit state<br />
-        block ... (optional) An object containing functions called within the function after receiving a result object. See <a href="#CallbackFunctionObject">here</a> for detail<br />
-        <b> Return:</b><br />
-        An object containing the result of reserved operations associated with tokens.<br />
-        <div class="alert alert-warning"> <b>IMPORTANT!</b><br />
-          The commit() function is blocked until all the callback function blocks are completed</div></td>
     </tr>
     <tr>
       <td>setWaitingForResultNotification(<br />
@@ -525,7 +503,6 @@ There are several functions in the class allowing you to access/manipulate model
 - [update](#ClassesModelMapper.count) for counting the number of model objects
 
 These functions are performed asynchronously.
-`MessageSession.commit()` or command functions in a model stub object triggers the operations on a remote device.
 In order for you to look into the operation results, you can append a callback function object (see below) to above functions.
 
 <div id="CallbackFunctionObject" class="anchor"></div>
@@ -556,7 +533,7 @@ In order for you to look into the operation results, you can append a callback f
     </tr>
     <tr>
       <td>interrupt(eventId)</td>
-      <td>The command/operation transmission to a remote device can be interrupted because of an unexpected event. The function is used when such the event occurs before completing server-device interaction. The <code>eventId</code> is a value set via <code>MessageSession.commit()</code> or an auto-generated text by the underlying runtime.</td>
+      <td>The command/operation transmission to a remote device can be interrupted because of an unexpected event. The function is used when such the event occurs before completing server-device interaction. The <code>eventId</code> is an auto-generated text by the underlying runtime.</td>
     </tr>
   </tbody>
 </table>
@@ -683,9 +660,7 @@ You can remove an object in a device.
 <div id="ClassesModelMapper.count" class="anchor"></div>
 ##### Query Operations
 You can retrieve data stored in a device via find* and count functions as similar as you do so from a database via DAO class.
-
-Unlike a generic database, the query operations require `commit()` operation in order for you to complete them.
-
+All the operations are performed asynchronously. Use callback blocks to handle the results.
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -784,10 +759,6 @@ The `session` parameter is an instance of `MessageSession`.
 The second parameter is transferred to a remote device.
 
 The last parameter is an instance of [CallbackFunctionObject](#CallbackFunctionObject).
-
-<div class="alert alert-warning"> <b>IMPORTANT!</b><br />
-  <p>The runtime environment will call <code>MessageSession.commit()</code> automatically when a command is invoked.</p>
-</div>
 
 ##### Command in a model object
 <script src="https://gist.github.com/dbaba/3142814.js" type="text/javascript"></script>
