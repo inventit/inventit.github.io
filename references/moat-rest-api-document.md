@@ -198,8 +198,6 @@ With providing the 3 parameters (`a`, `u` and `c`), Sandbox Cloud authenticates 
 As of 1.1.0, MOAT REST API supports challenge and response style authentication in order for clients to avoid to expose their own plain password.
 Cross-origin Resource Sharing (CORS) clients must use this style of authentication.
 
-*Note that reagrding CORS, Sandbox Cloud doesn't allow any other domains than Inventit's owning domains.*
-
 The following diagram illustrates the sequence of challenge and response authentication.
 
 <image src="/img/references/moat-rest-api-auth-chal.png" alt="Responsive image" class="img-rounded img-responsive" />
