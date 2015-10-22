@@ -13,9 +13,6 @@ i18n : false
 #production_url : http://localhost:4000
 #i18n : true
 
-gems:
-  - jekyll-redirect-from
-
 paginate: 8
 paginate_path: "blog/page:num"
 
